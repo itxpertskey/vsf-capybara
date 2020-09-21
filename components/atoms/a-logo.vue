@@ -5,7 +5,7 @@
     class="a-logo"
   >
     <SfImage
-      src="/assets/logo.svg"
+      src="/assets/images/capitools-uk-logo.png"
       :alt="$t(defaultTitle)"
       class="sf-header__logo"
     />
@@ -31,10 +31,18 @@ export default {
 </script>
 <style lang="scss" scoped>
 .a-logo {
-  display: inline-flex;
   ::v-deep .sf-header__logo {
-    --header-logo-width: 41px;
-    --header-logo-height: 41px;
+    min-width: 200px;  
+    --header-logo-height: 66px;
+    margin: 0;
+    @media screen and (max-width: 767px){
+       min-width: auto;
+    }
+    img{
+        width: 100%;
+        height: 100%;
+        objecet-fit: contain;
+    }
   }
 }
 </style>

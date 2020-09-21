@@ -7,6 +7,7 @@
     <SfGallery
       ref="gallery"
       :images="gallery"
+      :enable-zoom="enableZoom"
     />
   </div>
 </template>
@@ -21,6 +22,11 @@ export default {
   components: {
     SfGallery,
     SfImage
+  },
+  data(){
+    return{
+      enableZoom: true,
+    };
   },
   props: {
     gallery: {
@@ -85,8 +91,3 @@ export default {
   }
 };
 </script>
-<style lang="scss" scoped>
-.m-product-gallery {
-  flex: 1;
-}
-</style>

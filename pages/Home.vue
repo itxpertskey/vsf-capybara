@@ -1,5 +1,5 @@
 <template>
-  <div id="home">
+  <section id="home">
     <SfHero
       class="hero"
       :slider-options="{
@@ -10,63 +10,82 @@
       <SfHeroItem
         v-for="(hero, i) in heroes"
         :key="i"
-        :title="hero.title"
-        :subtitle="hero.subtitle"
-        :button-text="hero.buttonText"
-        :background="hero.background"
         :image="hero.image"
         :class="hero.className"
       />
     </SfHero>
+    <MAssurance />
+    <MNosSpecialities />
+    <MPromoProductBlock />
 
-    <SfBannerGrid :banner-grid="1" class="banner-grid">
-      <template v-for="(banner, i) in banners" #[banner.slot]>
-        <router-link :key="i" :to="banner.link">
-          <SfBanner
-            :subtitle="banner.subtitle"
-            :title="banner.title"
-            :description="banner.description"
-            :button-text="banner.buttonText"
-            :image="banner.image"
+    <div class="product-slider">
+      <div class="container">
+        <div class="d-flex slider-content">
+          <SfImage
+            src="assets/images/jardin.jpg"
+            class="slider-banner"
           />
-        </router-link>
-      </template>
-    </SfBannerGrid>
+          <lazy-hydrate :trigger-hydration="!loading">
+            <m-product-carousel :products="blockoneproduct" />
+          </lazy-hydrate>
+        </div>
+      </div>
+    </div>
 
-    <ONewsletter />
+    <MCodePromotionBlock />
 
-    <SfSection :title-heading="$t('Bestsellers')" class="section">
-      <lazy-hydrate :trigger-hydration="!loading">
-        <m-product-carousel :products="newCollection" />
-      </lazy-hydrate>
-    </SfSection>
+    <div class="product-slider">
+      <div class="container">
+        <div class="d-flex slider-content">
+          <SfImage
+            src="assets/images/hyundai-groupe-electrogene-inverter.jpg"
+            class="slider-banner"
+          />
+          <lazy-hydrate :trigger-hydration="!loading">
+            <m-product-carousel :products="blockoneproduct" />
+          </lazy-hydrate>
+        </div>
+      </div>
+    </div>
 
-    <SfSection
-      v-if="isOnline"
-      :title-heading="$t('Share Your Look')"
-      subtitle-heading="#YOURLOOK"
-      class="section"
-    >
-      <AImagesGrid :images="instagramImages" />
-    </SfSection>
-  </div>
+    <MSupportBlock />
+    <div class="product-slider">
+      <div class="container">
+        <div class="d-flex slider-content">
+          <SfImage
+            src="assets/images/outillage.jpg"
+            class="slider-banner"
+          />
+          <lazy-hydrate :trigger-hydration="!loading">
+            <m-product-carousel :products="blockoneproduct" />
+          </lazy-hydrate>
+        </div>
+      </div>
+    </div>
+
+    <MAssurance />
+    <AAboutUs />
+  </section>
 </template>
 
 <script>
+
 import { mapState, mapGetters } from 'vuex';
 import LazyHydrate from 'vue-lazy-hydration';
 import { Logger } from '@vue-storefront/core/lib/logger';
 import { isServer, onlineHelper } from '@vue-storefront/core/helpers';
+import MNosSpecialities from 'theme/components/molecules/m-nos-specialities';
 import MProductCarousel from 'theme/components/molecules/m-product-carousel';
-import ONewsletter from 'theme/components/organisms/o-newsletter';
-import AImagesGrid from 'theme/components/atoms/a-images-grid';
+import MAssurance from 'theme/components/molecules/m-assurance';
+import MPromoProductBlock from 'theme/components/molecules/m-promo-product-block';
+import MCodePromotionBlock from 'theme/components/molecules/m-code-promotion-block';
+import MSupportBlock from 'theme/components/molecules/m-support-block';
 import { checkWebpSupport } from 'theme/helpers'
+import AAboutUs from 'theme/components/atoms/a-about-us';
 
 import {
   SfHero,
-  SfSection,
-  SfBannerGrid,
-  SfBanner
+  SfImage
 } from '@storefront-ui/vue';
 
 export default {
@@ -74,12 +93,14 @@ export default {
   components: {
     LazyHydrate,
     SfHero,
-    SfSection,
-    SfBannerGrid,
-    SfBanner,
+    SfImage,
+    MNosSpecialities,
     MProductCarousel,
-    ONewsletter,
-    AImagesGrid
+    AAboutUs,
+    MAssurance,
+    MSupportBlock,
+    MPromoProductBlock,
+    MCodePromotionBlock
   },
   data () {
     return {
@@ -96,7 +117,8 @@ export default {
       heroImages: 'promoted/getHeadImage',
       promotedOffers: 'promoted/getPromotedOffers',
       newCollection: 'homepage/getEverythingNewCollection',
-      dummyInstagramImages: 'instagram/getInstagramImages'
+      dummyInstagramImages: 'instagram/getInstagramImages',      
+      blockoneproduct: 'homepage/getBlockOneProducts',
     }),
     isOnline () {
       return onlineHelper.isOnline;
@@ -123,7 +145,10 @@ export default {
     if (context) context.output.cacheTags.add(`home`)
 
     await Promise.all([
-      store.dispatch('homepage/fetchNewCollection'),
+       store.dispatch('homepage/blockOneProducts'),
+        // store.dispatch('homepage/blockTwoProducts'),
+        // store.dispatch('homepage/blockThreeProducts'),
+        //store.dispatch('homepage/fetchNewCollection'),
       store.dispatch('promoted/updateHeadImage'),
       store.dispatch('instagram/updateInstagramImages')
     ]);
@@ -134,9 +159,9 @@ export default {
   beforeRouteEnter (to, from, next) {
     if (!isServer && !from.name) {
       next(vm => {
-        vm.$store.dispatch('homepage/fetchNewCollection').then(() => {
-          vm.loading = false;
-        });
+        vm.$store.dispatch('homepage/blockOneProducts').then(() => {
+           vm.loading = false;
+       });
       });
     } else {
       next();
@@ -156,15 +181,11 @@ export default {
 
 #home {
   box-sizing: border-box;
-  padding: 0 var(--spacer-sm);
-  @include for-desktop {
-    padding: 0 var(--spacer-sm);
-    max-width: 1272px;
-    margin: 0 auto;
-  }
+  padding: 0;
 }
+
 .sf-hero-item {
-  --hero-item-height: 14rem;
+  --hero-item-height: 25rem;
   height: initial;
 }
 .banner-grid {
@@ -174,8 +195,6 @@ export default {
   }
 }
 .section {
-  padding-left: var(--spacer-xl);
-  padding-right: var(--spacer-xl);
   @include for-desktop {
     padding-left: 0;
     padding-right: 0;

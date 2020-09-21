@@ -24,10 +24,27 @@
               :special-price="getProductPrice(product).special"
               :stock="10"
               :qty="product.qty"
-              class="collected-product"
+              class="collected-product" 
               @click:remove="removeHandler(product)"
               @input="changeQuantity(product, $event)"
             >
+              <template #image>
+                <div class="sf-image sf-collected-product__image sf-image--has-size" data-loaded="true" style="--_image-width:140; --_image-height:200;">
+                  <img width="140" height="200" alt="" style="" :src="getThumbnailForProductExtend(product)" @error="$event.target.src=placeholder"/> 
+                </div> 
+              </template>
+              <template #remove="{ removeHandler }">
+                <SfCircleIcon
+                 class="sf-button sf-circle-icon sf-circle-icon--small sf-collected-product__remove sf-collected-product__remove--circle-icon"
+                 :icon="icon"
+                 :has-badge="hasBadge"
+                 :badge-label="badgeLabel"
+                 aria-label="Go to Home"
+                 :disabled="disabled"
+                 @click="removeHandler" 
+                 :style="{ margin: '.5rem' }" 
+                /> 
+              </template>
               <template #configuration>
                 <div class="collected-product__properties">
                   <SfProperty :name="$t('SKU')" :value="product.sku" />
@@ -81,7 +98,7 @@
             </template>
           </SfProperty>
           <SfButton
-            class="sf-button--full-width color-secondary"
+            class="sf-button--full-width btn-secondary a-add-to-cart"
             @click.native="goToCheckout"
           >
             {{ $t("Go to checkout") }}
@@ -89,7 +106,7 @@
         </div>
         <div v-else>
           <SfButton
-            class="sf-button--full-width color-primary"
+            class="sf-button--full-width btn-primary"
             @click.native="startShopping"
           >
             {{ $t("Start shopping") }}
@@ -108,7 +125,7 @@ import { getThumbnailForProduct } from '@vue-storefront/core/modules/cart/helper
 import { getProductPrice, getProductPriceFromTotals } from 'theme/helpers';
 import VueOfflineMixin from 'vue-offline/mixin';
 import onEscapePress from '@vue-storefront/core/mixins/onEscapePress';
-
+ 
 import {
   SfButton,
   SfCollectedProduct,
@@ -116,7 +133,8 @@ import {
   SfPrice,
   SfImage,
   SfHeading,
-  SfSidebar
+  SfSidebar,
+  SfCircleIcon
 } from '@storefront-ui/vue';
 
 export default {
@@ -127,12 +145,18 @@ export default {
     SfPrice,
     SfImage,
     SfHeading,
-    SfSidebar
+    SfSidebar,
+    SfCircleIcon
   },
   mixins: [VueOfflineMixin, onEscapePress],
   data () {
     return {
-      isMicrocartVisible: false
+      isMicrocartVisible: false,
+      icon: "cross",
+      hasBadge: false,
+      badgeLabel: "99",
+      disabled: false,
+      placeholder: '/assets/placeholder.jpg'
     };
   },
   computed: {
@@ -254,9 +278,11 @@ export default {
 .collected-product-list {
   flex: 1;
 }
+
 .collected-product {
   --collected-product-image-background: var(--c-white);
   margin: 0 0 var(--spacer-sm) 0;
+  border: 1px solid var(--c-light);
   &__properties {
     margin: var(--spacer-xs) 0 0 0;
   }
@@ -270,5 +296,6 @@ export default {
   &:hover {
     --cp-actions-opacity: 1;
   }
+
 }
 </style>

@@ -1,79 +1,95 @@
 <template>
-  <footer class="o-footer">
-    <SfFooter :column="5" :multiple="true">
-      <SfFooterColumn
-        v-for="linkGroup in links"
-        :key="linkGroup.name"
-        :title="$t(linkGroup.name)"
-      >
-        <SfList>
-          <SfListItem v-for="link in linkGroup.children" :key="link.name">
-            <router-link v-if="link.link" :to="localizedRoute(link.link)" exact>
-              <SfMenuItem class="sf-footer__menu-item" :label="$t(link.name)" />
-            </router-link>
-            <SfMenuItem
-              v-else-if="link.clickHandler"
-              class="sf-footer__menu-item"
-              :label="$t(link.name)"
-              @click="link.clickHandler"
-            />
-          </SfListItem>
-        </SfList>
-      </SfFooterColumn>
-      <SfFooterColumn :title="$t('Others')">
-        <SfList>
-          <SfListItem>
-            <router-link to="/legal" exact>
-              <SfMenuItem
-                class="sf-footer__menu-item"
-                :label="$t('Legal notice')"
-              />
-            </router-link>
-          </SfListItem>
-          <SfListItem>
-            <router-link to="/privacy" exact>
-              <SfMenuItem
-                class="sf-footer__menu-item"
-                :label="$t('Privacy policy')"
-              />
-            </router-link>
-          </SfListItem>
-          <SfListItem v-if="multistoreEnabled">
-            <SfMenuItem
-              @click.native="showLanguageSwitcher"
-              class="sf-footer__menu-item"
-              :label="currentLanguage"
-            />
-          </SfListItem>
-          <SfListItem class="sf-footer__menu-item">
-            {{ getVersionInfo }}
-          </SfListItem>
-        </SfList>
-      </SfFooterColumn>
-      <SfFooterColumn :title="$t('Social')" class="social-column">
-        <div class="social-icon">
-          <img
-            v-for="item in social"
-            :key="item"
-            :src="'/assets/icons/' + item + '.svg'"
-            class="social-icon__img"
-          >
+  <footer id="footer" class="o-footer">
+    <div class="container">
+        <div class="d-flex footer-overlay justify-between">
+          <MFooterNewsletterSection />
+          <AFooterPaymentSection />
         </div>
-      </SfFooterColumn>
-    </SfFooter>
+        <SfFooter :column="4" :multiple="true">
+          <SfFooterColumn
+            v-for="linkGroup in links"
+            :key="linkGroup.name"
+            :title="$t(linkGroup.name)"
+          >
+            <SfList>
+               <SfListItem v-for="link in linkGroup.children" :key="link.name">
+                <template v-if="link.name === 'Logout'">
+                  <router-link v-if="link.link" v-on:click.native="changeActivePage" :to="localizedRoute(link.link)" exact>
+                    <SfMenuItem class="sf-footer__menu-item" :label="$t(link.name)" />
+                  </router-link>
+                  <SfMenuItem
+                      v-else-if="link.clickHandler"
+                      class="sf-footer__menu-item"
+                      :label="$t(link.name)"
+                      @click="link.clickHandler"
+                  />
+                </template>
+                <template v-else>
+                  <router-link v-if="link.link" :to="localizedRoute(link.link)" exact>
+                    <SfMenuItem class="sf-footer__menu-item" :label="$t(link.name)" />
+                  </router-link>
+                  <SfMenuItem
+                    v-else-if="link.clickHandler"
+                    class="sf-footer__menu-item"
+                    :label="$t(link.name)"
+                    @click="link.clickHandler"
+                  />
+                </template>
+              </SfListItem>
+            </SfList>
+          </SfFooterColumn>
+        </SfFooter>
+        <div class="social-links d-flex align-center">
+          <h4>
+            Lets stay in touch!
+          </h4>
+          <div class="item d-flex">
+           <a href="https://www.facebook.com/CapitoolsUK/" target="_blank">
+              <img :src="'/assets/images/facebook_icon.png'" class="icon_facebook"/>
+            </a>
+            <a href="https://www.youtube.com/channel/UCi6MvXNjvI_Oy02TzXThOMg" target="_blank">
+              <img :src="'/assets/images/youtube_icon.png'" class="icon_youtube"/>
+            </a>
+            <a href="https://www.instagram.com/capitoolsuk/" target="_blank">
+              <img :src="'/assets/images/insta_icon.png'" class="icon_instagram"/>
+            </a>
+          </div>
+        </div>
+
+        <!--  <div class="blog d-flex align-center">
+          <label>New</label>
+          <img :src="'/assets/images/footer_blog.png'" class="image_blog_size">
+          <p class="footer_blog_text">
+            Ut nonumes noluisse nec, in impetus integre sea. Nec no elitr ignota aeterno. Qui etiam assentior complectitur no. in impetus integre sea. Nec no elitr ignota aeterno.
+          </p>
+          <SfButton
+            class="see-more btn-primary"
+            :link="seeMoreLink"
+          >
+            See more
+          </SfButton>
+        </div> -->
+    </div>
     <ABackToTop bottom="20px" right="20px" visibleoffset="200" class="desktop-only" />
+    <div class="copyrights text-center">
+      <p>
+        <span>&copy;1999  -</span>{{currentDate.getFullYear()}}<span> All Rights Reserved. Third party trademarks are hereby acknowledged.</span>
+      </p>
+    </div>
   </footer>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
 import ABackToTop from 'theme/components/atoms/a-back-to-top';
-import { SfFooter, SfList, SfMenuItem } from '@storefront-ui/vue';
+import { SfFooter, SfList, SfMenuItem , SfButton } from '@storefront-ui/vue';
 import { ModalList } from 'theme/store/ui/modals'
 import { getPathForStaticPage } from 'theme/helpers';
 import config from 'config';
 import { currentStoreView } from '@vue-storefront/core/lib/multistore';
 import get from 'lodash-es/get';
+import AFooterPaymentSection from 'theme/components/atoms/a-footer-payment-section';
+import MFooterNewsletterSection from 'theme/components/molecules/m-footer-newsletter-section';
 
 export default {
   name: 'OFooter',
@@ -81,11 +97,16 @@ export default {
     ABackToTop,
     SfFooter,
     SfList,
-    SfMenuItem
+    SfMenuItem,
+    SfButton,
+    AFooterPaymentSection,
+    MFooterNewsletterSection
   },
   data () {
     return {
-      social: ['facebook', 'pinterest', 'twitter', 'youtube']
+      seeMoreLink:"#",
+      social: ['facebook', 'pinterest', 'twitter', 'youtube'],
+      currentDate: new Date
     };
   },
   computed: {
@@ -102,45 +123,68 @@ export default {
     },
     links () {
       return {
-        orders: {
-          name: 'Orders',
-          children: [
-            {
-              name: 'My account',
-              ...this.isLoggedIn
-                ? { link: '/my-account' }
-                : { clickHandler: () => this.openModal({ name: ModalList.Auth, payload: 'login' }) }
-            },
-            { name: 'Delivery', link: '/delivery' },
-            { name: 'Return policy', link: '/returns' }
-          ]
-        },
-        help: {
-          name: 'Help',
-          children: [
-            { name: 'Customer service', link: '/customer-service' },
-            { name: 'Size guide', link: '/size-guide' },
-            { name: 'Contact us', link: '/contact' }
-          ]
-        },
         about: {
           name: 'About us',
           children: [
-            {
-              name: 'About us',
-              link: getPathForStaticPage('/about-us')
-            },
-            {
-              name: 'Customer service',
-              link: getPathForStaticPage('/customer-service')
-            },
-            { name: 'Store locator', link: '/store-locator' }
+            { name: 'Who We Are?', link: '/pages/about-us' },
+            { name: 'Our products', link: '/pages/our-products.html' },
+            { name: 'Our expertise', link: '/pages/our-expertise' },
+            { name: 'Our partner brands', link: '/pages/capitools-brands-and-partners' },
+            { name: 'Our guarantee', link: '/pages/our-guarantee' },
+            { name: 'Promotions', link: '/pages/deals-promos' },
+            { name: 'New products', link: '/pages/new-products' },
+            { name: 'Contact us', link: '/pages/contact-capitools' },
+            { name: 'sitemap', link: '/pages/sitemap' },
+            { name: 'We are hiring', link: '/pages/we-are-hiring' }
+          ]
+        },
+        product: {
+          name: 'The Products',
+          children: [
+            { name: 'Secure payment', link: '/pages/secure-payment' },
+            { name: 'Terms of Sales', link: '/pages/terms-of-sales' },
+            { name: 'Legal Notice', link: '/pages/legal-information' },
+            { name: 'Payment methods', link: '/pages/payment-info' },
+            { name: 'Satisfied or refunded', link: '/pages/satisfied-or-refunded' },
+            { name: 'Partners', link: '/pages/partners' },
+            { name: 'Cyber ​​Security', link: '/pages/cyber-security' },
+            { name: 'Cookie notice information', link: '/pages/cookie-notice-information' }
+          ]
+        },
+        help: {
+          name: 'Help & Services',
+          children: [
+            { name: 'My orders', link: '/pages/my-capitools-order' },
+            { name: 'My assets', link: '/pages/my-assets' },
+            { name: 'My adresses', link: '/pages/my-address' },
+            { name: 'My personal information', link: '/pages/my-personal-details' },
+            { name: 'My coupons', link: '/pages/my-coupons' },
+            { name: 'Logout', link: '/' }
+          ]
+        },
+        legal: {
+          name: 'Legal Information',
+          children: [
+            { name: 'FAQ', link: '/pages/f-a-q-frequently-asked-questions' },
+            { name: 'After-sales service & customer relations', link: '/pages/after-sales-service-and-customer-relations' },
+            { name: 'Payment in 3 installments', link: '/pages/payment-in-three-installments' },
+            { name: 'Product delivery', link: '/pages/delivery' },
+            { name: 'Return Policy', link: '/pages/return-policy' },
+            { name: 'The SWAP Europe Guarantee network', link: '/pages/swap-europe-network-warranty' }
           ]
         }
       };
     }
   },
   methods: {
+    changeActivePage () {
+        this.logout();
+        return;
+    },
+    async logout () {
+      await this.$store.dispatch('user/logout', {});
+      this.$router.push(this.localizedRoute('/'));
+    },
     ...mapActions('ui', {
       openModal: 'openModal'
     }),
@@ -155,27 +199,10 @@ export default {
 @import "~@storefront-ui/shared/styles/helpers/breakpoints";
 
 .o-footer {
-  @include for-desktop {
-    max-width: 1272px;
-    margin: auto;
-  }
   .sf-footer {
     --footer-width: auto;
+    --footer-padding : 0px;
   }
 }
-.social-column {
-  flex-basis: auto;
-}
-.social-icon {
-  padding: 20px 40px;
-  @include for-desktop {
-    padding: 6px 0;
-  }
-  &__img {
-    height: 1.75rem;
-    &:not(:last-child) {
-      margin-right: 1.25rem;
-    }
-  }
-}
+
 </style>

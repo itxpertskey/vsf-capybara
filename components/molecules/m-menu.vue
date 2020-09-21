@@ -6,9 +6,14 @@
     >
       <SfMegaMenuColumn
         v-for="category in categories"
-        :key="category.id"
+        :key="category.id" 
         :title="category.name"
       >
+        <template #title>
+          <router-link  style="background-color:#FFFFFF" :to="category.link" @click.native="$emit('close')">
+            <h3 class="sf-mega-menu-column__title">{{ category.name }}</h3>
+          </router-link>  
+        </template> 
         <SfList>
           <SfListItem
             v-for="item in category.items"
@@ -23,7 +28,8 @@
           </SfListItem>
         </SfList>
       </SfMegaMenuColumn>
-      <template #aside>
+     
+    </SfMegaMenu>
         <div class="aside-menu">
           <SfBanner
             v-for="(banner, i) in banners"
@@ -34,8 +40,6 @@
             :class="`aside-banner--${banner.type}`"
           />
         </div>
-      </template>
-    </SfMegaMenu>
   </div>
 </template>
 <script>
@@ -89,7 +93,7 @@ export default {
 
           return {
             ...prepareCategoryMenuItem(category),
-            items: [viewAllMenuItem, ...subCategories]
+            items: [...subCategories]
           };
         })
         .sort((a, b) => a.position - b.position);

@@ -10,19 +10,16 @@
       :configuration="productConfiguration"
     />
     <div class="product__info">
+    <div class="d-flex align-start">
+
       <MProductShortInfo
         :product="product"
         :custom-options="productCustomOptions"
         :reviews="reviews"
       />
-      <SfButton
-        v-show="sizeOption"
-        @click.native="openSizeGuide"
-        class="sf-button--text desktop-only product__guide"
-      >
-        {{ $t('Size guide') }}
-      </SfButton>
-      <div>
+
+      <div class="quantity-section">
+      
         <MProductOptionsConfigurable
           v-if="product.type_id =='configurable'"
           :product="product"
@@ -40,17 +37,14 @@
           v-else-if="product.custom_options && product.custom_options.length > 0"
           :product="product"
         />
+      
         <MProductAddToCart
           class="product__add-to-cart"
           :product="product"
           :stock="productStock"
         />
+        </div>
       </div>
-      <MProductAdditionalInfo
-        :product="product"
-        :reviews="reviews"
-        :attributes="productAttributes"
-      />
     </div>
   </div>
 </template>
@@ -58,11 +52,9 @@
 import get from 'lodash-es/get'
 import config from 'config';
 import { mapGetters, mapActions } from 'vuex';
-import { SfButton } from '@storefront-ui/vue';
 import MProductGallery from 'theme/components/molecules/m-product-gallery';
 import MProductShortInfo from 'theme/components/molecules/m-product-short-info';
 import MProductAddToCart from 'theme/components/molecules/m-product-add-to-cart';
-import MProductAdditionalInfo from 'theme/components/molecules/m-product-additional-info';
 import MProductOptionsConfigurable from 'theme/components/molecules/m-product-options-configurable';
 import MProductOptionsBundle from 'theme/components/molecules/m-product-options-bundle';
 import MProductOptionsCustom from 'theme/components/molecules/m-product-options-custom';
@@ -71,11 +63,9 @@ import { ModalList } from 'theme/store/ui/modals';
 
 export default {
   components: {
-    SfButton,
     MProductGallery,
     MProductShortInfo,
     MProductAddToCart,
-    MProductAdditionalInfo,
     MProductOptionsConfigurable,
     MProductOptionsBundle,
     MProductOptionsCustom,
@@ -165,20 +155,22 @@ export default {
 @import "~@storefront-ui/shared/styles/helpers/breakpoints";
 
 .product {
+  flex-direction: column;
   @include for-desktop {
     display: flex;
+    flex-direction: row;
   }
   &__info {
     margin: var(--spacer-sm) auto var(--spacer-xs);
     @include for-desktop {
-      max-width: 32.625rem;
-      margin: 0 0 0 7.5rem;
+      margin: 0 ;
+      max-width: calc(100% - 550px);
     }
   }
   &__add-to-cart {
-    margin: var(--spacer-base) var(--spacer-sm) 0;
+    margin:  0;
     @include for-desktop {
-      margin-top: var(--spacer-2xl);
+      
     }
   }
   &__guide,
@@ -188,6 +180,18 @@ export default {
     margin: var(--spacer-xl) 0 var(--spacer-base) auto;
   }
 }
+
+.quantity-section{
+    min-width: 260px;
+    width: 100%;
+    margin: 0 15px;
+    padding: 15px;
+    border: 1px solid var(--_c-green-primary-lighten);
+    border-radius: 3px;
+    @include for-mobile{
+      width: -webkit-fill-available;
+    }
+  }
 
 .section {
   border-bottom: 1px solid #f1f2f3;

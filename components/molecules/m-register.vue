@@ -1,5 +1,10 @@
 <template>
   <div class="m-register modal-content">
+     <SfImage
+      src="/assets/images/capitools-uk-logo.png"
+      class="capitools-logo"
+    />
+    <h1 class="text-primary text-center">Register</h1>
     <form @submit.prevent="register" class="form">
       <SfInput
         v-model="email"
@@ -42,7 +47,16 @@
         type="password"
         class="form__element"
       />
-      <SfButton class="sf-button--full-width form__submit">
+      <SfCheckbox
+          v-model="checked"
+          class="form__element form__checkbox"
+          :label="label"
+          :required="required"
+          :valid="valid"
+          :disabled="$v.email.$invalid" 
+          @change="subscribeEmail"
+        />
+      <SfButton class="sf-button--full-width btn-primary form__submit">
         {{ $t("Create an account") }}
       </SfButton>
     </form>
@@ -56,19 +70,26 @@
 import i18n from '@vue-storefront/i18n';
 import { Logger } from '@vue-storefront/core/lib/logger';
 import { required, email } from 'vuelidate/lib/validators';
-import { SfInput, SfButton } from '@storefront-ui/vue';
+import { SfInput, SfButton, SfImage, SfCheckbox } from '@storefront-ui/vue';
 import { ModalList } from 'theme/store/ui/modals'
 import { mapActions } from 'vuex';
+import Subscribe from '@vue-storefront/core/modules/newsletter/mixins/Subscribe';
 
 export default {
   name: 'MRegister',
-  components: { SfInput, SfButton },
+  mixins: [Subscribe],
+  components: { SfInput, SfButton, SfImage, SfCheckbox },
   data () {
     return {
       email: '',
       password: '',
       firstName: '',
-      lastName: ''
+      lastName: '',
+      checked: false, 
+      label: "Click to join Mailing List", 
+      required: false, 
+      valid: true, 
+      disabled: false,
     };
   },
   methods: {
@@ -136,6 +157,20 @@ export default {
         message: i18n.t(result.result),
         action1: { label: i18n.t('OK') }
       });
+    },
+    subscribeEmail () {
+      if(this.checked){
+          this.subscribe(this.onSuccesfulSubmission);
+      }
+    },
+    onSuccesfulSubmission (isSubscribed) {
+      if (isSubscribed) {
+        this.$store.dispatch('notification/spawnNotification', {
+          type: 'success',
+          message: i18n.t('You have been successfully subscribed to our newsletter!'),
+          action1: { label: i18n.t('OK') }
+        })
+      } 
     }
   },
   validations: {
@@ -165,7 +200,7 @@ export default {
 .form {
   width: 100%;
   &__element {
-    margin: var(--spacer-base) 0;
+    margin: 15px 0;
   }
   &__submit {
     margin: var(--spacer-xl) 0 0 0;

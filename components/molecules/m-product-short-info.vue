@@ -13,27 +13,43 @@
         class="product__drag-icon mobile-only"
       />
     </div>
+    <p class="reference">
+      <b>Reference : </b> {{ product.sku }}
+    </p>
     <div class="product__price-and-rating">
-      <AProductPrice
-        v-if="product.type_id !== 'grouped'"
-        :product="product"
-        :custom-options="customOptions"
-      />
       <AProductRating
         @click="openReviewsTab"
         :reviews="reviews"
+        class="d-flex"
       >
-        {{ $t("Read all {count} review", { count: reviewsCount }) }}
+        <!-- {{ $t("Read all {count} review", { count: reviewsCount }) }} -->
       </AProductRating>
     </div>
+    <hr>
     <div class="product__description desktop-only" v-html="product.description" />
+    <SfButton
+      v-show="sizeOption"
+      @click.native="openSizeGuide"
+      class="sf-button--text desktop-only product__guide"
+    >
+      {{ $t('Size guide') }}
+    </SfButton>
+    <div v-if="showOrHideBlocksBasedOnBFTG(product)">
+      <AMesAdvantage />
+    </div>
+    <div v-else>
+      <AGarantie />
+    </div>
   </div>
 </template>
 
 <script>
+import config from 'config';
 import { SfHeading, SfIcon, SfPrice, SfButton } from '@storefront-ui/vue';
 import AProductRating from 'theme/components/atoms/a-product-rating';
 import AProductPrice from 'theme/components/atoms/a-product-price';
+import AMesAdvantage from 'theme/components/atoms/a-mes-advantage';
+import AGarantie from 'theme/components/atoms/a-garantie';
 import { createSmoothscroll } from 'theme/helpers'
 export default {
   name: 'MProductShortInfo',
@@ -41,7 +57,9 @@ export default {
     SfHeading,
     SfIcon,
     AProductRating,
-    AProductPrice
+    AProductPrice,
+    AMesAdvantage,
+    AGarantie
   },
   props: {
     product: {
@@ -71,6 +89,10 @@ export default {
 
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
       createSmoothscroll(scrollTop, scrollTop + reviewsEl.getBoundingClientRect().top);
+    },
+    showOrHideBlocksBasedOnBFTG (product) {
+      const availableManufactures = config.availableManufactures;
+      return availableManufactures.includes(product.manufacturer);
     }
   }
 };
@@ -81,7 +103,6 @@ export default {
 
 .product {
   &__header {
-    margin: 0 var(--spacer-sm);
     display: flex;
     justify-content: space-between;
     @include for-desktop {

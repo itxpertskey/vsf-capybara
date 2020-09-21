@@ -16,40 +16,30 @@
       :product-stock="stock"
     />
     <div class="product__bottom">
+      <MAssurance />
+      <MProductAdditionalInfo
+        :product="getCurrentProduct"
+        :reviews="reviews"
+        :attributes="productAttributes"
+      />
       <lazy-hydrate when-idle>
         <SfSection :title-heading="$t('We found other products you might like')">
           <MRelatedProducts type="upsell" />
         </SfSection>
       </lazy-hydrate>
-      <lazy-hydrate when-idle>
-        <SfSection v-show="banners.length">
-          <router-link :key="i" :to="banner.link" v-for="(banner, i) in banners">
-            <SfBanner
-              :subtitle="banner.subtitle"
-              :title="banner.title"
-              :image="banner.image"
-              class="banner sf-banner--slim"
-            />
-          </router-link>
-        </SfSection>
-      </lazy-hydrate>
+
       <lazy-hydrate when-idle>
         <SfSection :title-heading="$t('Similar Products')">
           <MRelatedProducts type="related" />
         </SfSection>
       </lazy-hydrate>
-      <SfSection
-        v-if="isOnline"
-        title-heading="Share Your Look"
-        subtitle-heading="#YOURLOOK"
-      >
-        <AImagesGrid :images="instagramImages" />
-      </SfSection>
     </div>
   </div>
 </template>
 
 <script>
+import get from 'lodash-es/get'
+import config from 'config';
 import { mapGetters, mapState } from 'vuex';
 import LazyHydrate from 'vue-lazy-hydration';
 import {
@@ -62,21 +52,22 @@ import { registerModule } from '@vue-storefront/core/lib/modules';
 import { onlineHelper, isServer } from '@vue-storefront/core/helpers';
 import { catalogHooksExecutors } from '@vue-storefront/core/modules/catalog-next/hooks';
 import MRelatedProducts from 'theme/components/molecules/m-related-products';
+import MProductAdditionalInfo from 'theme/components/molecules/m-product-additional-info';
+import MAssurance from 'theme/components/molecules/m-assurance';
 import OProductDetails from 'theme/components/organisms/o-product-details';
-import AImagesGrid from 'theme/components/atoms/a-images-grid';
-import { checkWebpSupport } from 'theme/helpers'
-import { SfSection, SfBanner, SfBreadcrumbs } from '@storefront-ui/vue';
-import { filterChangedProduct } from '@vue-storefront/core/modules/catalog/events'
+import { checkWebpSupport } from 'theme/helpers';
+import { SfSection, SfBreadcrumbs } from '@storefront-ui/vue';
+import { filterChangedProduct } from '@vue-storefront/core/modules/catalog/events';
 
 export default {
   name: 'Product',
   components: {
     LazyHydrate,
     MRelatedProducts,
+    MProductAdditionalInfo,
     SfSection,
     OProductDetails,
-    SfBanner,
-    AImagesGrid,
+    MAssurance,
     SfBreadcrumbs
   },
   provide () {
@@ -88,7 +79,8 @@ export default {
     return {
       stock: {
         isLoading: false,
-        max: 0
+        max: 0,
+        manageQuantity: true
       }
     };
   },
@@ -144,6 +136,22 @@ export default {
     },
     instagramImages () {
       return checkWebpSupport(this.dummyInstagramImages, this.isWebpSupported)
+    },
+    reviews () {
+      const baseReviews = get(this.$store.state.review, 'items.items', [])
+      return baseReviews.map((review) => ({
+        author: review.nickname,
+        date: review.created_at,
+        message: `${review.title}: ${review.detail}`,
+        rating: 1 // TODO: remove hardcode
+      }))
+    },
+
+    availability () {
+      return this.product.stock && this.product.stock.is_in_stock ? 'InStock' : 'OutOfStock'
+    },
+    sizeOption () {
+      return get(this.productConfiguration, 'size', false)
     }
   },
   watch: {
@@ -203,12 +211,40 @@ export default {
           product: this.getCurrentProduct,
           qty: this.getCurrentProduct.qty
         });
-        this.stock.max = res.qty;
+        this.manageQuantity = res.isManageStock;
+        this.stock.max = res.isManageStock ? res.qty : null;
       } finally {
         this.stock.isLoading = false;
       }
     }
   },
+  props: {
+    product: {
+      type: Object,
+      default: () => ({})
+    },
+    productGallery: {
+      type: Array,
+      default: () => []
+    },
+    productConfiguration: {
+      type: Object,
+      default: () => ({})
+    },
+    productCustomOptions: {
+      type: Object,
+      default: () => ({})
+    },
+    productAttributes: {
+      type: Array,
+      default: () => []
+    },
+    productStock: {
+      type: Object,
+      default: () => ({})
+    }
+  },
+
   metaInfo () {
     const storeView = currentStoreView();
     return {

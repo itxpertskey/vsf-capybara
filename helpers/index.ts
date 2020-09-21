@@ -55,19 +55,23 @@ export function getTopLevelCategories (categoryList) {
 
 export function prepareCategoryProduct (product) {
   return {
-    id: product.id,
+    id: product.id, 
     title: htmlDecode(product.name),
     image: getThumbnailPath(
       productThumbnailPath(product),
       config.products.thumbnails.width,
       config.products.thumbnails.height
-    ),
+    ),  
     link: formatProductLink(product, currentStoreView().storeCode),
     price: getProductPrice(product),
     rating: {
       max: 5,
       score: 5
-    }
+    },
+    obj_product:product,
+    sku:product.sku,
+    is_in_stock:product.stock.is_in_stock,
+    description:product.description
   }
 }
 

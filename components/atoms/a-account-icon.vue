@@ -6,11 +6,12 @@
     <SfIcon
       icon="account"
       size="xs"
-      class="sf-header__icon"
+      class="sf-header__icon icon-size"
       :class="{
         'sf-header__icon--is-active': isLoggedIn
       }"
     />
+    <small>Account</small>
   </SfButton>
 </template>
 
@@ -38,3 +39,9 @@ export default {
   }
 };
 </script>
+<style  lang="scss" scoped>
+.icon-size
+{
+ --icon-size: 2rem;
+}
+</style>
