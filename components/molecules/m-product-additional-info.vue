@@ -35,8 +35,8 @@
       <SfDivider v-show="reviewsCount" />
       <MReviewList v-show="reviewsCount" :reviews="reviews" :visible=10 />
     </SfTab>
-    <SfTab :title="$t('Video')" ref="videoTab"> 
-      <div class="video-grid" v-if="isShowVideoTab">
+    <SfTab :title="$t('Video')" ref="videoTab"  v-if="isShowVideoTab"> 
+      <div class="video-grid">
         <div class="video-item">
           <youtube v-if="product.youtube_video_code_one"
                    :video-id="productVideoIdOne"
