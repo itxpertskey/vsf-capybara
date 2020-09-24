@@ -261,9 +261,9 @@
     </div>
     <div class="actions align-center">
       <SfButton
-        class="sf-button--full-width actions__button btn-primary"
-        :disabled="$v.orderReview.$invalid || !productsInCart.length"
-        @click="placeOrder"
+        class="sf-button--full-width actions__button"
+        :disabled="!orderReview.terms && productsInCart.length"
+        @click="placeOrder" 
       >
         {{ $t("Place the order") }}
       </SfButton>
