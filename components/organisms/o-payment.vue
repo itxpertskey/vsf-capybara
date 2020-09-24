@@ -93,7 +93,29 @@
         "
         @blur="$v.payment.zipCode.$touch()"
       />
-      <SfSelect
+       <div  v-for="country in countries" :key="country.code">
+        <div v-if="country.code === defaultCountryCode">
+          <SfSelect
+            v-model="payment.country"
+            class="form__element form__element--half form__element--half-even form__select sf-select--underlined"
+            name="countries"
+            :label="$t('Country')"
+            :required="true"
+            :valid="!$v.payment.country.$error"
+            :error-message="$t('Field is required')"
+            @change="changeCountry"
+            style="width: 15rem;"
+          >
+            <SfSelectOption
+              :key="country.code"
+              :value="country.code"
+            >
+              {{ country.name }}
+            </SfSelectOption>
+          </SfSelect>
+        </div>
+      </div>  
+     <!-- <SfSelect
         v-model="payment.country"
         class="form__element form__element--half form__element--half-even form__select sf-select--underlined"
         name="countries"
@@ -110,7 +132,7 @@
         >
           {{ country.name }}
         </SfSelectOption>
-      </SfSelect>
+      </SfSelect> -->
       <SfInput
         v-model.trim="payment.phoneNumber"
         class="form__element"
@@ -303,7 +325,12 @@ export default {
   },
   mounted () {
     createSmoothscroll(document.documentElement.scrollTop || document.body.scrollTop, 0);
-  }
+  },
+  data() {
+    return {
+      defaultCountryCode: "GB"
+    };
+  },
 };
 </script>
 <style lang="scss" scoped>
