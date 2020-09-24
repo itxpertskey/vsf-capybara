@@ -40,10 +40,13 @@
           <SfTableHeader class="table__header table__price">
             {{ $t('Price') }}
           </SfTableHeader>
-        </SfTableHeading>
+        </SfTableHeading> 
         <SfTableRow v-for="product in products" :key="product.id">
           <SfTableData class="table__header table__image">
-            <SfImage :src="getThumbnailForProduct(product)" :alt="product.name | htmlDecode" />
+            <div data-v-e966eaee="" class="sf-image" data-loaded="true">
+              <img :alt="product.name | htmlDecode" :src="getThumbnailForProduct(product)" @error="$event.target.src=placeholder"/> 
+            </div>
+           <!-- <SfImage :src="getThumbnailForProduct(product)" :alt="product.name | htmlDecode" /> -->
           </SfTableData>
           <SfTableData class="table__header">
             {{ product.name | htmlDecode }}
@@ -168,7 +171,8 @@ export default {
   },
   data () {
     return {
-      products: []
+      products: [],
+      placeholder: '/assets/placeholder.jpg'
     }
   },
   computed: {
@@ -189,13 +193,13 @@ export default {
         if (arrayOfSKUs.indexOf(product.sku) === -1) {
           arrayOfSKUs.push(product.sku)
         }
-      })
+      }) 
 
       let searchQuery = new SearchQuery()
-      searchQuery = searchQuery.applyFilter({ key: 'configurable_children.sku', value: { 'in': arrayOfSKUs } })
-      this.$store.dispatch('product/list', { query: searchQuery, start: 0, size: this.order.items.length, updateState: false }, { root: true }).then((resp) => {
+      searchQuery = searchQuery.applyFilter({ key: 'sku', value: { 'terms': arrayOfSKUs } })
+      this.$store.dispatch('product/findProducts', { query: searchQuery, start: 0, size: this.order.items.length, updateState: false }, { root: true }).then((resp) => {
         resp.items.forEach(responseItem => {
-          let relatedProduct = this.order.items.find(item => { return item.product_id === responseItem.id })
+          let relatedProduct = this.order.items.find(item => { return item.sku === responseItem.sku })
           this.products.push(Object.assign({}, relatedProduct, responseItem))
         })
       })
