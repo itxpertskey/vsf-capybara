@@ -10,27 +10,27 @@
       :enable-zoom="enableZoom"
     >
     <template #thumbs="{ images, active: activeIndex, go }"  v-if="isShowVideoTabThumbInGallery" >
-       <SfButton
-          v-for="(image, index) in images"
-          :key="'img-' + index"
-          class="sf-button--pure sf-gallery__item"
-          :class="{ 'sf-gallery__item--selected': index === activeIndex }"
-          @click="go(index)"
-        >
-          <SfImage
-            class="sf-gallery__thumb"
-            :src="image.mobile.url"
-            :alt="image.alt"
-            :width="thumbWidth"
-            :height="thumbHeight"
-          />
-        </SfButton>
         <SfButton
           v-for="(image, index) in videoThumbImages"
           :key="'img-' + index"
           class="sf-button--pure sf-gallery__item"
           :class="{ 'sf-gallery__item--selected': index === activeIndex }"
           v-on:click="openVideosTab()"
+        >
+          <SfImage
+            class="sf-gallery-video__thumb"
+            :src="videoThumbImageMobile"
+            :alt="image.alt"
+            :width="thumbWidth"
+            :height="thumbHeight"
+          />
+       </SfButton>
+       <SfButton
+          v-for="(image, index) in images"
+          :key="'img-' + index"
+          class="sf-button--pure sf-gallery__item"
+          :class="{ 'sf-gallery__item--selected': index === activeIndex }"
+          @click="go(index)"
         >
           <SfImage
             class="sf-gallery__thumb"
@@ -72,7 +72,11 @@ export default {
           zoom: { url: "assets/placeholder.jpg" },
         },
       ],
+      videoThumbImageMobile: "assets/placeholder.jpg", 
     };
+  },
+  mounted () {
+    this.videoThumbImageMobile = "https://img.youtube.com/vi/"+this.$youtube.getIdFromUrl(this.product.youtube_video_code_one)+"/sddefault.jpg";
   },
   props: {
     gallery: {

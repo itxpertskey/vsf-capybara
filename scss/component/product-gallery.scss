@@ -6,6 +6,20 @@
     margin-right: 15px;
     flex: 1;
     .sf-gallery{
+      &-video__thumb{
+        &:before {
+            position: absolute;
+            background: url('/assets/icons/play-button-overlay.webp') center no-repeat;
+            background-size: contain;
+            content: "";
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 99999;
+            pointer-events: none;
+        }  
+      }
        &__thumbs{
          justify-content: center;
          button{
