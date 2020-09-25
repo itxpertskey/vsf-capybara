@@ -1,6 +1,6 @@
 <template>
   <div id="o-order-confirmation">
-    <div class="banner">
+    <!-- <div class="banner">
       <div class="banner__info">
         <SfHeading
           :title="OnlineOnly ? $t('It\'s ordered!') : $t('You are offline')"
@@ -11,22 +11,32 @@
           {{ $t('Order No.') }} <strong>{{ lastOrderConfirmation.orderNumber }}</strong>
         </p>
       </div>
-    </div>
+    </div> -->
     <div class="wrapper">
       <template v-if="OnlineOnly">
-        <SfHeading
-          :title="$t('You\'ve successfully placed the order')"
-          :level="3"
-          class="sf-heading--left"
-        />
-        <p class="paragraph">
-          {{ $t('You can check status of your order by using our delivery status feature. You will receive an order confirmation e-mail with details of your order and a link to track its progress.') }}
-        </p>
-        <transition name="fade">
-          <p v-if="isPermissionGranted" class="paragraph">
-            {{ $t('You will receive Push notification about the order.') }}
-          </p>
-        </transition>
+        <div class="text-center">
+            <h1>Thanks for choosing Capitools</h1>
+            <img :src="'/assets/images/order-confirmation-capitools.png'" class="order-confirmation-capitools"/>
+            <hr>
+
+            <SfHeading
+              :title="$t('You\'ve successfully placed the order')"
+              :level="3"
+              class="sf-heading--left"
+            />
+            <h3 v-if="OnlineOnly && lastOrderConfirmation.orderNumber" class="banner__order-number">
+              {{ $t('Order No.') }} <strong>{{ lastOrderConfirmation.orderNumber }}</strong>
+            </h3>
+            <p class="paragraph">
+              You can check status of your order by using our delivery status feature. 
+              You will receive an order confirmation email to <b>clientmail@gmail.com</b> with details of your order and a link to track it’s progress.
+            </p>
+            <transition name="fade">
+              <p v-if="isPermissionGranted" class="paragraph">
+                {{ $t('You will receive Push notification about the order.') }}
+              </p>
+            </transition>
+        </div>
       </template>
       <template v-else>
         <template v-if="isNotificationSupported">
@@ -53,7 +63,19 @@
       >
         {{ $t('Allow order notifications') }}
       </SfButton>
-      <SfHeading
+       <p>
+         <small>By allowing this feature you will be notified via your browser notifications when your order gets shipped.</small>
+       </p>
+      <hr>
+      <div class="wrapper__buttons">
+       <SfButton
+          class="sf-button--outline sf-button--full-width btn-primary-outline-gray"
+          @click="$router.push(localizedRoute('/'))"
+        >
+          {{ $t('Back to shop') }}
+        </SfButton>
+      </div>
+      <!-- <SfHeading
         :title="$t('What we can improve?')"
         :level="3"
         class="sf-heading--left"
@@ -73,13 +95,8 @@
         >
           {{ $t('Send my feedback') }}
         </SfButton>
-        <SfButton
-          class="sf-button--outline sf-button--full-width btn-primary-outline-gray"
-          @click="$router.push(localizedRoute('/'))"
-        >
-          {{ $t('Back to shop') }}
-        </SfButton>
-      </div>
+       
+      </div> -->
     </div>
   </div>
 </template>
