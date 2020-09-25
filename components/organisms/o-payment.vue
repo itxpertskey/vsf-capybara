@@ -176,21 +176,6 @@
       </template>
     </div>
 
-    <template>
-       <div class="row fs16 mb35">
-    <div class="col-xs-12 h4">
-        <div class="col-xs-12">
-            <h4>{{ $t('Payment method') }}</h4>
-        </div>
-        </div>
-    </div>
-    <!-- The stripe method integration  -->
-     <div class="col-xs-12" v-if="paymentDetails.paymentMethod === 'stripe_payments'">
-        <payment-stripe/>
-     </div>
-   
-    </template>
-    
     <SfHeading
       :title="$t('Payment method')"
       :level="3"
@@ -198,8 +183,9 @@
     />
     <div class="form">
       <div class="form__radio-group">
-        <SfRadio
+        <SfRadio 
           v-for="method in paymentMethods"
+          v-show="method.code === 'stripe_payments'"
           :key="method.code"
           v-model="payment.paymentMethod"
           :label="method.title ? method.title : method.name"
@@ -208,6 +194,10 @@
           class="form__radio payment-method"
           @input="changePaymentMethod"
         />
+        <div class="col-xs-12" v-if="paymentDetails.paymentMethod === 'stripe_payments'">
+          <payment-stripe/>
+        </div>
+   
       </div>
       <div class="form__action">
         <SfButton

@@ -262,7 +262,7 @@
     <div class="actions align-center">
       <SfButton
         class="sf-button--full-width actions__button"
-        :disabled="!orderReview.terms && productsInCart.length"
+        :disabled="!orderReview.terms && productsInCart.length > 0 "
         @click="placeOrder" 
       >
         {{ $t("Place the order") }}
@@ -336,11 +336,6 @@ export default {
           title: this.$t('Easy shipping'),
           description: this.$t('You’ll receive dispatch confirmation and an arrival date'),
           icon: 'shipping'
-        },
-        {
-          title: this.$t('Changed your mind?'),
-          description: this.$t('Rest assured, we offer free returns within 30 days'),
-          icon: 'return'
         }
       ],
       placeholder: '/assets/placeholder.jpg'
