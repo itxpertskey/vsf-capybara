@@ -23,14 +23,24 @@
               :title="$t('You\'ve successfully placed the order')"
               :level="3"
               class="sf-heading--left"
-            />
-            <h3 v-if="OnlineOnly && lastOrderConfirmation.orderNumber" class="banner__order-number">
-              {{ $t('Order No.') }} <strong>{{ lastOrderConfirmation.orderNumber }}</strong>
-            </h3>
-            <p class="paragraph">
-              You can check status of your order by using our delivery status feature. 
-              You will receive an order confirmation email to <b>clientmail@gmail.com</b> with details of your order and a link to track it’s progress.
-            </p>
+            /> 
+            <div v-if="isLoggedIn">
+              <div v-for="order in orders" :key="order.magento_order_id">
+                <div v-if="order.magento_order_id === lastOrderConfirmation.magentoOrderId">
+                  Your Order Number {{ order.order_id }}
+                    <p class="paragraph">
+                        You can check status of your order by using our delivery status feature. 
+                        You will receive an order confirmation email to <b>{{ order.customer_email }}</b> with details of your order and a link to track it’s progress.
+                    </p>
+                  </div>
+              </div> 
+            </div>
+            <div v-else>
+              <p class="paragraph">
+                You can check status of your order by using our delivery status feature. 
+                You will receive an order confirmation email with details of your order and a link to track it’s progress.
+              </p>
+            </div>
             <transition name="fade">
               <p v-if="isPermissionGranted" class="paragraph">
                 {{ $t('You will receive Push notification about the order.') }}
@@ -103,7 +113,7 @@
 
 <script>
 import get from 'lodash-es/get';
-import { mapState } from 'vuex';
+import { mapState, mapGetters} from 'vuex';
 import config from 'config';
 import VueOfflineMixin from 'vue-offline/mixin';
 import { EmailForm } from '@vue-storefront/core/modules/mailer/components/EmailForm';
@@ -111,11 +121,12 @@ import { isServer } from '@vue-storefront/core/helpers';
 import { registerModule } from '@vue-storefront/core/lib/modules';
 import { MailerModule } from '@vue-storefront/core/modules/mailer';
 import { SfHeading, SfButton } from '@storefront-ui/vue';
+import UserOrder from '@vue-storefront/core/modules/order/components/UserOrdersHistory';
 
 export default {
   name: 'OOrderConfirmation',
   components: { SfHeading, SfButton },
-  mixins: [VueOfflineMixin, EmailForm],
+  mixins: [VueOfflineMixin, EmailForm, UserOrder],
   data () {
     return {
       feedback: '',
@@ -127,6 +138,7 @@ export default {
       lastOrderConfirmation: state => get(state, 'order.last_order_confirmation.confirmation') || {},
       checkoutPersonalEmailAddress: state => state.checkout.personalDetails.emailAddress
     }),
+    ...mapGetters('user', ['isLoggedIn']),
     isNotificationSupported () {
       if (isServer || !('Notification' in window)) return false;
       return 'Notification' in window;
@@ -136,7 +148,19 @@ export default {
     },
     mailerElements () {
       return config.mailer.contactAddress;
-    }
+    },
+    orders () {
+      let orders = []
+      this.ordersHistory.forEach(item => {
+        orders.push({
+          'magento_order_id': item.id,
+          'order_id': item.increment_id,
+          'customer_email' : item.customer_email
+        })
+      })
+           
+      return orders;
+     } 
   },
   beforeCreate () {
     registerModule(MailerModule);
@@ -152,6 +176,9 @@ export default {
             this.notificationPermission = permission;
           });
       }
+    },
+    isUserLoggedIn () {
+      return this.isLoggedIn ? true : false;
     },
     sendFeedback () {
       this.sendEmail(
