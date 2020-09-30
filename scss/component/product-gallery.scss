@@ -28,10 +28,12 @@
          }
         @include for-desktop{
           max-width: 70px;
-          height: fit-content;
+          max-height: 420px;
+          overflow: auto;
           button{
             width: 70px;
             max-height: 70px;
+            scroll-snap-align: ceneter;
             .sf-image{
               height: 70px;
             }

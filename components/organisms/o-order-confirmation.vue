@@ -19,15 +19,10 @@
             <img :src="'/assets/images/order-confirmation-capitools.png'" class="order-confirmation-capitools"/>
             <hr>
 
-            <SfHeading
-              :title="$t('You\'ve successfully placed the order')"
-              :level="3"
-              class="sf-heading--left"
-            /> 
             <div v-if="isLoggedIn">
               <div v-for="order in orders" :key="order.magento_order_id">
-                <div v-if="order.magento_order_id === lastOrderConfirmation.magentoOrderId">
-                  Your Order Number {{ order.order_id }}
+                <div class="order-confirmation-message" v-if="order.magento_order_id === lastOrderConfirmation.magentoOrderId">
+                    <h2>Your Order Number <a class="text-primary">#{{ order.order_id }}</a></h2>
                     <p class="paragraph">
                         You can check status of your order by using our delivery status feature. 
                         You will receive an order confirmation email to <b>{{ order.customer_email }}</b> with details of your order and a link to track it’s progress.

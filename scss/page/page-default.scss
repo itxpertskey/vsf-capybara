@@ -97,6 +97,18 @@
                 font-size: 10px;
             }
         }
+        .order-confirmation-message{
+            h2{
+                font-family: 'Poppins-Regular';
+                .text-primary{
+                    color: var(--_c-green-primary-lighten)!important;
+                    font-family: 'Poppins-Bold';
+                    display: inline-block;
+                    vertical-align: middle;
+                    margin: 0 10px;
+                }
+            }
+        }
         .wrapper__notifications-button{
             text-transform: none;
             margin: 70px auto;

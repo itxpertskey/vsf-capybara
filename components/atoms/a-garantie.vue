@@ -39,6 +39,7 @@ export default {
         border: 1px solid var(--_c-gray-accent);
         border-radius: 5px;
         width: fit-content;
+        margin: 15px 0;
         @include for-mobile{
           display: inline-flex;
           width: 43vw;
