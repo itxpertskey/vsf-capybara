@@ -12,10 +12,13 @@ const MyAccount = () =>
   import(/* webpackChunkName: "vsf-my-account" */ 'theme/pages/MyAccount');
 const Static = () =>
   import(/* webpackChunkName: "vsf-static" */ 'theme/pages/Static');
+const OrderConfirmed = () =>
+  import(/* webpackChunkName: "vsf-error" */ 'theme/pages/OrderConfirmed');
 
 let routes = [
   { name: 'home', path: '/', component: Home, alias: '/pwa.html' },
   { name: 'checkout', path: '/checkout', component: Checkout },
+  { name: 'order-confirmed', path: '/order-confirmed', component: OrderConfirmed },
   { name: 'legal', path: '/legal', component: Static },
   { name: 'privacy', path: '/privacy', component: Static },
   { name: 'my-account', path: '/my-account', component: MyAccount },
