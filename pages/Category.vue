@@ -128,13 +128,17 @@
                 class="products__product-card">
                 <template #title>
                   <h3 class="sf-product-card__title">
-                      {{ product.title }}
+                      {{ product.title }} 
                   </h3>
                   <p class="reference">
                      Ref : {{ product.sku }}
                   </p> 
-                  
-                  <AProductRating />
+                  <div class="a-product-rating" @click="$emit('click')">
+                    <div class="product__rating">
+                      <SfRating :score="getSingleProductRatingCount(product.id)" :max="product.rating.max" />
+                      <span class="product__count">({{ getSingleProductReviewCount(product.id) }})Customer reviews</span>
+                    </div>
+                  </div>
                   <div class="d-flex align-start justify-between">
                       <SfPrice
                         class="sf-product-card__price"
@@ -195,8 +199,12 @@
                     <p class="reference">
                       Ref : {{ product.sku }}
                     </p> 
-                    
-                    <AProductRating />
+                     <div class="a-product-rating" @click="$emit('click')">
+                      <div class="product__rating">
+                        <SfRating :score="getSingleProductRatingCount(product.id)" :max="product.rating.max" />
+                        <span class="product__count">({{ getSingleProductReviewCount(product.id) }})Customer reviews</span>
+                      </div>
+                     </div>
                      <div class="description" style="white-space: break-spaces">
                       <p itemprop="description" v-html="product.description"> </p>
                     </div> 
@@ -297,6 +305,9 @@ import {
   productThumbnailPath,
   isServer
 } from '@vue-storefront/core/helpers';
+import { ReviewModule } from '@vue-storefront/core/modules/review';
+import { registerModule } from '@vue-storefront/core/lib/modules';
+import get from 'lodash-es/get'
 import i18n from '@vue-storefront/i18n';
 import onBottomScroll from '@vue-storefront/core/mixins/onBottomScroll';
 import { htmlDecode } from '@vue-storefront/core/filters';
@@ -330,6 +341,7 @@ import {
   SfProductCard,
   SfProductCardHorizontal,
   SfPrice,
+  SfRating
 } from '@storefront-ui/vue';
 
 const THEME_PAGE_SIZE = 12;
@@ -386,6 +398,7 @@ export default {
     SfPrice,
     AAddToCart,
     AProductRating,
+    SfRating
   },
   props: 
   {
@@ -611,6 +624,9 @@ export default {
       });
     }
   },
+  beforeCreate () {
+    registerModule(ReviewModule);
+  },
   mounted () {
     this.unsubscribeFromStoreAction = this.$store.subscribeAction(action => {
       if (action.type === 'category-next/loadAvailableFiltersFrom') {
@@ -629,6 +645,28 @@ export default {
   methods: { 
     getBrowserWidth () {
       return (this.browserWidth = window.innerWidth);
+    },
+    getSingleProductReviewCount(product_Id){
+       const reviewCountCollection = get(this.$store.state.review, 'review_count_collection',[])
+       if( reviewCountCollection != null ){
+         for (let iLoop = 0; iLoop < reviewCountCollection.length; iLoop++) {
+           if( reviewCountCollection[iLoop].product_Id == product_Id ){
+                return reviewCountCollection[iLoop].review_Count;  
+              } 
+            }
+       } 
+       return "0";
+    },
+     getSingleProductRatingCount(product_Id){
+       const reviewCountCollection = get(this.$store.state.review, 'review_count_collection',[])
+       if( reviewCountCollection != null ){
+         for (let iLoop = 0; iLoop < reviewCountCollection.length; iLoop++) {
+           if( reviewCountCollection[iLoop].product_Id == product_Id ){
+                return reviewCountCollection[iLoop].rating_Count;  
+              } 
+            }
+       } 
+       return "0";
     },
     isProductDisabled ( product ) {
       return product.is_in_stock ? false : true ;
