@@ -5,6 +5,7 @@ import { productThumbnailPath, getThumbnailPath, isServer } from '@vue-storefron
 import { htmlDecode } from '@vue-storefront/core/filters'
 import { formatProductLink } from '@vue-storefront/core/modules/url/helpers'
 import { getProductPrice } from './price'
+import store from '@vue-storefront/core/store'
 
 export * from './price'
 
@@ -54,6 +55,7 @@ export function getTopLevelCategories (categoryList) {
 }
 
 export function prepareCategoryProduct (product) {
+  (store as any).dispatch('review/reviewCount', { productId: product.id });
   return {
     id: product.id, 
     title: htmlDecode(product.name),

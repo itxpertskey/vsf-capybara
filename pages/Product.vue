@@ -143,10 +143,10 @@ export default {
         author: review.nickname,
         date: review.created_at,
         message: `${review.title}: ${review.detail}`,
-        rating: 1 // TODO: remove hardcode
+        rating: ( review.ratings[0].value+review.ratings[1].value+review.ratings[2].value+review.ratings[3].value+review.ratings[4].value ) / 5 // TODO: remove hardcode
       }))
     },
-
+    
     availability () {
       return this.product.stock && this.product.stock.is_in_stock ? 'InStock' : 'OutOfStock'
     },
