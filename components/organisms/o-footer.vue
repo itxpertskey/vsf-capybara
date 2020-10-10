@@ -14,26 +14,40 @@
             <SfList>
                <SfListItem v-for="link in linkGroup.children" :key="link.name">
                 <template v-if="link.name === 'Logout'">
-                  <router-link v-if="link.link" v-on:click.native="changeActivePage" :to="localizedRoute(link.link)" exact>
-                    <SfMenuItem class="sf-footer__menu-item" :label="$t(link.name)" />
-                  </router-link>
-                  <SfMenuItem
+                  <div v-if="isLoggedIn"> 
+                     <router-link v-if="link.link" v-on:click.native="changeActivePage" :to="localizedRoute(link.link)" exact>
+                        <SfMenuItem class="sf-footer__menu-item" :label="$t(link.name)" />
+                     </router-link>
+                    <SfMenuItem
+                        v-else-if="link.clickHandler"
+                        class="sf-footer__menu-item"
+                        :label="$t(link.name)"
+                        @click="link.clickHandler"
+                    />
+                  </div>
+                  <div v-else> 
+                     <router-link v-on:click.native="goToAccount" :to="{ path: $route.currentRoute}" exact>
+                       <SfMenuItem class="sf-footer__menu-item" label="Login" />
+                    </router-link> 
+                  </div>
+                </template>
+                <template v-else>
+                  <div v-if="link.name === 'My orders' || link.name === 'My adresses' || link.name === 'My personal information'">
+                    <router-link v-on:click.native="goToAccount" :to="{ path: $route.currentRoute}" exact>
+                       <SfMenuItem class="sf-footer__menu-item" :label="$t(link.name)" />
+                    </router-link>
+                  </div>
+                  <div v-else>
+                    <router-link v-if="link.link" :to="localizedRoute(link.link)" exact>
+                     <SfMenuItem class="sf-footer__menu-item" :label="$t(link.name)" />
+                    </router-link>
+                    <SfMenuItem
                       v-else-if="link.clickHandler"
                       class="sf-footer__menu-item"
                       :label="$t(link.name)"
                       @click="link.clickHandler"
-                  />
-                </template>
-                <template v-else>
-                  <router-link v-if="link.link" :to="localizedRoute(link.link)" exact>
-                    <SfMenuItem class="sf-footer__menu-item" :label="$t(link.name)" />
-                  </router-link>
-                  <SfMenuItem
-                    v-else-if="link.clickHandler"
-                    class="sf-footer__menu-item"
-                    :label="$t(link.name)"
-                    @click="link.clickHandler"
-                  />
+                    />
+                  </div>
                 </template>
               </SfListItem>
             </SfList>
@@ -151,14 +165,12 @@ export default {
             { name: 'Cookie notice information', link: '/pages/cookie-notice-information' }
           ]
         },
-        help: {
+        help: { 
           name: 'Help & Services',
           children: [
-            { name: 'My orders', link: '/pages/my-capitools-order' },
-            { name: 'My assets', link: '/pages/my-assets' },
+            { name: 'My orders', link: '/pages/my-capitools-order' }, 
             { name: 'My adresses', link: '/pages/my-address' },
-            { name: 'My personal information', link: '/pages/my-personal-details' },
-            { name: 'My coupons', link: '/pages/my-coupons' },
+            { name: 'My personal information', link: '/pages/my-personal-details' }, 
             { name: 'Logout', link: '/' }
           ]
         },
@@ -180,6 +192,13 @@ export default {
     changeActivePage () {
         this.logout();
         return;
+    },
+    goToAccount () {
+      if (this.isLoggedIn) {
+        this.$router.push(this.localizedRoute('/my-account'))
+      } else {
+        this.openModal({ name: ModalList.Auth, payload: 'login' })
+      }
     },
     async logout () {
       await this.$store.dispatch('user/logout', {});
