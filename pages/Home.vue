@@ -71,9 +71,9 @@
       </div>
     </div>
 
-    <MAssurance /> -->
-    <MWarrantyNetwork/>
-    <!-- <cms-block :identifier="'warranty-network-swap'" />  -->
+    <MAssurance /> 
+    <MWarrantyNetwork/>-->
+    <cms-block :identifier="'swap-text'" />   
     <AAboutUs />
   </section>
 </template>
