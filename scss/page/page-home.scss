@@ -53,6 +53,8 @@
             background-color: var(--c-white);
             border-radius: 5px;
             overflow: hidden;
+            border: 1px solid var(--c-light);
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
             @media screen and (max-width: 767px){
                 flex-direction: column;
             }
@@ -67,25 +69,23 @@
                 }
             }
             .sf-carousel{
-                width: calc(100% - 360px);
-                @media screen and (max-width: 767px){
-                    width: 100%;
-                }
+
                 &__wrapper{
                     max-width: 100%;
+                    padding-bottom: 40px;
                     .glide{
                         .glide{
                             &__track{
                                 ul{
                                     li{
-                                        width: 303px!important;
+                                    
                                         .sf-product-card{
                                             max-width: -webkit-fill-available;
                                             width: 100%;
                                             margin: 0!important;
                                             border-radius: 0;
-                                            border-left: 0;
                                             border-right: 0;
+                                            border-top: 0;
                                             &__image-wrapper{
                                                 height: 170px;
                                                 text-align: center;
@@ -113,7 +113,7 @@
                 }
                 &__controls{
                     top: auto;
-                    bottom: 0;
+                    bottom: -5px;
                     button{
                         height: 25px;
                         border-radius: 2px;
@@ -156,5 +156,41 @@
                 }
             }
         }
+    }
+
+    .cms-content{
+        max-width: 1270px;
+        margin: 20px auto;
+        padding: 0 10px;
+        #mkpSection{
+            background-color: var(--c-white);
+            border-radius: 5px;
+            overflow: hidden;
+            border: 1px solid var(--c-light);
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+            .mkpHeader{
+                display: flex;
+                align-items: center;
+                padding: 0 3vw;
+                img{
+                    max-width: 260px;
+                    width: 100%;
+                    margin-right: 4vw;
+                }
+                .mkpHeaderDiv{
+                    padding: 30px 0;
+                    .mkpHeaderTitle{
+                        font-family: 'Poppins-Bold';
+                        color: var(--_c-green-primary-lighten);
+                        font-size: 20px;
+                        margin: 0;
+                    }
+                    p{
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+       
     }
 }

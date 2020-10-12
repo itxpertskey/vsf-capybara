@@ -20,9 +20,11 @@
     
     <div class="product-slider">
       <div class="container">    
-      <lazy-hydrate :trigger-hydration="!loading">
-        <m-product-carousel :products="blockoneproduct" />
-      </lazy-hydrate>
+        <div class="slider-content">  
+          <lazy-hydrate :trigger-hydration="!loading">
+            <m-product-carousel :products="blockoneproduct" />
+          </lazy-hydrate>
+       </div> 
       </div>
     </div>
 

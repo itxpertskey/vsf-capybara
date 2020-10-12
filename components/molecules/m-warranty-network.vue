@@ -1,20 +1,25 @@
 <template>
-    <div class="d-flex align-center">
-        <div class="rectangle_warranty">
-        <SfImage
-            src="/assets/images/swap-europe-warranty.png"
-            class="image_warranty"
-            />
+    <div class="container">
+        <div class="rectangle_warranty d-flex align-center">
+            <SfImage
+                src="/assets/images/swap-europe-warranty.png"
+                class="image_warranty"
+                />
             <div class="rectangle_warranty_text"> 
-                Our Warranty Network: SWAP
+                <h3>Our Warranty Network: SWAP</h3>
 
-                At SWAP, we believe that it is always better to repair a tool than to throw it away..
+                <p>At SWAP, we believe that it is always better to repair a tool than to throw it away..</p>
 
-                With our permanent stock of over 20,000 reference parts, compatible with most brands, SWAP, is the leading European parts stockist in DIY and gardening, extending the life of your machines whilst helping you save on cost. Lawn mower, electric drills, sanders ... keep all your tools for longer while saving money!
+                <p>With our permanent stock of over 20,000 reference parts, compatible with most brands, SWAP, is the leading 
+                European parts stockist in DIY and gardening, extending the life of your machines whilst helping you save on cost. 
+                Lawn mower, electric drills, sanders ... keep all your tools for longer while saving money!</p>
 
-                Finally, and because the obsolescence of machines is not inevitable, SWAP helps you to get the best possible performance and long-term use of your products by monitoring their life cycles.
+                <p>Finally, and because the obsolescence of machines is not inevitable, SWAP helps you to get the best possible
+                 performance and long-term use of your products by monitoring their life cycles.</p>
 
-                From the servicing or installation of equipment such as an air conditioning unit or a wood stove, to the maintenance of your petrol tools (winter maintenance) through the replacement of a defective part or a repair, SWAP takes care of your tools!
+                <p>From the servicing or installation of equipment such as an air conditioning unit or a wood stove, to the maintenance 
+                of your petrol tools (winter maintenance) through the replacement of a defective part or a repair, SWAP takes care 
+                of your tools!</p>
             </div>
         </div>
     </div>
@@ -24,28 +29,38 @@
 import { SfImage } from '@storefront-ui/vue';
 export default { components: { SfImage } };
 </script>
-<style>
+
+<style lang="scss">
+@import "~@storefront-ui/shared/styles/helpers/breakpoints";
 .rectangle_warranty {
   box-sizing: border-box;
-  height: 344px;
-  width: 1302px;
-  border: 2px solid #E3E6EA;
+  border: 2px solid var(--c-light);
   border-radius: 5px;
-  background-color: #FFFFFF;
-  box-shadow: 0 2px 6px 0 rgba(0,0,0,0.05);
-  display:flex;
+  background-color: var(--_c-light-secondary);
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
+  margin: 30px 0;
+    .sf-image{
+        width: 100%;
+        text-align: center;
+    }
+    @media screen and (max-width: 1024px){
+        flex-direction: column;
+    }
+    .rectangle_warranty_text{
+        padding: 0 30px;
+        @media screen and (max-width: 1024px){
+            margin: 20px;
+        }
+        h3{
+            font-family: 'Poppins-Bold';
+            color: var(--_c-green-primary-lighten);
+        }
+        p {
+                font-family: Poppins;
+                font-size: 13px;
+        }
+    }
+
 }
-.image_warranty{
-    margin-left: 51px;
-}
-.rectangle_warranty_text {
-  height: 257px;
-  width: 855px;
-  color: #222222;
-  font-family: Poppins;
-  font-size: 13px;
-  letter-spacing: 0;
-  line-height: 20px;
-  margin-left: 42px;
-}
+
 </style>
