@@ -64,6 +64,8 @@
     </div>
 
     <MAssurance />
+    <MWarrantyNetwork/>
+    <!-- <cms-block :identifier="'warranty-network-swap'" />  -->
     <AAboutUs />
   </section>
 </template>
@@ -77,11 +79,13 @@ import { isServer, onlineHelper } from '@vue-storefront/core/helpers';
 import MNosSpecialities from 'theme/components/molecules/m-nos-specialities';
 import MProductCarousel from 'theme/components/molecules/m-product-carousel';
 import MAssurance from 'theme/components/molecules/m-assurance';
+import MWarrantyNetwork from 'theme/components/molecules/m-warranty-network';
 import MPromoProductBlock from 'theme/components/molecules/m-promo-product-block';
 import MCodePromotionBlock from 'theme/components/molecules/m-code-promotion-block';
 import MSupportBlock from 'theme/components/molecules/m-support-block';
 import { checkWebpSupport } from 'theme/helpers'
 import AAboutUs from 'theme/components/atoms/a-about-us';
+import CmsBlock from 'theme/components/core/blocks/Cms/Block'
 
 import {
   SfHero,
@@ -100,8 +104,11 @@ export default {
     MAssurance,
     MSupportBlock,
     MPromoProductBlock,
-    MCodePromotionBlock
+    MCodePromotionBlock,
+    CmsBlock,
+    MWarrantyNetwork
   },
+   mixins: [CmsBlock],
   data () {
     return {
       loading: true,
