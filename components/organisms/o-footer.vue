@@ -4,6 +4,7 @@
         <div class="d-flex footer-overlay justify-between">
           <MFooterNewsletterSection />
           <AFooterPaymentSection />
+          <AFooterSocialMediaSection />
         </div>
         <SfFooter :column="4" :multiple="true">
           <SfFooterColumn
@@ -53,7 +54,7 @@
             </SfList>
           </SfFooterColumn>
         </SfFooter>
-        <div class="social-links d-flex align-center">
+       <!--  <div class="social-links d-flex align-center" >
           <h4>
             Lets stay in touch!
           </h4>
@@ -70,7 +71,7 @@
           </div>
         </div>
 
-        <!--  <div class="blog d-flex align-center">
+         <div class="blog d-flex align-center">
           <label>New</label>
           <img :src="'/assets/images/footer_blog.png'" class="image_blog_size">
           <p class="footer_blog_text">
@@ -103,6 +104,7 @@ import config from 'config';
 import { currentStoreView } from '@vue-storefront/core/lib/multistore';
 import get from 'lodash-es/get';
 import AFooterPaymentSection from 'theme/components/atoms/a-footer-payment-section';
+import AFooterSocialMediaSection from 'theme/components/atoms/a-footer-social-media-section';
 import MFooterNewsletterSection from 'theme/components/molecules/m-footer-newsletter-section';
 
 export default {
@@ -114,6 +116,7 @@ export default {
     SfMenuItem,
     SfButton,
     AFooterPaymentSection,
+    AFooterSocialMediaSection,
     MFooterNewsletterSection
   },
   data () {
