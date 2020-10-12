@@ -61,12 +61,24 @@
     }
     .a-product-rating{
         .product__rating{
-            flex-direction: column;
-            align-items: flex-start;
+            display: flex;
+            align-items: center;
+            .sf-rating{
+                margin-right: 10px;
+            }
+            .sf-rating{
+                &__icon{
+                  --icon-color: var(--_c-orange-primary);
+                  &--negative {
+                        --icon-color: var(--c-gray-variant);
+                    }
+                }
+              }
             .product__count{
+                font-size: 12px;
                 line-height: normal;
                 align-items: flex-start;
-                margin: 8px 0;
+                margin: 0;
             }
         }
     }
@@ -131,3 +143,12 @@
 
     }
 }
+
+.sf-rating{
+    &__icon{
+      --icon-color: var(--_c-orange-primary);
+      &--negative {
+            --icon-color: var(--c-gray-variant);
+        }
+    }
+  }
