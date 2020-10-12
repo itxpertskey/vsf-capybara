@@ -189,7 +189,7 @@
                   >
                   <template #image>
                       <div class="sf-image sf-product-card__image sf-image--has-size" data-loaded="true" style="--_image-width:216;--_image-height:326;">
-                        <img width="216" height="326" alt="" style="" :src="product.image" @error="$event.target.src=placeholder"/> 
+                        <img width="216" height="326" alt="product image" style="" :src="product.image" @error="$event.target.src=placeholder"/> 
                       </div>
                   </template>
                   <template #title>
@@ -666,7 +666,7 @@ export default {
               } 
             }
        } 
-       return "0";
+       return 0;
     },
     isProductDisabled ( product ) {
       return product.is_in_stock ? false : true ;

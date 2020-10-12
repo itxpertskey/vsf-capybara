@@ -17,8 +17,16 @@
     <MAssurance />
     <MNosSpecialities />
     <MPromoProductBlock />
-
+    
     <div class="product-slider">
+      <div class="container">    
+      <lazy-hydrate :trigger-hydration="!loading">
+        <m-product-carousel :products="blockoneproduct" />
+      </lazy-hydrate>
+      </div>
+    </div>
+
+   <!-- <div class="product-slider">
       <div class="container">
         <div class="d-flex slider-content">
           <SfImage
@@ -32,7 +40,7 @@
       </div>
     </div>
 
-    <MCodePromotionBlock />
+    <MCodePromotionBlock /> 
 
     <div class="product-slider">
       <div class="container">
@@ -63,7 +71,7 @@
       </div>
     </div>
 
-    <MAssurance />
+    <MAssurance /> -->
     <MWarrantyNetwork/>
     <!-- <cms-block :identifier="'warranty-network-swap'" />  -->
     <AAboutUs />
@@ -86,6 +94,9 @@ import MSupportBlock from 'theme/components/molecules/m-support-block';
 import { checkWebpSupport } from 'theme/helpers'
 import AAboutUs from 'theme/components/atoms/a-about-us';
 import CmsBlock from 'theme/components/core/blocks/Cms/Block'
+import { ReviewModule } from '@vue-storefront/core/modules/review';
+import { registerModule } from '@vue-storefront/core/lib/modules';
+import get from 'lodash-es/get'
 
 import {
   SfHero,
@@ -159,6 +170,9 @@ export default {
       store.dispatch('promoted/updateHeadImage'),
       store.dispatch('instagram/updateInstagramImages')
     ]);
+  },
+   beforeCreate () {
+    registerModule(ReviewModule);
   },
   mounted () {
     if (!this.isLoggedIn && localStorage.getItem('redirect')) { this.$bus.$emit('modal-show', 'modal-signup'); }

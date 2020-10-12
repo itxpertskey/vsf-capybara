@@ -19,7 +19,12 @@
             <p class="reference">
                 Ref : {{ product.sku }}
             </p>
-            <AProductRating />
+            <div class="a-product-rating" @click="$emit('click')">
+              <div class="product__rating">
+                <SfRating :score="getSingleProductRatingCount(product.id)" :max="product.rating.max" />
+                <span class="product__count">({{ getSingleProductReviewCount(product.id) }})Customer reviews</span>
+              </div>
+            </div>
              <div class="d-flex align-start justify-between">
                 <SfPrice
                   class="sf-product-card__price"
@@ -40,7 +45,7 @@
           </template>
            <template #image>
             <div class="sf-image sf-product-card__image sf-image--has-size" data-loaded="true" style="--_image-width:216;--_image-height:326;">
-              <img width="216" height="326" alt="" style="" :src="product.image" @error="$event.target.src=placeholder"/> 
+              <img width="216" height="326" alt="product image" style="" :src="product.sku" @error="$event.target.src=placeholder"/> 
             </div>
            </template>
        </SfProductCard>
@@ -57,6 +62,7 @@ import { productThumbnailPath } from '@vue-storefront/core/helpers';
 import { prepareCategoryProduct } from 'theme/helpers';
 import AProductRating from 'theme/components/atoms/a-product-rating';
 import AAddToCart from 'theme/components/atoms/a-add-to-cart';
+import get from 'lodash-es/get'
 
 export default {
   name: 'MProductCarousel',
@@ -95,6 +101,28 @@ export default {
   methods: {  
     isProductDisabled ( product ) {
       return product.is_in_stock ? false : true ;
+    },
+    getSingleProductReviewCount(product_Id){
+       const reviewCountCollection = get(this.$store.state.review, 'review_count_collection',[])
+       if( reviewCountCollection != null ){
+         for (let iLoop = 0; iLoop < reviewCountCollection.length; iLoop++) {
+           if( reviewCountCollection[iLoop].product_Id == product_Id ){
+                return reviewCountCollection[iLoop].review_Count;  
+              } 
+            }
+       } 
+       return "0";
+    },
+     getSingleProductRatingCount(product_Id){
+       const reviewCountCollection = get(this.$store.state.review, 'review_count_collection',[])
+       if( reviewCountCollection != null ){
+         for (let iLoop = 0; iLoop < reviewCountCollection.length; iLoop++) {
+           if( reviewCountCollection[iLoop].product_Id == product_Id ){
+                return reviewCountCollection[iLoop].rating_Count;  
+              } 
+            }
+       } 
+       return 0;
     },
   }
 };
