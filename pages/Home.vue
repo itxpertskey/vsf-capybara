@@ -15,7 +15,7 @@
       />
     </SfHero>
     <MAssurance />
-    <MNosSpecialities />
+   <!-- <MNosSpecialities /> -->
     <cms-block :identifier="'home-template'" />
   <!--  <MPromoProductBlock />-->
     
