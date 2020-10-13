@@ -51,8 +51,12 @@
             background-color: var(--c-white);
             border-radius: 3px;
             box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
-            @include for-mobile {
+            @media screen and(max-width: 1024px) {
                 padding: 20px;
+                &.social-links,
+                &.payment{
+                    margin-right: 0!important;
+                }
             }
             p{
                 color: var(--c-black);
@@ -64,6 +68,10 @@
                 }
             }
             &.newsletter{
+                max-width: 455px;
+                @media screen and(max-width: 1024px) {
+                    max-width: 100%;
+                }
                 @include for-mobile {
                     flex-direction: column;
                     .d-flex{
@@ -101,6 +109,23 @@
                 }
             }
             &.payment{
+                margin-right: 30px;
+                p{
+                    margin-bottom: 20px;
+                }
+                .payment-types{
+                    a{
+                        margin-right: 10px;
+                    }
+                }
+            }
+            &.social-links{
+                max-width: 200px;
+                width: 100%;
+                @media screen and(max-width: 1024px) {
+                    max-width: 100%;
+                    width: auto;
+                }
                 p{
                     margin-bottom: 20px;
                 }

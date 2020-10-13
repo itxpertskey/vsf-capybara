@@ -1,5 +1,5 @@
 <template>
-  <div class="payment overflow-y">
+  <div class="social-links overflow-y">
     <div class="payment_text">
       <p>
          <b>Lets stay in touch!</b>
