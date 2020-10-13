@@ -16,7 +16,8 @@
     </SfHero>
     <MAssurance />
     <MNosSpecialities />
-    <MPromoProductBlock />
+    <cms-block :identifier="'home-template'" />
+  <!--  <MPromoProductBlock />-->
     
     <div class="product-slider">
       <div class="container">    
