@@ -118,7 +118,7 @@ export default {
        if( reviewCountCollection != null ){
          for (let iLoop = 0; iLoop < reviewCountCollection.length; iLoop++) {
            if( reviewCountCollection[iLoop].product_Id == product_Id ){
-                return reviewCountCollection[iLoop].rating_Count;  
+                return parseInt(reviewCountCollection[iLoop].rating_Count,10);  
               } 
             }
        } 
