@@ -18,10 +18,10 @@
         class="product__property"
       />
     </SfTab>
-    <SfTab :title="$t('Read reviews')" ref="reviewTab">
+    <SfTab :title="$t('Read reviews')" ref="reviewTab"> 
       <div class="review-header">
         <SfHeading
-          :title="$t('{count} Reviews', { count: reviewsCount })"
+          :title="$t(this.productReviewCount)"
           :level="3"
           class="sf-heading--left"
         />
@@ -32,6 +32,7 @@
           {{ $t('Leave me review') }}
         </AProductRating>
       </div>
+     
       <SfDivider v-show="reviewsCount" />
       <MReviewList v-show="reviewsCount" :reviews="reviews" :visible=10 />
     </SfTab>
@@ -82,6 +83,7 @@ export default {
   },
   data() {
    return {
+     productReviewCount: '',
       productVideoIdOne: '',
       productVideoIdTwo: '',
       productVideoIdThree: '',
@@ -111,6 +113,7 @@ export default {
       isVideoProductTab: state => state.ui.isVideoProductTab
     }),
     reviewsCount () {
+      this.productReviewCount =   this.reviews.length + " Reviews";
       return this.reviews.length;
     },
     setYoutubeVideoId(){

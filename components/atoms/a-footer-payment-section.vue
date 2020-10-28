@@ -17,9 +17,9 @@
         <a>
           <img :src="'/assets/images/maestroDark.png'" class="payment_image_size"/>
         </a>
-        <a>
+        <!-- <a>
           <img :src="'/assets/images/paypal.png'" class="payment_image_size"/>
-        </a>
+        </a> -->
         <a>
           <img :src="'/assets/images/americanExpressDark.png'" class="payment_image_size"/>
         </a>
