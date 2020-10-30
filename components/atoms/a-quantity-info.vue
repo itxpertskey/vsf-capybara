@@ -3,7 +3,7 @@
         <div class="d-flex align-center"> 
              <SfImage
                 src="/assets/icons/livraisonGratuite-Icon.png"
-                :alt="$t(defaultTitle)"
+                alt="Livraison Gratuite"
                 class="icon"
                 />
              <p>Free delivery</p>
@@ -11,7 +11,7 @@
         <div class="d-flex align-center"> 
              <SfImage
                 src="/assets/icons/calendar-icon.png"
-                :alt="$t(defaultTitle)"
+                alt="Calendar"
                 class="icon"
                 />
              <p>Delivery within 10 days</p>

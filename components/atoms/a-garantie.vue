@@ -2,7 +2,7 @@
   <div class="garantie-product d-flex">
             <SfImage
             src="/assets/images/garantie-icon.png"
-            :alt="garantie-icon"
+            alt="garantie-icon"
             class="sf-heade"
              />
         <div class="description">

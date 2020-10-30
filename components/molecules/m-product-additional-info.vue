@@ -36,23 +36,21 @@
       <SfDivider v-show="reviewsCount" />
       <MReviewList v-show="reviewsCount" :reviews="reviews" :visible=10 />
     </SfTab>
-    <SfTab :title="$t('Video')" ref="videoTab"  v-if="isShowVideoTab"> 
+    <SfTab :title="$t('Video')" ref="videoTab"  v-if="isShowVideoTab">  
       <div class="video-grid">
-        <div class="video-item">
+        <div class="video-item" v-if="product.youtube_video_code_one">
           <youtube v-if="product.youtube_video_code_one"
                    :video-id="productVideoIdOne"
                    :player-vars="playerVars"
                    @playing="playing"
           />
         </div>
-        <div class="video-item">
-          <youtube v-if="product.youtube_video_code_two"
-                   :video-id="productVideoIdTwo"
+        <div class="video-item" v-if="product.youtube_video_code_two">
+          <youtube :video-id="productVideoIdTwo"
           />
         </div>
-        <div class="video-item">
-          <youtube v-if="product.youtube_video_code_three"
-                   :video-id="productVideoIdThree"
+        <div class="video-item" v-if="product.youtube_video_code_three">
+          <youtube :video-id="productVideoIdThree"
           />
         </div>
       </div>
@@ -115,18 +113,15 @@ export default {
     reviewsCount () {
       this.productReviewCount =   this.reviews.length + " Reviews";
       return this.reviews.length;
-    },
-    setYoutubeVideoId(){
-       this.productVideoIdOne   = this.$youtube.getIdFromUrl(this.product.youtube_video_code_one);
-       this.productVideoIdTwo   = this.$youtube.getIdFromUrl(this.product.youtube_video_code_two);
-       this.productVideoIdThree = this.$youtube.getIdFromUrl(this.product.youtube_video_code_three);
-    },
+    }, 
     isShowVideoTab(){
       return this.product.youtube_video_code_one != null || this.product.youtube_video_code_two != null || this.product.youtube_video_code_three != null  ? true : false ;
     }
   },
   mounted () {
-    this.setYoutubeVideoId();  
+    this.productVideoIdOne   = this.product.youtube_video_code_one != null ? this.$youtube.getIdFromUrl(this.product.youtube_video_code_one) : '';
+    this.productVideoIdTwo   = this.product.youtube_video_code_two != null? this.$youtube.getIdFromUrl(this.product.youtube_video_code_two) : '';
+    this.productVideoIdThree = this.product.youtube_video_code_three != null? this.$youtube.getIdFromUrl(this.product.youtube_video_code_three) : '';
   },
   watch: {
     isReviewProductTab (value) {
