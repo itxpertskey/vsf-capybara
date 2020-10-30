@@ -75,9 +75,7 @@ export default {
       videoThumbImageMobile: "assets/placeholder.jpg", 
     };
   },
-  mounted () {
-    this.videoThumbImageMobile = "https://img.youtube.com/vi/"+this.$youtube.getIdFromUrl(this.product.youtube_video_code_one)+"/sddefault.jpg";
-  },
+
   props: {
     gallery: {
       type: Array,
@@ -112,6 +110,16 @@ export default {
       type: [Number, String],
       default: 160,
     },
+  },
+    mounted () {
+    if(this.product.youtube_video_code_one != null)
+        this.videoThumbImageMobile = "https://img.youtube.com/vi/"+this.$youtube.getIdFromUrl(this.product.youtube_video_code_one)+"/sddefault.jpg";
+      else if(this.product.youtube_video_code_two != null) 
+        this.videoThumbImageMobile = "https://img.youtube.com/vi/"+this.$youtube.getIdFromUrl(this.product.youtube_video_code_two)+"/sddefault.jpg";
+      else if(this.product.youtube_video_code_three != null) 
+        this.videoThumbImageMobile = "https://img.youtube.com/vi/"+this.$youtube.getIdFromUrl(this.product.youtube_video_code_three)+"/sddefault.jpg";
+      else
+        this.videoThumbImageMobile = "assets/placeholder.jpg"; 
   },
   computed: {
     isOnline () {

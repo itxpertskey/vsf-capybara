@@ -27,13 +27,13 @@
     </div>
     <hr>
     <div class="product__description desktop-only" v-html="product.description" />
-    <SfButton
+    <!-- <SfButton
       v-show="sizeOption"
       @click.native="openSizeGuide"
       class="sf-button--text desktop-only product__guide"
     >
       {{ $t('Size guide') }}
-    </SfButton>
+    </SfButton> -->
     <div v-if="showOrHideBlocksBasedOnBFTG(product)">
       <AMesAdvantage />
     </div>
@@ -59,7 +59,8 @@ export default {
     AProductRating,
     AProductPrice,
     AMesAdvantage,
-    AGarantie
+    AGarantie,
+    SfButton
   },
   props: {
     product: {
