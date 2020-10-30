@@ -445,28 +445,31 @@ export default {
     }), 
     getParentCategoryName(){ 
       const categoryUrl = this.getCurrentCategory.url_path;  
-      if( categoryUrl.includes("gardening/")){
-        return "Gardening";
-      } 
+      if(categoryUrl != null){
 
-      if( categoryUrl.includes("gardening-hand-tools")){
-        return "Hand Tools";
-      } 
+        if( categoryUrl.includes("gardening/")){
+          return "Gardening";
+        } 
 
-      if( categoryUrl.includes("power-tools")){
-        return "Power Tools";
-      } 
+        if( categoryUrl.includes("gardening-hand-tools")){
+          return "Hand Tools";
+        } 
 
-      if( categoryUrl.includes("generators")){
-        return "Generators";
-      } 
-      
-      if( categoryUrl.includes("workshop")){
-        return "Workshop";
-      } 
-      
-      if( categoryUrl.includes("brands")){
-        return "Brands";
+        if( categoryUrl.includes("power-tools")){
+          return "Power Tools";
+        } 
+
+        if( categoryUrl.includes("generators")){
+          return "Generators";
+        } 
+        
+        if( categoryUrl.includes("workshop")){
+          return "Workshop";
+        } 
+        
+        if( categoryUrl.includes("brands")){
+          return "Brands";
+        } 
       } 
       return "Gardening";
     },
