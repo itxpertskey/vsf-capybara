@@ -13,18 +13,18 @@
       class="my-account"
       @click:change="changeActivePage"
     >
-      <SfContentPage :title="$t('My profile')">
-          <OMyAccountProfile />
-      </SfContentPage>
-      <SfContentPage :title="$t('Shipping details')">
-        <OMyAccountShippingDetails />
-      </SfContentPage>
-      <SfContentPage :title="$t('My Orders')">
-        <OMyAccountOrdersHistory />
-      </SfContentPage>
-      <SfContentPage :title="$t('Log out')" />
-    </SfContentPages>
-     <!--  <SfContentCategory :title="$t('Personal Details')">
+        <SfContentPage :title="$t('My profile')">
+            <OMyAccountProfile />
+        </SfContentPage>
+        <SfContentPage :title="$t('Shipping details')">
+          <OMyAccountShippingDetails />
+        </SfContentPage>
+        <SfContentPage :title="$t('My Orders')">
+          <OMyAccountOrdersHistory />
+        </SfContentPage>
+      </SfContentPages>
+     <!-- <SfContentPage :title="$t('Log out')" />
+       <SfContentCategory :title="$t('Personal Details')">
         <SfContentPage :title="$t('Loyalty Card')">
           <OMyAccountPlaceholder :title="$t('Loyalty Card')" />
         </SfContentPage>

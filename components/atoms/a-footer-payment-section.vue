@@ -5,7 +5,7 @@
          <b>Secured payment methods</b>
       </p>
       <div class="payment-types d-flex wrap">
-        <a href="">
+        <a>
           <img :src="'/assets/images/visaDark.png'" class="payment_image_size"/>
         </a>
         <a>

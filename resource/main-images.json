@@ -3,15 +3,15 @@
     {
       "className": "sf-hero-item--position-bg-top-left sf-hero-item--align-right",
       "image": {
-        "webp": "/assets/banner/png/hyundai-banner-01.jpg",
-        "fallback": "/assets/banner/png/hyundai-banner-01.jpg"
+        "webp": "/assets/banner/png/banner-01.png",
+        "fallback": "/assets/banner/png/banner-01.png"
       }
     },
     {
       "className": "sf-hero-item--position-bg-top-left sf-hero-item--align-right",
       "image": {
-        "webp": "/assets/banner/png/hyundai-banner-02.jpg",
-        "fallback": "/assets/banner/png/hyundai-banner-02.jpg"
+        "webp": "/assets/banner/png/banner-02.png",
+        "fallback": "/assets/banner/png/banner-02.png"
       }
     }
   ]

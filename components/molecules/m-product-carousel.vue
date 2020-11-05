@@ -10,6 +10,7 @@
       <SfProductCard 
          :link="product.link"
         :wishlist-icon="false"
+        :image="product.image"
         link-tag="router-link"
       >
           <template #title>
@@ -43,11 +44,11 @@
               :disabled="isProductDisabled(product)"
             />  
           </template>
-           <template #image>
+           <!-- <template #image>
             <div class="sf-image sf-product-card__image sf-image--has-size" data-loaded="true" style="--_image-width:216;--_image-height:326;">
               <img width="216" height="326" alt="product image" style="" :src="product.sku" @error="$event.target.src=placeholder"/> 
-            </div>
-           </template>
+            </div> 
+           </template> -->
        </SfProductCard>
     </SfCarouselItem>
   </SfCarousel>
