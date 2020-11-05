@@ -11,7 +11,8 @@
         'sf-header__icon--is-active': isLoggedIn
       }"
     />
-    <small>Account</small>
+    <small v-if="isLoggedIn">Account</small>
+    <small v-else>Login</small> 
   </SfButton>
 </template>
 

@@ -156,12 +156,12 @@
                     :product="product.obj_product"
                     :disabled="isProductDisabled(product)"
                   />  
-                  </template>
-                  <template #image>
+                  </template> 
+                 <!-- <template #image>
                       <div class="sf-image sf-product-card__image sf-image--has-size" data-loaded="true" style="--_image-width:216;--_image-height:326;">
                         <img width="216" height="326" alt="" style="" :src="product.image" @error="$event.target.src=placeholder"/> 
                       </div>
-                  </template>
+                  </template> -->
               </SfProductCard>
             </transition-group>
           </lazy-hydrate>
@@ -187,11 +187,11 @@
                     :max-rating="maxRating"
                     :reviews-count="reviewsCount" 
                   >
-                  <template #image>
+                 <!--  <template #image>
                       <div class="sf-image sf-product-card__image sf-image--has-size" data-loaded="true" style="--_image-width:216;--_image-height:326;">
                         <img width="216" height="326" alt="product image" style="" :src="product.image" @error="$event.target.src=placeholder"/> 
                       </div>
-                  </template>
+                  </template> -->
                   <template #title>
                     <h3 class="sf-product-card__title">
                         {{ product.title }}
@@ -204,7 +204,7 @@
                         <SfRating :score="getSingleProductRatingCount(product.id)" :max="product.rating.max" />
                         <span class="product__count">({{ getSingleProductReviewCount(product.id) }})Customer reviews</span>
                       </div>
-                     </div>
+                     </div> 
                      <div class="description" style="white-space: break-spaces">
                       <p itemprop="description" v-html="product.description"> </p>
                     </div> 
