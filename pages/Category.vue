@@ -73,7 +73,7 @@
                   </div>  
                 -->
                 <div class="navbar__sort d-flex"> 
-                  <p><b>Tri:</b></p>
+                  <p><b>Sorting:</b></p>
                   <SfButton class="sf-button--text" @click="OrderProducthHightoLow">High to Low</SfButton>
                   <SfButton class="sf-button--text" @click="OrderProducthLowtoHigh">Low to High</SfButton>
                 </div>
@@ -654,18 +654,18 @@ export default {
        if( reviewCountCollection != null ){
          for (let iLoop = 0; iLoop < reviewCountCollection.length; iLoop++) {
            if( reviewCountCollection[iLoop].product_Id == product_Id ){
-                return reviewCountCollection[iLoop].review_Count;  
+                return +reviewCountCollection[iLoop].review_Count;  
               } 
             }
        } 
-       return "0";
+       return 0;
     },
      getSingleProductRatingCount(product_Id){
        const reviewCountCollection = get(this.$store.state.review, 'review_count_collection',[])
        if( reviewCountCollection != null ){
          for (let iLoop = 0; iLoop < reviewCountCollection.length; iLoop++) {
            if( reviewCountCollection[iLoop].product_Id == product_Id ){
-                 return parseInt(reviewCountCollection[iLoop].rating_Count,10);  
+                 return +reviewCountCollection[iLoop].rating_Count;  
               } 
             }
        } 

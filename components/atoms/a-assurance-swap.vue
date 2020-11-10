@@ -16,7 +16,7 @@ import { SfImage } from '@storefront-ui/vue';
 export default { components: { SfImage } };
 </script>
 
-<style lang='scss' >
+<style lang='scss' scoped >
     .sf-image{
         width: 70px;
     }

@@ -1,7 +1,7 @@
 <template>
   <div class="garantie-product d-flex">
             <SfImage
-            src="/assets/images/garantie-icon.png"
+            src="/assets/images/big-garantie-2years-icon.png"
             alt="garantie-icon"
             class="sf-heade"
              />

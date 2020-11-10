@@ -108,18 +108,18 @@ export default {
        if( reviewCountCollection != null ){
          for (let iLoop = 0; iLoop < reviewCountCollection.length; iLoop++) {
            if( reviewCountCollection[iLoop].product_Id == product_Id ){
-                return reviewCountCollection[iLoop].review_Count;  
+                return +reviewCountCollection[iLoop].review_Count;  
               } 
             }
        } 
-       return "0";
+       return 0;
     },
      getSingleProductRatingCount(product_Id){
        const reviewCountCollection = get(this.$store.state.review, 'review_count_collection',[])
        if( reviewCountCollection != null ){
          for (let iLoop = 0; iLoop < reviewCountCollection.length; iLoop++) {
            if( reviewCountCollection[iLoop].product_Id == product_Id ){
-                return parseInt(reviewCountCollection[iLoop].rating_Count,10);  
+                return +reviewCountCollection[iLoop].rating_Count;  
               } 
             }
        } 
