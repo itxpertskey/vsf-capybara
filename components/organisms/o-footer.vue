@@ -158,14 +158,14 @@ export default {
         product: {
           name: 'The Products',
           children: [
-            { name: 'Secure payment', link: '/pages/secure-payment' },
-            { name: 'Terms of Sales', link: '/pages/terms-of-sales' },
+            { name: 'Secure payment', link: '/pages/payment-info' },
+            { name: 'Terms of Sales', link: '/pages/capitools-uk-terms-conditions' },
             { name: 'Legal Notice', link: '/pages/legal-information' },
-            { name: 'Payment methods', link: '/pages/payment-info' },
-            { name: 'Satisfied or refunded', link: '/pages/satisfied-or-refunded' },
-            { name: 'Partners', link: '/pages/partners' },
+            { name: 'Payment methods', link: '/pages/payment-info' }, 
+            { name: 'Satisfied or refunded', link: '/pages/returns-and-refunds-policy' },
+            { name: 'Partners', link: '/pages/capitools-partners' },
             { name: 'Cyber ​​Security', link: '/pages/cyber-security' },
-            { name: 'Cookie notice information', link: '/pages/cookie-notice-information' }
+            { name: 'Cookie notice information', link: '/pages/privacy' }
           ]
         },
         help: { 
@@ -181,10 +181,10 @@ export default {
           name: 'Legal Information',
           children: [
             { name: 'FAQ', link: '/pages/f-a-q-frequently-asked-questions' },
-            { name: 'After-sales service & customer relations', link: '/pages/after-sales-service-and-customer-relations' },
+            { name: 'After-sales service & customer relations', link: '/pages/capitools-service-and-customer-care' },
             { name: 'Payment in 3 installments', link: '/pages/payment-in-three-installments' },
             { name: 'Product delivery', link: '/pages/delivery' },
-            { name: 'Return Policy', link: '/pages/return-policy' },
+            { name: 'Return Policy', link: '/pages/returns-and-refunds-policy' },
             { name: 'The SWAP Europe Guarantee network', link: '/pages/swap-europe-network-warranty' }
           ]
         }
