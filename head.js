@@ -80,6 +80,10 @@ export default {
       integrity:
         'sha384-I1iiXcTSM6j2xczpDckV+qhhbqiip6FyD6R5CpuqNaWXvyDUvXN5ZhIiyLQ7uuTh',
       crossorigin: 'anonymous'
+    },
+    {
+      src: 'https://widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js',
+      async: true
     }
   ]
 };
