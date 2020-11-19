@@ -23,16 +23,18 @@
               :regular-price="getProductPrice(product).regular"
               :special-price="getProductPrice(product).special"
               :stock="10"
+              :link="getProductUrl(product)"
               :qty="product.qty"
               class="collected-product" 
               @click:remove="removeHandler(product)"
               @input="changeQuantity(product, $event)"
             >
-              <template #image>
+             
+              <!-- <template #image>
                 <div class="sf-image sf-collected-product__image sf-image--has-size" data-loaded="true" style="--_image-width:140; --_image-height:200;">
                   <img width="140" height="200" alt="product image" style="" :src="getThumbnailForProductExtend(product)" @error="$event.target.src=placeholder"/> 
                 </div> 
-              </template>
+              </template>-->
               <template #remove="{ removeHandler }">
                 <SfCircleIcon
                  class="sf-button sf-circle-icon sf-circle-icon--small sf-collected-product__remove sf-collected-product__remove--circle-icon"
@@ -122,10 +124,10 @@ import { mapState, mapGetters } from 'vuex';
 import { localizedRoute } from '@vue-storefront/core/lib/multistore';
 import { onlineHelper } from '@vue-storefront/core/helpers';
 import { getThumbnailForProduct } from '@vue-storefront/core/modules/cart/helpers';
-import { getProductPrice, getProductPriceFromTotals } from 'theme/helpers';
+import { getProductPrice, getProductPriceFromTotals , getProductUrl } from 'theme/helpers';
 import VueOfflineMixin from 'vue-offline/mixin';
-import onEscapePress from '@vue-storefront/core/mixins/onEscapePress';
- 
+import onEscapePress from '@vue-storefront/core/mixins/onEscapePress'; 
+
 import {
   SfButton,
   SfCollectedProduct,
@@ -196,6 +198,9 @@ export default {
       return onlineHelper.isOnline && product.totals && product.totals.options
         ? getProductPriceFromTotals(product)
         : getProductPrice(product);
+    },
+    getProductUrl(product){
+      return getProductUrl(product);
     },
     getProductOptions (product) {
       return onlineHelper.isOnline && product.totals && product.totals.options
