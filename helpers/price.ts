@@ -2,6 +2,8 @@ import { price } from '@vue-storefront/core/filters';
 import { getCustomOptionValues, getCustomOptionPriceDelta } from '@vue-storefront/core/modules/catalog/helpers/customOption'
 import { getBundleOptionsValues, getBundleOptionPrice } from '@vue-storefront/core/modules/catalog/helpers/bundleOptions'
 import get from 'lodash-es/get'
+import { currentStoreView } from '@vue-storefront/core/lib/multistore'
+import { formatProductLink } from '@vue-storefront/core/modules/url/helpers'
 
 function calculateBundleOptionsPrice (product) {
   const allBundleOptions = product.bundle_options || []
@@ -24,6 +26,11 @@ function calculateCustomOptionsPriceDelta (product, customOptions) {
 
 function formatPrice (value) {
   return value ? price(value) : ''
+}
+
+export function getProductUrl (product) {
+  const { storeCode } = currentStoreView()
+  return formatProductLink(product, currentStoreView().storeCode)
 }
 
 export function getProductPrice (product, customOptions = {}) {
