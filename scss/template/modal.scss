@@ -42,3 +42,21 @@
         }
     }
 }
+
+.m-modal-authentication{
+    .sf-modal{
+        .sf-modal__container{
+            .sf-modal__content{
+                form{
+                    margin-bottom: 10px;
+                }
+                .aside{
+                    margin-bottom: 10px;
+                    .aside__heading{
+                        margin: 10px 0;
+                    }
+                }
+            }
+        }
+    }
+}
