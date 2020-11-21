@@ -32,17 +32,22 @@
                   :regular="product.price.regular"
                   :special="product.price.special" 
                 />  
-                <p class="stock" v-if="product.is_in_stock">In stock</p>
-                <p class="out-of-stock" v-else>Out of stock</p> 
+                <!-- <p class="stock" v-if="product.is_in_stock">In stock</p>
+                <p class="out-of-stock" v-else>Out of stock</p>  -->
              </div>
           </template> 
           <template #price>
-            <AAddToCart
+             <SfButton class="sf-add-to-cart__button">
+                <SfLink target="_blank" :link="product.link">
+                  More Info
+                </SfLink>
+            </SfButton>
+         <!--    <AAddToCart
               class="sf-add-to-cart__button"
               :qty="qty"
               :product="product.obj_product"
               :disabled="isProductDisabled(product)"
-            />  
+            />  -->
           </template>
            <!-- <template #image>
             <div class="sf-image sf-product-card__image sf-image--has-size" data-loaded="true" style="--_image-width:216;--_image-height:326;">
@@ -54,7 +59,7 @@
   </SfCarousel>
 </template>
 <script>
-import { SfProductCard, SfCarousel ,   SfRating, SfPrice, } from '@storefront-ui/vue';
+import { SfProductCard , SfCarousel , SfRating , SfPrice , SfButton , SfLink } from '@storefront-ui/vue';
 import { htmlDecode } from '@vue-storefront/core/filters';
 import config from 'config';
 import { currentStoreView } from '@vue-storefront/core/lib/multistore';
@@ -72,6 +77,8 @@ export default {
     SfProductCard,
     SfRating,
     SfPrice,
+    SfButton,
+    SfLink,
     AProductRating,
     AAddToCart
   },
