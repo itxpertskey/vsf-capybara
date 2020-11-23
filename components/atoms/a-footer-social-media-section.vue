@@ -11,6 +11,8 @@
             <a href="https://twitter.com/CapitoolsUK" target="_blank">
               <img :src="'/assets/icons/twitter-icon-new.png'" class="icon_twitter"/>
             </a>
+        </div>
+        <div class="payment-types d-flex wrap"> 
             <a href="https://www.youtube.com/channel/UCi6MvXNjvI_Oy02TzXThOMg" target="_blank">
               <img :src="'/assets/icons/youtube-icon-new.png'" class="icon_youtube"/> 
             </a>

@@ -4,7 +4,7 @@
     <p class="text_upper">
       We are specialized in DIY and gardening tools
     </p>
-    <AHeaderAvisIcon />
+   <!-- <AHeaderAvisIcon /> -->
   </div>
 </template>
 <script>
