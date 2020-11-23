@@ -4,6 +4,7 @@
         <div class="d-flex footer-overlay justify-between">
           <MFooterNewsletterSection />
           <AFooterPaymentSection />
+          <AFooterTrustpilotSection />
           <AFooterSocialMediaSection />
         </div>
         <SfFooter :column="4" :multiple="true">
@@ -105,6 +106,7 @@ import { currentStoreView } from '@vue-storefront/core/lib/multistore';
 import get from 'lodash-es/get';
 import AFooterPaymentSection from 'theme/components/atoms/a-footer-payment-section';
 import AFooterSocialMediaSection from 'theme/components/atoms/a-footer-social-media-section';
+import AFooterTrustpilotSection from 'theme/components/atoms/a-footer-trustpilot-section';
 import MFooterNewsletterSection from 'theme/components/molecules/m-footer-newsletter-section';
 
 export default {
@@ -117,6 +119,7 @@ export default {
     SfButton,
     AFooterPaymentSection,
     AFooterSocialMediaSection,
+    AFooterTrustpilotSection,
     MFooterNewsletterSection
   },
   data () {

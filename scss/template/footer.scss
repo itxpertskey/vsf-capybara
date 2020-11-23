@@ -109,7 +109,12 @@
                     }
                 }
             }
+            &.trustpilot{
+                width: 30%;
+                margin-right: 30px;
+            }
             &.payment{
+                width: 30%;
                 margin-right: 30px;
                 p{
                     margin-bottom: 20px;
@@ -121,7 +126,7 @@
                 }
             }
             &.social-links{
-                max-width: 200px;
+                max-width: 100px;
                 width: 100%;
                 @media screen and(max-width: 1024px) {
                     max-width: 100%;
