@@ -14,9 +14,7 @@
         <a>
           <img :src="'/assets/images/masterCardDark.png'" class="payment_image_size"/>
         </a> 
-      </div>
-      <div class="payment-types d-flex wrap"> 
-        <a>
+         <a>
           <img :src="'/assets/images/maestroDark.png'" class="payment_image_size"/>
         </a> 
         <a>
