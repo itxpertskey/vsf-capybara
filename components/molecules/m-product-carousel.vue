@@ -37,11 +37,11 @@
              </div>
           </template> 
           <template #price>
-             <SfButton class="sf-add-to-cart__button">
-                <SfLink target="_blank" :link="product.link">
+             
+                <SfLink class="sf-button a-add-to-cart sf-button--full-width sf-add-to-cart__button" target="_blank" :link="product.link">
                   More Info
                 </SfLink>
-            </SfButton>
+           
          <!--    <AAddToCart
               class="sf-add-to-cart__button"
               :qty="qty"
