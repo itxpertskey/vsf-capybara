@@ -26,6 +26,10 @@
     .sf-link.sf-button{
         padding: 10px 0;
         color: var(--c-white);
+        background-color: var(--_c-green-primary);
+        &:hover{
+            background-color: var(--_c-green-primary-lighten);
+        }
     }
     a{
         padding: 0 15px;
