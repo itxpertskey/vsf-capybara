@@ -136,7 +136,7 @@
                   <div class="a-product-rating" @click="$emit('click')">
                     <div class="product__rating">
                       <SfRating :score="getSingleProductRatingCount(product.id)" :max="product.rating.max" />
-                      <span class="product__count">({{ getSingleProductReviewCount(product.id) }})Customer reviews</span>
+                      <span class="product__count">({{ getSingleProductReviewCount(product.id) }}) Customer reviews</span>
                     </div>
                   </div>
                   <div class="d-flex align-start justify-between">
@@ -202,7 +202,7 @@
                      <div class="a-product-rating" @click="$emit('click')">
                       <div class="product__rating">
                         <SfRating :score="getSingleProductRatingCount(product.id)" :max="product.rating.max" />
-                        <span class="product__count">({{ getSingleProductReviewCount(product.id) }})Customer reviews</span>
+                        <span class="product__count">({{ getSingleProductReviewCount(product.id) }}) Customer reviews</span>
                       </div>
                      </div> 
                      <div class="description" style="white-space: break-spaces">
