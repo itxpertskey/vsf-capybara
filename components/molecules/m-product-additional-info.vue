@@ -29,7 +29,7 @@
           @click="handleOpenReviewModal"
           :reviews="reviews"
         >
-          {{ $t('Leave me review') }}
+            {{ $t('Leave me review') }}
         </AProductRating>
       </div>
      
@@ -75,7 +75,7 @@ export default {
     SfHeading,
     SfTabs,
     AProductRating,
-    SfDivider,
+    SfDivider, 
     AProductAttribute,
     MReviewList
   },
@@ -84,7 +84,7 @@ export default {
      productReviewCount: '',
       productVideoIdOne: '',
       productVideoIdTwo: '',
-      productVideoIdThree: '',
+      productVideoIdThree: '', 
       playerVars: {
         autoplay: 1
       }
@@ -144,7 +144,8 @@ export default {
       openModal: 'openModal'
     }),
     handleOpenReviewModal () {
-      this.openModal({ name: ModalList.Review, payload: this.product.id })
+     // this.openModal({ name: ModalList.Review, payload: this.product.id })
+      window.open("https://www.capitools.co.uk/review/product/list/id/"+this.product.id+"/#review-form", "_blank");    
     },
     onToggle (id) { 
       this.$store.commit('ui/setReviewProductTab', id === this.$refs.reviewTab._uid);
