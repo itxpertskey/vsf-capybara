@@ -23,6 +23,7 @@
             }
         }
     }
+  
     .sf-link.sf-button{
         padding: 10px 0;
         color: var(--c-white);
@@ -97,7 +98,15 @@
         }
     }
     &__wishlist-icon{
-        display: none;
+        display: none!important;
+    }
+    .sf-product-card__wishlist-icon{
+        display: none!important;
+    }
+    &:hover{
+        &.sf-product-card__wishlist-icon{
+            display: none!important;
+        }
     }
 }
 
