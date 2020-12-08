@@ -18,8 +18,12 @@
 }
 
 .navbar__main{
+    justify-content: space-between;
     @media screen and (max-width: 600px){
         flex-direction: column;
+        .navbar__counter{
+            margin: 15px 0;
+        }
     }
     .navbar__sort{
         p{
