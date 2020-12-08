@@ -177,7 +177,7 @@ export default {
       opacity: 1;
       visibility: visible;
       top: 0;
-      z-index: 1;
+      z-index: 2;
       --mega-menu-aside-menu-height: calc(100vh - var(--bottom-navigation-height) - var(--bar-height));
     }
   }

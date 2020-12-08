@@ -78,7 +78,12 @@
                             &__track{
                                 ul{
                                     li{
-                                    
+                                        @media screen and (max-width: 480px){ 
+                                            width: 75vw!important;
+                                            &.glide__slide--active{
+                                                width: 75vw!important;
+                                            }
+                                        }                                   
                                         .sf-product-card{
                                             max-width: -webkit-fill-available;
                                             width: 100%;
@@ -130,8 +135,8 @@
                         display: flex;
                     }
                     @media screen and (max-width: 767px){
-                       bottom: auto;
-                       top: -18px;
+                        bottom: -5px;
+                        top: auto;
                        display: flex;
                        z-index: 1;
                        button{

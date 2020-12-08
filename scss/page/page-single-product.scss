@@ -116,7 +116,36 @@
                     }
                 }
             }
-        }   
+        } 
+        &__bottom{
+            .m-product-carousel{
+                @media screen and (max-width: 767px){ 
+                    .sf-carousel__controls{
+                        display: flex;
+                        z-index: 1;
+                    }
+                }
+                .glide{
+                    .glide__track{
+                        .glide__slides{
+                            .glide__slide {
+                                @media screen and (max-width: 480px){ 
+                                    width: 75vw!important;
+                                    .sf-product-card{ 
+                                        max-width: 100%;
+                                        width: 100%;
+                                    }
+                                    &.glide__slide--active{
+                                        width: 75vw!important;
+                                        
+                                    }  
+                                }    
+                            }
+                        }
+                    }
+                }
+            }
+        }  
     }
     .product__bottom{
         .sf-tabs{
