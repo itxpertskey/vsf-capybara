@@ -159,6 +159,12 @@ p{
 
 .m-cookie-notification{
     @media screen and (max-width: 1024px){
-        display: none;
+        display: block!important;
+        bottom: 60px!important;
+        background-color: rgba(0, 0, 0, 0.7)!important;
+        .cookie{
+            line-height: 1;
+            font-size: 14px;
+        }
     }
 }
