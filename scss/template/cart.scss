@@ -9,4 +9,64 @@
             border: 1px solid var(--_c-green-primary-lighten);
         }
     }
+    .sf-sidebar__content{
+        @media screen and (max-width: 1024px){
+            padding: 15px;
+            .my-cart{
+                .collected-product-list{
+                    .collected-product{
+                        .sf-collected-product__title-wraper{
+                            margin-bottom: 15px;
+                            a{
+                                margin: 0;
+                                font-size: 16px;
+                            }
+                        }
+                        .sf-collected-product__image{
+                            height: 140px;
+                            margin-bottom: 10px;
+                        }
+                        .sf-collected-product__quantity-wrapper{
+                            position: relative;
+                            padding: 0;
+                        }
+                    }
+                }
+            }
+        }
+        @media screen and (max-width: 600px){
+            .my-cart{
+                .collected-product-list{
+                    .collected-product{
+                        .sf-collected-product__image{
+                            width: 90px;
+                            height: 90px;
+                        }
+                        .sf-collected-product__quantity-wrapper{
+                            width: 100px;
+                        }
+                        .sf-collected-product__title-wraper{
+                            a{
+                                font-size: 13px;
+                                line-height: normal;
+                            }
+                        }
+                        .collected-product__properties{
+                            span{
+                                font-size: 11px;
+                            }
+                        }
+                        .sf-collected-product__main{
+                            margin: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .sf-price{
+        @media screen and (max-width: 1024px){
+            height: auto;
+        }
+    }
 }
