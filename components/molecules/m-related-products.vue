@@ -1,8 +1,12 @@
 <template>
-  <m-product-carousel
-    v-if="getCurrentRelatedProducts.length"
-    :products="getCurrentRelatedProducts"
-  />
+   <div class="product-slider">
+     <div class="slider-content"> 
+        <m-product-carousel
+          v-if="getCurrentRelatedProducts.length"
+          :products="getCurrentRelatedProducts"
+        />
+      </div>
+    </div>
 </template>
 
 <script>
