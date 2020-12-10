@@ -185,7 +185,6 @@ export default {
           children: [
             { name: 'FAQ', link: '/pages/f-a-q-frequently-asked-questions' },
             { name: 'After-sales service & customer relations', link: '/pages/capitools-service-and-customer-care' },
-            { name: 'Payment in 3 installments', link: '/pages/payment-in-three-installments' },
             { name: 'Product delivery', link: '/pages/delivery' },
             { name: 'Return Policy', link: '/pages/returns-and-refunds-policy' },
             { name: 'The SWAP Europe Guarantee network', link: '/pages/swap-europe-network-warranty' }

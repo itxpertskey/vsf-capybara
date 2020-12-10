@@ -38,7 +38,7 @@
           </template> 
           <template #price>
              
-                <SfLink class="sf-button a-add-to-cart sf-button--full-width sf-add-to-cart__button" target="_blank" :link="product.link">
+                <SfLink class="sf-button a-add-to-cart sf-button--full-width sf-add-to-cart__button" :link="product.link">
                   More Info
                 </SfLink>
            

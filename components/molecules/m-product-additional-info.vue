@@ -29,7 +29,7 @@
           @click="handleOpenReviewModal"
           :reviews="reviews"
         >
-            {{ $t('Leave me review') }}
+            {{ $t('Write a review') }}
         </AProductRating>
       </div>
      
