@@ -31,6 +31,9 @@
         &:hover{
             background-color: var(--_c-green-primary-lighten);
         }
+        @media screen and (max-width: 1024px){
+            display: none;;
+        }
     }
     a{
         padding: 0 15px;
