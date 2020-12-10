@@ -2,7 +2,7 @@
   <div class="avis-banner">
     <div class="avis-background" />
     <p class="text_upper">
-      We are specialized in DIY and gardening tools
+     Specialized in DIY and gardening tools
     </p>
    <!-- <AHeaderAvisIcon /> -->
   </div>
