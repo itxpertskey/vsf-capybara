@@ -18,6 +18,11 @@
         class="product__property"
       />
     </SfTab>
+    <SfTab :title="$t('Features')" v-if="product.feature_bullets"> 
+      <div class="features" >
+        <p itemprop="features" v-html="product.feature_bullets"> </p>
+      </div>
+    </SfTab>
     <SfTab :title="$t('Read reviews')" ref="reviewTab"> 
       <div class="review-header">
         <SfHeading
