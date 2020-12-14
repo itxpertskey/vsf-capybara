@@ -21,7 +21,8 @@
               :product="product"
               :custom-options="customOptions"
           />
-          <AQuantityInfo /> 
+          <AQuantityInfo
+            :product="product"/> 
           <div class="quantity d-flex align-center">
               <label>Quantity :</label>
               <AProductQuantity

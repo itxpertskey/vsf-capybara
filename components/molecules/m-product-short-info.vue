@@ -27,6 +27,7 @@
     </div>
     <hr>
     <div class="product__description desktop-only" v-html="product.description" />
+     <p><a @click="openDescriptionTab">Read more</a></p>
     <!-- <SfButton
       v-show="sizeOption"
       @click.native="openSizeGuide"
@@ -84,8 +85,20 @@ export default {
   methods: {
     openReviewsTab () {
       this.$store.commit('ui/setVideoProductTab', false);
+      this.$store.commit('ui/setDescriptionProductTab', false);
       this.$store.commit('ui/setReviewProductTab', true);
        
+      const reviewsEl = document.querySelector('#m-product-additional-info');
+      if (!reviewsEl) return;
+
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      createSmoothscroll(scrollTop, scrollTop + reviewsEl.getBoundingClientRect().top);
+    },
+    openDescriptionTab() {
+      this.$store.commit('ui/setReviewProductTab', false);
+      this.$store.commit('ui/setVideoProductTab', false);
+      this.$store.commit('ui/setDescriptionProductTab', true);
+      
       const reviewsEl = document.querySelector('#m-product-additional-info');
       if (!reviewsEl) return;
 

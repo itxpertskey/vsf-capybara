@@ -21,6 +21,7 @@ export const uiStore = {
     isWebpSupported: true,
     isReviewProductTab: false,
     isVideoProductTab: false,
+    isDescriptionProductTab: false,
     isMobileMenu: false
   },
   mutations: {
@@ -63,6 +64,9 @@ export const uiStore = {
     },
     setVideoProductTab (state, action) {
       state.isVideoProductTab = action
+    },
+    setDescriptionProductTab (state, action) {
+      state.isDescriptionProductTab = action
     },
     openMenu (state) {
       state.isMobileMenu = true
