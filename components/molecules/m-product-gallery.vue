@@ -173,6 +173,7 @@ export default {
    methods:{
     openVideosTab() {
       this.$store.commit('ui/setReviewProductTab', false);
+      this.$store.commit('ui/setDescriptionProductTab', false);
       this.$store.commit('ui/setVideoProductTab', true);
       
       const reviewsEl = document.querySelector('#m-product-additional-info');

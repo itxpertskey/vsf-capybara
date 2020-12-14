@@ -5,7 +5,7 @@
     ref="productTabs"  
     @toggle="onToggle"
   >
-    <SfTab :title="$t('Description')"> 
+    <SfTab :title="$t('Description')" ref="descriptionTab"> 
       <div class="description" >
         <p itemprop="description" v-html="product.description"> </p>
       </div>
@@ -113,7 +113,8 @@ export default {
   computed: {
     ...mapState({
       isReviewProductTab: state => state.ui.isReviewProductTab,
-      isVideoProductTab: state => state.ui.isVideoProductTab
+      isVideoProductTab: state => state.ui.isVideoProductTab,
+      isDescriptionProductTab: state => state.ui.isDescriptionProductTab
     }),
     reviewsCount () {
       this.productReviewCount =   this.reviews.length + " Reviews";
@@ -134,15 +135,21 @@ export default {
         this.$refs.productTabs.toggle(this.$refs.reviewTab._uid);
       }
     },
-     isVideoProductTab (value) {
+    isVideoProductTab (value) {
       if (value && !this.$refs.videoTab.isActive) {
         this.$refs.productTabs.toggle(this.$refs.videoTab._uid);
+      }
+    },
+    isDescriptionProductTab (value) {
+      if (value && !this.$refs.descriptionTab.isActive) {
+        this.$refs.productTabs.toggle(this.$refs.descriptionTab._uid);
       }
     }
   },
   beforeDestroy () {
     this.$store.commit('ui/setReviewProductTab', false);
     this.$store.commit('ui/setVideoProductTab', false);
+    this.$store.commit('ui/setDescriptionProductTab', false);
   }, 
   methods: {
     ...mapActions('ui', {
@@ -155,6 +162,7 @@ export default {
     onToggle (id) { 
       this.$store.commit('ui/setReviewProductTab', id === this.$refs.reviewTab._uid);
       this.$store.commit('ui/setVideoProductTab', id === this.$refs.videoTab._uid);
+      this.$store.commit('ui/setDescriptionProductTab', id === this.$refs.descriptionTab._uid);
     }, 
   }
 };
