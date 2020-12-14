@@ -44,6 +44,7 @@ header{
                         height: auto;
                         line-height: normal;
                         padding: 10px 0;
+                        padding-top: 30px;
                     }
                     .container{
                         padding: 0 20px;
@@ -107,6 +108,12 @@ header{
         }
     }
     .o-search-panel{
+        .no-results{
+            background-image: url('/assets/loading.gif');
+            background-size: 24px;
+            background-repeat: no-repeat;
+            background-position: 50% 7px;
+        }
         .products{
             &__listing{
                 .sf-product-card{
