@@ -205,8 +205,8 @@
                         <span class="product__count">({{ getSingleProductReviewCount(product.id) }}) Customer reviews</span>
                       </div>
                      </div> 
-                     <div class="description" style="white-space: break-spaces">
-                      <p itemprop="description" v-html="product.description"> </p>
+                     <div class="features" v-if="product.feature_bullets">
+                      <p itemprop="features" v-html="product.feature_bullets"> </p>
                     </div> 
                   </template> 
                  <template #price>

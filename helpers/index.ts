@@ -73,7 +73,8 @@ export function prepareCategoryProduct (product) {
     obj_product:product,
     sku:product.sku,
     is_in_stock:product.stock.is_in_stock,
-    description:product.description
+    description:product.description,
+    feature_bullets:product.feature_bullets,
   }
 }
 
