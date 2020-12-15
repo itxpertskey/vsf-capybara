@@ -92,6 +92,36 @@
                         }
                     }
                 }
+                .m-product-add-to-cart{
+                    .sf-add-to-cart{
+                        .md-feature-bullets{
+                            .delivery-bullets{
+                                margin: 0;
+                                padding-left: 20px;
+                                font-size: 12px;
+                            }
+                        }
+                        .sf-price{
+                            margin-bottom: 10px;
+                            font-family: 'Poppins-Bold';
+                            .sf-price__regular,
+                            .sf-price__special{
+                                font-family: 'Poppins-Bold';
+                            }
+                        }
+                        .quantity{
+                            label{
+                                margin-right: 10px;
+                            }
+                            .a-product-quantity{
+                                border: 1px solid var(--_c-gray-accent);
+                            }
+                        }
+                    }
+                    .sf-alert{
+                        margin-bottom: 10px;
+                    }
+                }
                 .a-add-to-cart{
                     max-width: 100%;
                     color: var(--c-white);
@@ -113,6 +143,39 @@
                     p{
                         font-size: 12px;
                         margin: 0;
+                    }
+                }
+                .m-product-options-custom{
+                    margin-bottom: 15px;
+                    .single-option{
+                        .sf-heading{
+                            .sf-heading__title{
+                                font-size: 14px;
+                                font-family: 'Poppins-Bold';
+                            }
+                        }
+                        .sf-radio{
+                            .sf-radio__container{
+                                padding: 10px;
+                                .sf-radio__label{
+                                    font-size: 13px;
+                                  }
+                                  .sf-radio__checkmark{
+                                    width: 20px;
+                                    height: 20px;
+                                  }
+                            }
+                            &.sf-radio--is-active{
+                                .sf-radio__container{
+                                   padding: 10px;
+                                   .sf-radio__checkmark{
+                                        width: 20px;
+                                        height: 20px;
+                                        border: 6px solid var(--_c-green-primary-lighten);
+                                    }                                  
+                                 }                                 
+                             }
+                        }
                     }
                 }
             }

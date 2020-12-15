@@ -137,16 +137,25 @@ export default {
 <style lang="scss" scoped>
 @import "~@storefront-ui/shared/styles/helpers/breakpoints";
 
-.m-product-options-custom {
-  margin: 0 var(--spacer-sm);
-  @include for-desktop {
-    margin: 0 var(--spacer-xl);
+.single-option {
+  .sf-radio{
+      &.sf-radio--is-active{
+         .sf-radio__container{
+            padding: 10px;
+            .sf-radio__content{
+              .sf-radio__checkmark{
+                  width: 20px;
+                  height: 20px;
+                  border: 6px solid var(--_c-green-primary-lighten);
+              }
+              .sf-radio__label{
+                font-size: 14px;
+              }
+            }
+          }
+          
+      }
   }
 }
-.single-option {
-  margin-top: 1.5rem;
-}
-.sf-divider {
-  margin-top: 1.5rem;
-}
+
 </style>
