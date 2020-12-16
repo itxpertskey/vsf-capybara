@@ -47,6 +47,10 @@
                         line-height: normal;
                     }
                 }
+                .read-more{
+                    font-size: 14px;
+                    color: var(--_c-green-primary-lighten);
+                }
                 .garantie-product{
                     .sf-image{
                         > img{
@@ -175,6 +179,9 @@
                                     }                                  
                                  }                                 
                              }
+                        }
+                        .sf-select{
+                            --select-border-width: 0;
                         }
                     }
                 }

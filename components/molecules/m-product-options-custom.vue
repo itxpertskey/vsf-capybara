@@ -65,14 +65,13 @@
           :required="option.is_require"
         />
       </div>
-      <SfDivider />
     </div>
   </form>
 </template>
 
 <script>
 import { ProductCustomOptions } from '@vue-storefront/core/modules/catalog/components/ProductCustomOptions'
-import { SfCheckbox, SfAlert, SfHeading, SfRadio, SfSelect, SfProductOption, SfInput, SfDivider } from '@storefront-ui/vue';
+import { SfCheckbox, SfAlert, SfHeading, SfRadio, SfSelect, SfProductOption, SfInput } from '@storefront-ui/vue';
 import get from 'lodash-es/get'
 import { customOptionFieldName, defaultCustomOptionValue, selectedCustomOptionValue } from '@vue-storefront/core/modules/catalog/helpers/customOption';
 
@@ -85,8 +84,7 @@ export default {
     SfRadio,
     SfSelect,
     SfProductOption,
-    SfInput,
-    SfDivider
+    SfInput
   },
   computed: {
     getError () {
@@ -155,6 +153,17 @@ export default {
           }
           
       }
+  }
+  .sf-select--underlined{
+    --select-border-width: 0;
+    padding-bottom: 0;
+    #sfSelect{
+      .sf-product-option{
+        .sf-product-option__label{
+          font-size: 14px;
+        }
+      }
+    }
   }
 }
 

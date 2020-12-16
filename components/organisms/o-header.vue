@@ -160,6 +160,7 @@ export default {
   }
   .search-container {
     display: flex;
+    align-items: stretch;
     .o-search {
       flex-grow: 1;
     }
