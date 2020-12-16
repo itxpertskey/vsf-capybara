@@ -33,7 +33,7 @@
            <MHeaderDrill />
       </div>   
 
-      <div class="search-container header-menu menu-list d-flex align-center justify-center desktop-only">
+      <div class="search-container header-menu menu-list d-flex justify-center desktop-only">
 
           <div class="sf-header-navigation-item"
             v-for="category in categories"

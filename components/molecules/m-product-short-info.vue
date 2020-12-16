@@ -27,7 +27,7 @@
     </div>
     <hr>
     <div class="product__description desktop-only" v-html="product.description" />
-     <p><a @click="openDescriptionTab">Read more</a></p>
+    <a @click="openDescriptionTab" class="read-more">Read more</a>
     <!-- <SfButton
       v-show="sizeOption"
       @click.native="openSizeGuide"
