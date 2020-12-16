@@ -23,7 +23,7 @@
         <p itemprop="features" v-html="product.feature_bullets"> </p>
       </div>
     </SfTab>
-    <SfTab :title="$t('Read reviews')" ref="reviewTab"> 
+    <SfTab :title="$t('Reviews')" ref="reviewTab"> 
       <div class="review-header">
         <SfHeading
           :title="$t(this.productReviewCount)"
