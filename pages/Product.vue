@@ -14,13 +14,13 @@
       :product-custom-options="getCurrentCustomOptions"
       :product-attributes="getCustomAttributes"
       :product-stock="stock"
-    />
+    />  
     <div class="product__bottom">
       <MAssurance />
       <MProductAdditionalInfo
         :product="getCurrentProduct"
         :reviews="reviews"
-        :attributes="productAttributes"
+        :attributes="getCustomAttributes"
       />
       <lazy-hydrate when-idle>
         <SfSection :title-heading="$t('We found other products you might like')">
@@ -118,7 +118,7 @@ export default {
     },
     getCustomAttributes () {
       return Object.values(this.attributesByCode)
-        .filter(a => {
+        .filter(a => { 
           return (
             a.is_visible &&
             a.is_user_defined &&
