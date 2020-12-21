@@ -23,6 +23,11 @@
         <p itemprop="features" v-html="product.feature_bullets"> </p>
       </div>
     </SfTab>
+    <SfTab :title="$t('Premium')" v-if="product.include_pdi"> 
+      <div class="premium" >
+        <cms-block :identifier="'pdi-text-capitools'" />
+      </div>
+    </SfTab>
     <SfTab :title="$t('Reviews')" ref="reviewTab"> 
       <div class="review-header">
         <SfHeading
@@ -70,6 +75,7 @@ import { SfHeading, SfTabs, SfDivider } from '@storefront-ui/vue';
 import AProductRating from 'theme/components/atoms/a-product-rating';
 import AProductAttribute from 'theme/components/atoms/a-product-attribute';
 import MReviewList from 'theme/components/molecules/m-review-list'; 
+import CmsBlock from 'theme/components/core/blocks/Cms/Block';
 import Vue from 'vue'
 import VueYoutube from 'vue-youtube'
 Vue.use(VueYoutube)
@@ -82,8 +88,10 @@ export default {
     AProductRating,
     SfDivider, 
     AProductAttribute,
-    MReviewList
+    MReviewList,
+    CmsBlock,
   },
+   mixins: [CmsBlock],
   data() {
    return {
      productReviewCount: '',
