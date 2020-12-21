@@ -10,17 +10,21 @@
         <p itemprop="description" v-html="product.description"> </p>
       </div>
      <!--  <div itemprop="description" v-html="product.description" /> -->
-      <AProductAttribute
-        v-for="(attribute, i) in attributes"
-        :key="i"
-        :product="product"
-        :attribute="attribute"
-        class="product__property"
-      />
     </SfTab>
     <SfTab :title="$t('Features')" v-if="product.feature_bullets"> 
       <div class="features" >
         <p itemprop="features" v-html="product.feature_bullets"> </p>
+      </div>
+    </SfTab>
+    <SfTab :title="$t('Specs')" v-if="attributes.length"> 
+      <div class="specs" >
+        <AProductAttribute
+          v-for="(attribute, i) in attributes"
+          :key="i"
+          :product="product"
+          :attribute="attribute"
+          class="product__property" 
+        />
       </div>
     </SfTab>
     <SfTab :title="$t('Premium')" v-if="product.include_pdi"> 
