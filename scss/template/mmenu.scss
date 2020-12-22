@@ -97,6 +97,11 @@
                 }
             }
         }
+        &:not(:first-child){
+            .m-menu{
+                display: none!important;
+            }
+        }
     }
 }
 
