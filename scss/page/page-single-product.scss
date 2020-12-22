@@ -261,6 +261,28 @@
                             }
                         }
                     }
+                    .specs{
+                        border: 1px solid  var(--c-light);
+                        .a-product-attribute{
+                            margin: 0;
+                            border-bottom: 1px solid  var(--c-light);
+                            .sf-property__name{
+                                width: 300px;
+                                background-color: var(--_c-gray-primary);
+                                color: var(--c-white);
+                            }
+                            span{
+                                display: block;
+                                width: 100%;
+                                padding: 10px
+                            }
+                            &:nth-child(odd){
+                                .sf-property__value{
+                                    background-color: var(--c-light);
+                                }
+                            }
+                        } 
+                    } 
                 }
             }
         }
