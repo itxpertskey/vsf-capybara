@@ -1,19 +1,25 @@
 <template>
   <section id="home">
-    <SfHero
-      class="hero"
-      :slider-options="{
-        animationDuration: 2000,
-        rewindDuration: 2000
-      }"
-    >
-      <SfHeroItem
-        v-for="(hero, i) in heroes"
-        :key="i"
-        :image="hero.image"
-        :class="hero.className"
-      />
-    </SfHero>
+     <div class="home-slider">
+       <ul id="home-slider" class="slider">
+         <li class="slider-item">
+           <a href="#">
+             <SfImage
+                src="assets/banner/png/banner-01.png"
+                class="slider-banner"
+              />
+           </a>
+         </li>
+         <li class="slider-item">
+           <a href="#">
+             <SfImage
+                src="assets/banner/png/banner-02.png"
+                class="slider-banner"
+              />
+           </a>
+         </li>
+       </ul>
+     </div>
     <MAssurance />
    <!-- <MNosSpecialities /> -->
     <cms-block :identifier="'home-template'" />
