@@ -266,15 +266,25 @@
                         .a-product-attribute{
                             margin: 0;
                             border-bottom: 1px solid  var(--c-light);
+                            @media screen and (max-width: 600px){
+                                flex-direction: column;
+                            }
                             .sf-property__name{
-                                width: 300px;
-                                background-color: var(--_c-gray-primary);
+                                width: 380px;
+                                background-color: var(--_c-green-primary);
                                 color: var(--c-white);
+                                margin: 0;
+                                @media screen and (max-width: 600px){
+                                    width: auto;
+                                }
                             }
                             span{
                                 display: block;
                                 width: 100%;
-                                padding: 10px
+                                padding: 10px;
+                                @media screen and (max-width: 600px){
+                                    width: auto;
+                                }
                             }
                             &:nth-child(odd){
                                 .sf-property__value{
