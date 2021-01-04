@@ -9,6 +9,7 @@ import store from '@vue-storefront/core/store'
 
 export * from './price'
 
+let categoryCollection: string[] = ['gardening','power-tools','garden-hand-tools','generators','pressure-washers','water-pumps','workshop','parts-and-accessories'];
 export function getPathForStaticPage (path: string) {
   const { storeCode } = currentStoreView()
   const isStoreCodeEquals = storeCode === config.defaultStoreCode
@@ -49,8 +50,8 @@ export function getTopLevelCategories (categoryList) {
     ? config.entities.category.categoriesDynamicPrefetchLevel
     : 2
 
-  return categoryList.filter(
-    category => category.level === categoryLevel && category.is_active && category.children_count > 0
+  return categoryList.filter( 
+    category => category.level === categoryLevel && category.is_active && categoryCollection.includes(category.url_path)
   )
 }
 
