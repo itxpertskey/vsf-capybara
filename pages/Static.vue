@@ -79,6 +79,13 @@ export default {
         { title: i18n.t('After-sales service & customer relations'), link: '/pages/capitools-service-and-customer-care', isCms: true },
         { title: i18n.t('Return Policy'), link: '/pages/return-policy', isCms: true },
         { title: i18n.t('Swap Europe Network Warranty'), link: '/pages/swap-europe-network-warranty', isCms: true },
+        { title: i18n.t('Our Best Sellers'), link: '/pages/our-best-sellers', isCms: true },
+        { title: i18n.t('Our Community'), link: '/pages/our-community', isCms: true },
+        { title: i18n.t('Mantenance & Troubleshooting'), link: '/pages/maintenance-and-troubleshooting', isCms: true },
+        { title: i18n.t('Data Protection'), link: '/pages/data-protection', isCms: true },
+        { title: i18n.t('Accessories'), link: '/pages/accessories', isCms: true },
+        { title: i18n.t('Spare Parts'), link: '/pages/spare-parts', isCms: true },
+        { title: i18n.t('Protective Equipment'), link: '/pages/protective-equipment', isCms: true }
       ]
     };
   },

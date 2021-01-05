@@ -144,50 +144,49 @@ export default {
     links () {
       return {
         about: {
-          name: 'About us',
+          name: 'About Us',
           children: [
-            { name: 'Who We Are?', link: '/pages/about-us' },
-            { name: 'Our products', link: '/pages/our-products.html' },
-            { name: 'Our expertise', link: '/pages/our-expertise' },
-            { name: 'Our partner brands', link: '/pages/capitools-brands-and-partners' },
-            { name: 'Our guarantee', link: '/pages/our-guarantee' },
-            { name: 'Promotions', link: '/pages/deals-promos' },
-            { name: 'New products', link: '/pages/new-products' },
-            { name: 'Contact us', link: '/pages/contact-capitools' },
-            { name: 'sitemap', link: '/pages/sitemap' },
-            { name: 'We are hiring', link: '/pages/we-are-hiring' }
+            { name: 'Who We Are', link: '/pages/about-us' },
+            { name: 'Our Brands & Partners', link: '/pages/capitools-brands-and-partners' },
+            { name: 'Deals & Promos', link: '/pages/deals-promos' },
+            { name: 'Our Best Sellers', link: '/pages/our-best-sellers' },
+            { name: 'New product', link: '/pages/new-products' },
+            { name: 'Contact Us', link: '/pages/contact-capitools' },
+            { name: 'Our Community', link: '/pages/our-community' }
           ]
-        },
+        }, 
         product: {
           name: 'The Products',
           children: [
-            { name: 'Secure payment', link: '/pages/payment-info' },
-            { name: 'Terms of Sales', link: '/pages/capitools-uk-terms-conditions' },
-            { name: 'Legal Notice', link: '/pages/legal-information' },
-            { name: 'Payment methods', link: '/pages/payment-info' }, 
-            { name: 'Satisfied or refunded', link: '/pages/returns-and-refunds-policy' },
-            { name: 'Partners', link: '/pages/capitools-partners' },
-            { name: 'Cyber ​​Security', link: '/pages/cyber-security' },
-            { name: 'Cookie notice information', link: '/pages/privacy' }
+            { name: 'Water Pumps', link: '/water-pumps' },
+            { name: 'Generators', link: '/generators' },
+            { name: 'DIY Tools', link: '/power-tools' },
+            { name: 'Garden Hand Tools', link: '/garden-hand-tools' }, 
+            { name: 'Accessories', link: '/pages/accessories' },
+            { name: 'Spare Parts', link: '/pages/spare-parts' },
+            { name: 'Protective Equipment', link: '/pages/protective-equipment' }
           ]
-        },
+        }, 
         help: { 
           name: 'Help & Services',
           children: [
-            { name: 'My orders', link: '/pages/my-capitools-order' }, 
-            { name: 'My adresses', link: '/pages/my-address' },
-            { name: 'My personal information', link: '/pages/my-personal-details' }, 
-            { name: 'Logout', link: '/' }
+            { name: 'FAQ (Frequently Asked Questions)', link: '/pages/f-a-q-frequently-asked-questions' },
+            { name: 'Service & Customer Care', link: '/pages/capitools-service-and-customer-care' },
+            { name: 'Mantenance & Troubleshooting', link: '/pages/maintenance-and-troubleshooting' },
+            { name: 'Payment', link: '/pages/payment-info' },
+            { name: 'Delivery', link: '/pages/delivery' },
+            { name: 'Return & Refund Policy', link: '/pages/returns-and-refunds-policy' },
+            { name: 'Swap Europe Network Warranty', link: '/pages/swap-europe-network-warranty' }
           ]
-        },
+        }, 
         legal: {
           name: 'Legal Information',
           children: [
-            { name: 'FAQ', link: '/pages/f-a-q-frequently-asked-questions' },
-            { name: 'After-sales service & customer relations', link: '/pages/capitools-service-and-customer-care' },
-            { name: 'Product delivery', link: '/pages/delivery' },
-            { name: 'Return Policy', link: '/pages/returns-and-refunds-policy' },
-            { name: 'The SWAP Europe Guarantee network', link: '/pages/swap-europe-network-warranty' }
+            { name: 'Terms & Conditions', link: '/pages/capitools-uk-terms-conditions' },
+            { name: 'Cookie notice information', link: '/pages/privacy' },
+            { name: 'Data Protection', link: '/pages/data-protection' },
+            { name: 'Cyber Security', link: '/pages/cyber-security' },
+            { name: 'Legal Information', link: '/pages/legal-information' }
           ]
         }
       };
