@@ -2,22 +2,22 @@
   <div class="top-bar">
     <ul class="d-flex" id="md_top_comfort_links">
       <li>
-        <a href="/our-promise" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"
+        <a href="/pages/our-promise" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"
           >Our Promise</a
         >
       </li>
       <li>
-        <a href="/delivery" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"
+        <a href="/pages/delivery" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"
           >Free Delivery</a
         >
       </li>
       <li>
-        <a href="/expert-advice" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"
+        <a href="/pages/expert-advice" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"
           >Expert Advice</a
         >
       </li>
       <li class="last">
-        <a href="/returns" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"
+        <a href="/pages/returns" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc"
           >30 Day Returns</a
         >
       </li>
