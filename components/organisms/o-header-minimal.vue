@@ -1,6 +1,6 @@
 <template>
   <header class="o-header">
-
+    <ATopBar />
      <div class="header-content d-flex">
             <div  class="d-flex align-center">
               <SfHeader 
@@ -67,6 +67,7 @@
 </template>
 
 <script>
+import ATopBar from 'theme/components/atoms/a-topbar';
 import MHeaderCompte from 'theme/components/molecules/m-header-compte';
 import MHeaderBasket from 'theme/components/molecules/m-header-basket';
 import AHeaderContact from 'theme/components/atoms/a-header-contact';
@@ -84,6 +85,7 @@ export default {
   name: 'OHeader',
   components: {
     SfHeader,
+    ATopBar,
     SfButton,
     ALogo,
     OSearch,
