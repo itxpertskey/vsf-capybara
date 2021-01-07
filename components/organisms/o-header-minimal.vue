@@ -1,5 +1,10 @@
 <template>
   <header class="o-header">
+    <SfOverlay
+      class="overlay"
+      :visible="isHoveredMenu || isSearchPanelVisible"
+      @click="$store.commit('ui/setSearchpanel', false)"
+    />
     <ATopBar />
      <div class="header-content d-flex">
             <div  class="d-flex align-center">
@@ -73,7 +78,7 @@ import MHeaderBasket from 'theme/components/molecules/m-header-basket';
 import AHeaderContact from 'theme/components/atoms/a-header-contact';
 import MHeaderDrill from 'theme/components/molecules/m-header-drill';
 
-import { SfHeader, SfButton } from '@storefront-ui/vue';
+import { SfHeader, SfOverlay, SfButton } from '@storefront-ui/vue';
 import ALogo from 'theme/components/atoms/a-logo';
 import OSearch from 'theme/components/organisms/o-search';
 import { mapState, mapGetters } from 'vuex';
@@ -85,6 +90,7 @@ export default {
   name: 'OHeader',
   components: {
     SfHeader,
+    SfOverlay,
     ATopBar,
     SfButton,
     ALogo,
@@ -156,6 +162,15 @@ export default {
 .overlay {
   position: absolute;
   z-index: 1;
+  + .top-bar{
+    position: relative;
+    z-index: 9;
+    + .header-content{
+       position: relative;
+       background-color: var(--c-white);
+       z-index: 9;
+    }
+  }
 }
 .o-header {
   --header-navigation-item-margin: 0 2rem 0 0;

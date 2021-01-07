@@ -43,7 +43,6 @@ export default {
   align-content: center;
   flex-wrap: wrap;
   width: 100%;
-  height: 100vh;
   margin: auto;
   .sf-alert {
     flex-basis: 100%;

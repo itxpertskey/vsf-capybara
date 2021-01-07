@@ -34,12 +34,6 @@ header{
                 } 
                 .o-search-panel{
                     top: 96px;
-                    @media screen and (max-width: 767px){
-                        height: calc(100vh - 97px);
-                        .container{
-                            height: 100%;
-                        }
-                    }
                     .no-results{
                         height: auto;
                         line-height: normal;
