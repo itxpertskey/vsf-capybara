@@ -6,7 +6,7 @@
         />
         <div class="text-center">
             <h6>Free Delivery </h6>
-            <p>on Order Over £50e</p>
+            <p>on Order Over £50</p>
         </div>
     </div>
 </template>
