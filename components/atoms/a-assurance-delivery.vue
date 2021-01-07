@@ -5,8 +5,8 @@
         class="image_delivery"
         />
         <div class="text-center">
-            <h6>Free delivery</h6>
-            <p>From 99 euros of purchase</p>
+            <h6>Free Delivery </h6>
+            <p>on Order Over £50e</p>
         </div>
     </div>
 </template>

@@ -5,8 +5,8 @@
         class="image_headphone"
         />
         <div class="text-center">
-            <h6>09 70 72 60 00</h6>
-            <p>Service clients</p>
+            <h6>Customer Service</h6>
+            <p>020 3026 8712</p>
         </div>
     </div>
 </template>
