@@ -85,13 +85,19 @@ export default {
 <style lang="scss" scoped>
 .top-bar {
   background-color: var(--_c-green-primary);
+   @media screen and (max-width: 820px) {
+      flex-direction: column;
+   }
   ul {
     padding: 3px 30px;
     margin: 0;
-    list-style: none;
-    
+    list-style: none; 
+    @media screen and (max-width: 820px) {
+      padding: 5px 15px;
+    }
     @media screen and (max-width: 480px) {
       padding: 5px;
+      justify-content: center;
     }
     li {
       margin: 0 10px;
@@ -99,7 +105,7 @@ export default {
       text-transform: uppercase;
       font-size: 12px;
       @media screen and (max-width: 480px) {
-        margin: 6px;
+        margin: 0 6px;
         font-size: 11px;
       }
       a, button {
