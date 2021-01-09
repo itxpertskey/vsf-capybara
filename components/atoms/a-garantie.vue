@@ -26,7 +26,7 @@ export default {
   },
   data() {
     return {
-      link: "#",
+      link: "https://www.capitools.com/fr/content/40-ma-garantie-swap",
     };
   },
 };
