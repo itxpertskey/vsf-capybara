@@ -1,5 +1,7 @@
 .header-menu{
     position: relative;
+    z-index: 8;
+    background-color: #fff;
     display: flex;
     align-items: stretch;
     .sf-mega-menu{
