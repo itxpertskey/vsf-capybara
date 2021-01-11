@@ -54,17 +54,50 @@ header {
         .sf-header {
             width: 100%;
         }
-        .info {
-            padding: 5px;
+        .sf-select.info {
             width: 50px;
+            min-width: 30px;
+            max-width: 50px!important;
+            height: 35px;
+            padding: 5px;
             text-align: center;
-            border: 1px solid var(--_c-gray-accent);
+            border: 1px solid var(--c-black);
             border-radius: 5px;
-            font-family: serif;
-            font-size: 28px;
-            font-style: italic;
-            font-weight: 700;
             display: none;
+            .sf-select__label{
+                font-size: 20px;
+                font-weight: 700;
+                color: var(--_c-green-primary-lighten);
+                top: 12px;
+                left: 6px;
+            }
+            .sf-select__selected,
+            .sf-select__error-message,
+            .sf-chevron{
+                display: none;
+            }
+            .sf-select__dropdown{
+                bottom: 60px;
+                height: 250px; 
+                @media screen and (max-width: 480px) {
+                    height: 30vh;
+                }
+                .sf-select__options{
+                    max-height: auto;
+                    li{
+                        padding: 7px 0;
+                        border-bottom: 1px solid var(--_c-gray-accent-lighten);
+                        &:hover{
+                            a{
+                                color: var(--_c-green-primary-lighten);
+                            }
+                        }
+                    }
+                }
+                .sf-button{
+                    display: none;
+                }
+            }
             @media screen and (max-width: 1024px) {
                 display: block;
             }
@@ -85,6 +118,9 @@ header {
             .rectangle_contact {
                 @media screen and (max-width: 480px) {
                     margin: 0;
+                    a{
+                        font-size: 16px;
+                    }
                 }
             }
             .trustpilot-widget {
