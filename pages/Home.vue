@@ -14,6 +14,20 @@
         :class="hero.className"
       />
     </SfHero>
+    <SfHero
+      class="hero"
+      :slider-options="{
+        animationDuration: 2000,
+        rewindDuration: 2000
+      }"
+    >
+      <SfHeroItem
+        v-for="(hero, i) in heroesResponsive"
+        :key="i"
+        :image="hero.image"
+        :class="hero.className"
+      />
+    </SfHero>
     <MAssurance />
    <!-- <MNosSpecialities /> -->
     <cms-block :identifier="'home-template'" />
@@ -136,6 +150,7 @@ export default {
     ...mapGetters({
       isLoggedIn: 'user/isLoggedIn',
       heroImages: 'promoted/getHeadImage',
+      heroImagesResponsive: 'promoted/getHeadImageResponsive',
       promotedOffers: 'promoted/getPromotedOffers',
       newCollection: 'homepage/getEverythingNewCollection',
       dummyInstagramImages: 'instagram/getInstagramImages',      
@@ -149,6 +164,9 @@ export default {
     },
     heroes () {
       return checkWebpSupport(this.heroImages, this.isWebpSupported)
+    },
+    heroesResponsive () {
+      return checkWebpSupport(this.heroImagesResponsive, this.isWebpSupported)
     },
     instagramImages () {
       return checkWebpSupport(this.dummyInstagramImages, this.isWebpSupported)
@@ -171,6 +189,7 @@ export default {
         // store.dispatch('homepage/blockThreeProducts'),
         //store.dispatch('homepage/fetchNewCollection'),
       store.dispatch('promoted/updateHeadImage'),
+      store.dispatch('promoted/updateHeadImageResponsive'),
       store.dispatch('instagram/updateInstagramImages')
     ]);
   },

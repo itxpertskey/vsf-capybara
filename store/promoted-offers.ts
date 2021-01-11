@@ -7,7 +7,8 @@ export default interface PromotedOffersState {
     productBanners: any[],
     menuAsideBanners: any[]
   },
-  headImage: any[]
+  headImage: any[],
+  headImageResponsive: any[]
 }
 
 export const promotedStore = {
@@ -19,13 +20,15 @@ export const promotedStore = {
       productBanners: [],
       menuAsideBanners: []
     },
-    headImage: []
+    headImage: [],
+    headImageResponsive: []
   },
   getters: {
     getPromotedOffers: state => {
       return state.banners
     },
-    getHeadImage: state => state.headImage
+    getHeadImage: state => state.headImage,
+    getHeadImageResponsive: state => state.headImageResponsive
   },
   actions: {
     async updatePromotedOffers ({ commit, rootState }, data) {
@@ -47,6 +50,16 @@ export const promotedStore = {
       } catch (err) {
         Logger.debug('Unable to load headImage' + err)()
       }
+    },
+    async updateHeadImageResponsive ({ commit, rootState }, data) {
+      let mainImageResource = rootState.storeView && rootState.storeView.storeCode ? `banners/${rootState.storeView.storeCode}_main-images` : `main-images`
+      try {
+        // Workaround to get jest --watch to work so don't change the import sting to a template string
+        const imageModule = await import(/* webpackChunkName: "vsf-head-img-[request]" */ 'theme/resource/' + mainImageResource + '.json')
+        commit('SET_HEAD_IMAGE_RESPONSIVE', imageModule.images_responsive)
+      } catch (err) {
+        Logger.debug('Unable to load headImage' + err)()
+      }
     }
   },
   mutations: {
@@ -55,6 +68,9 @@ export const promotedStore = {
     },
     SET_HEAD_IMAGE (state, headImage) {
       state.headImage = headImage
+    },
+    SET_HEAD_IMAGE_RESPONSIVE (state, headImageResponsive) {
+      state.headImageResponsive = headImageResponsive
     }
   }
 }
