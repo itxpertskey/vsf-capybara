@@ -1,4 +1,6 @@
 .o-microcart-panel{
+    z-index: 8;
+    position: relative;
     .a-add-to-cart{
         color: var(--c-white);
         background-color: var(--_c-green-primary-lighten);
