@@ -1,5 +1,31 @@
 #home{
     background-color: var(--_c-light-primary);
+    .sf-hero{
+        height: 21vw;
+        &.hero-tablet{
+            display: none;
+            height: 49vw;
+            @media screen and (max-width: 1024px) {
+                display: block;
+                *{
+                    height: 100%;
+                }
+            }
+        }
+        
+        .glide{
+            *{
+                height: 100%;
+            }
+            .glide__track{
+                ul{
+                    li{
+                        background-size: 100%!important;
+                    }
+                }
+            }
+        }
+    }
     .about-us{
         .sf-call-to-action{
             .sf-call-to-action__text-container{

@@ -1,7 +1,7 @@
 <template>
   <section id="home">
     <SfHero
-      class="hero"
+      class="hero desktop-only"
       :slider-options="{
         animationDuration: 2000,
         rewindDuration: 2000
@@ -15,7 +15,7 @@
       />
     </SfHero>
     <SfHero
-      class="hero"
+      class="hero-tablet"
       :slider-options="{
         animationDuration: 2000,
         rewindDuration: 2000
