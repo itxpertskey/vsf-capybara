@@ -3,6 +3,7 @@
  */
 export enum ModalList {
   Review = 'm-modal-review',
+  ReviewPwa = 'm-modal-review-pwa',
   Auth = 'm-modal-authentication',
   SizeGuide = 'm-modal-size-guide',
   TermsAndConditions = 'm-modal-terms-and-conditions',
@@ -17,6 +18,7 @@ export enum ModalList {
  */
 export const modalComponents = new Map([
   [ModalList.Review, () => import(/* webpackChunkName: "vsf-modals" */ 'theme/components/molecules/modals/m-modal-review.vue')],
+  [ModalList.ReviewPwa, () => import(/* webpackChunkName: "vsf-modals" */ 'theme/components/molecules/modals/m-modal-review-pwa.vue')],
   [ModalList.Auth, () => import(/* webpackChunkName: "vsf-modals" */ 'theme/components/molecules/modals/m-modal-authentication.vue')],
   [ModalList.SizeGuide, () => import(/* webpackChunkName: "vsf-modals" */ 'theme/components/molecules/modals/m-modal-size-guide.vue')],
   [ModalList.TermsAndConditions, () => import(/* webpackChunkName: "vsf-modals" */ 'theme/components/molecules/modals/m-modal-terms-and-conditions.vue')],

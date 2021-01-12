@@ -168,8 +168,9 @@ export default {
       openModal: 'openModal'
     }),
     handleOpenReviewModal () {
-     // this.openModal({ name: ModalList.Review, payload: this.product.id })
-      window.open("https://www.capitools.co.uk/review/product/list/id/"+this.product.id+"/#review-form", "_blank");    
+      this.openModal({ name: ModalList.ReviewPwa, payload: this.product.id })
+      //window.open("https://www.capitools.co.uk/review/product/list/id/"+this.product.id+"/#review-form", "_blank"); 
+     // window.open("https://www.capitools.test/review/product/list/id/"+this.product.id+"/pwa/pwa-review#review-form", "_blank");       
     },
     onToggle (id) { 
       this.$store.commit('ui/setReviewProductTab', id === this.$refs.reviewTab._uid);
