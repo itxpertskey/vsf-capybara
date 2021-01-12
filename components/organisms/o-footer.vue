@@ -4,7 +4,6 @@
         <div class="d-flex footer-overlay justify-between">
           <MFooterNewsletterSection />
           <AFooterPaymentSection />
-          <AFooterTrustpilotSection />
           <AFooterSocialMediaSection />
         </div>
         <SfFooter :column="4" :multiple="true">
@@ -55,36 +54,7 @@
             </SfList>
           </SfFooterColumn>
         </SfFooter>
-       <!--  <div class="social-links d-flex align-center" >
-          <h4>
-            Lets stay in touch!
-          </h4>
-          <div class="item d-flex">
-           <a href="https://www.facebook.com/CapitoolsUK/" target="_blank">
-              <img :src="'/assets/images/facebook_icon.png'" class="icon_facebook"/>
-            </a>
-            <a href="https://www.youtube.com/channel/UCi6MvXNjvI_Oy02TzXThOMg" target="_blank">
-              <img :src="'/assets/images/youtube_icon.png'" class="icon_youtube"/>
-            </a>
-            <a href="https://www.instagram.com/capitoolsuk/" target="_blank">
-              <img :src="'/assets/images/insta_icon.png'" class="icon_instagram"/>
-            </a>
-          </div>
-        </div>
-
-         <div class="blog d-flex align-center">
-          <label>New</label>
-          <img :src="'/assets/images/footer_blog.png'" class="image_blog_size">
-          <p class="footer_blog_text">
-            Ut nonumes noluisse nec, in impetus integre sea. Nec no elitr ignota aeterno. Qui etiam assentior complectitur no. in impetus integre sea. Nec no elitr ignota aeterno.
-          </p>
-          <SfButton
-            class="see-more btn-primary"
-            :link="seeMoreLink"
-          >
-            See more
-          </SfButton>
-        </div> -->
+      
     </div>
     <ABackToTop bottom="20px" right="20px" visibleoffset="200" class="desktop-only" />
     <div class="copyrights text-center">

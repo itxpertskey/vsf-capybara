@@ -80,7 +80,7 @@ header {
                 bottom: 60px;
                 height: 250px; 
                 @media screen and (max-width: 480px) {
-                    height: 30vh;
+                    height: 35vh;
                 }
                 .sf-select__options{
                     max-height: auto;
@@ -114,12 +114,19 @@ header {
                     padding: 10px;
                     justify-content: space-between;
                 }
+                @media screen and (max-width: 480px){
+                    padding: 0 10px;
+                }
             }
             .rectangle_contact {
                 @media screen and (max-width: 480px) {
                     margin: 0;
                     a{
-                        font-size: 16px;
+                        font-size: 14px;
+                    }
+                    .text_lower{
+                        font-size: 9px;
+                        margin: 0 auto;
                     }
                 }
             }
@@ -131,8 +138,9 @@ header {
                         height: 54px !important;
                     }
                     @media screen and (max-width: 480px) {
-                        height: 45px !important;
-                    }
+                        height: 38px !important;
+                        transform: none;
+                    } 
                 }
             }
         }
@@ -229,5 +237,8 @@ header {
                 width: 100%;
             }
         }
+    }
+    @media screen and (max-width: 480px){
+        padding: 0!important;
     }
 }
