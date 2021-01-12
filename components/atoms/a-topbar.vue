@@ -27,10 +27,7 @@
         <a href="/pages/returns" class="md-opjjpmhoiojifppkkcdabiobhakljdgm_doc">
         30 Day Returns
         </a>
-      </li>
-      <li>
-        <a> Wishlist </a>
-      </li>
+      </li> 
       <li>
         <a href="/pages/capitools-service-and-customer-care"> Help </a>
       </li>
