@@ -21,15 +21,15 @@
         :product="getCurrentProduct"
         :reviews="reviews"
         :attributes="getCustomAttributes"
-      />
+      /> 
       <lazy-hydrate when-idle>
-        <SfSection :title-heading="$t('We found other products you might like')">
+        <SfSection :title-heading="$t('OUR TOP DEALS')" v-if="upsellProductCount">
           <MRelatedProducts type="upsell" />
         </SfSection>
       </lazy-hydrate>
 
       <lazy-hydrate when-idle>
-        <SfSection :title-heading="$t('Similar Products')">
+        <SfSection :title-heading="$t('RELATED PRODUCTS')" v-if="relatedProductCount">
           <MRelatedProducts type="related" />
         </SfSection>
       </lazy-hydrate>
@@ -146,12 +146,24 @@ export default {
         rating: ( review.ratings[0].value+review.ratings[1].value+review.ratings[2].value+review.ratings[3].value+review.ratings[4].value ) / 5 // TODO: remove hardcode
       }))
     },
-    
+
     availability () {
       return this.product.stock && this.product.stock.is_in_stock ? 'InStock' : 'OutOfStock'
     },
     sizeOption () {
       return get(this.productConfiguration, 'size', false)
+    }, 
+    upsellProductCount () {
+      var productArray = this.getCurrentProduct.product_links.filter(function(ele){
+        return (ele.link_type == "upsell")
+      });
+      return productArray.length; 
+    },
+    relatedProductCount () {
+      var productArray = this.getCurrentProduct.product_links.filter(function(ele){
+        return (ele.link_type == "related")
+      });
+      return productArray.length; 
     }
   },
   watch: {
