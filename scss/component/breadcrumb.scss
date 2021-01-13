@@ -20,7 +20,7 @@
                 }
             }
             a{
-                font-family: 'Poppins-Bold';
+                font-family: 'Poppins-Regular';
                 font-size: 14px;
             }
             &:before{
@@ -28,8 +28,8 @@
                 width: 6px;
                 height: 6px;
                 display: inline-block;
-                border-right: 2px solid var(--_c-dark-secondary);
-                border-top: 2px solid var(--_c-dark-secondary);
+                border-right: 1px solid var(--_c-dark-secondary);
+                border-top: 1px solid var(--_c-dark-secondary);
                 transform: rotate(45deg);
                 padding: 0!important;
                 margin: 0 15px;
