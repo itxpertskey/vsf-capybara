@@ -35,12 +35,32 @@
             </SfProductCard>
           </div> 
       </VueSlickCarousel>
-      <button @click="showNext">Next</button>
-      <button @click="showPrevious">Prev</button>
+      <div class="controls d-flex">
+      <button @click="showPrevious">
+         <SfIcon
+            icon="arrow_left"
+            size="xs"
+            class="sf-header__icon icon-size"
+            :class="{
+              'sf-header__icon--is-active': isLoggedIn
+            }"
+          />
+      </button>
+      <button @click="showNext">
+        <SfIcon
+            icon="arrow_right"
+            size="xs"
+            class="sf-header__icon icon-size"
+            :class="{
+              'sf-header__icon--is-active': isLoggedIn
+            }"
+          />
+      </button>
+      </div>
     </div>
 </template>
 <script>
-import { SfProductCard , SfCarousel , SfRating , SfPrice , SfButton , SfLink } from '@storefront-ui/vue';
+import { SfProductCard , SfCarousel , SfRating , SfPrice , SfButton , SfLink, SfIcon } from '@storefront-ui/vue';
 import { htmlDecode } from '@vue-storefront/core/filters';
 import config from 'config';
 import { currentStoreView } from '@vue-storefront/core/lib/multistore';
@@ -62,6 +82,7 @@ export default {
     SfRating,
     SfPrice,
     SfButton,
+    SfIcon,
     SfLink,
     AProductRating,
     AAddToCart,
@@ -72,7 +93,7 @@ export default {
       placeholder: '/assets/placeholder.jpg',
       settings: 
       {
-        dots:true, 
+        dots:false, 
         speed: 500,
         slidesToShow: 4,
         slidesToScroll: 1,
@@ -81,6 +102,7 @@ export default {
         initialSlide: 0,
         infinite: false,
       },
+     
     };
   },
   props: {
