@@ -156,7 +156,7 @@
                 .slick-track{
                     .slick-slide{
                         .sf-product-card{
-                            margin: 0;
+                            margin: 0!important;
                             max-width: 100%;
                             width: 100%;
                         }
@@ -169,6 +169,7 @@
         .controls{
             width: 100%;
             justify-content: space-between;
+            border-top: 1px solid var(--c-light);
             button{
                 margin: 5px 5px;
                 border: 0;
