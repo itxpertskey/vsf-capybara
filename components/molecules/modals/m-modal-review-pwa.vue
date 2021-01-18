@@ -8,6 +8,7 @@
 </template>
 
 <script>
+import config from 'config';
 import { required, email, minLength } from 'vuelidate/lib/validators';
 import { SfModal, SfInput, SfButton } from '@storefront-ui/vue';
 
@@ -42,7 +43,8 @@ export default {
       return this.$store.state.user.current;
     },
     setReviewUrl(){
-      return "https://www.capitools.co.uk/review/product/list/id/"+this.modalData.payload+"/pwa/pwa-review#review-form";
+      const reviewPageUrl = config.externalCheckout.cmsUrl;
+      return reviewPageUrl+"/review/product/list/id/"+this.modalData.payload+"/pwa/pwa-review#review-form";
     }
   },
   mounted () {
