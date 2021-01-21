@@ -1,6 +1,6 @@
 export default {
   title: 'VSF Capybara',
-  titleTemplate: '%s - Vue Storefront',
+  titleTemplate: '%s',
   htmlAttrs: {
     lang: 'en'
   },
@@ -10,7 +10,7 @@ export default {
       vmid: 'description',
       name: 'description',
       content:
-        'Vue Storefront is a standalone PWA storefront for your eCommerce, possible to connect with any eCommerce backend (eg. Magento, Prestashop or Shopware) through the API.'
+        'Capitools has made it possible to simplify all your DIY and gardening desires.Professionals, amateurs or just a DIY and DIY fan, we offer a wide choice of tools, machines and accessories.'
     },
     {
       name: 'viewport',
