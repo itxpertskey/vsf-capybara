@@ -99,6 +99,7 @@
               <SfPrice :regular="total.value | price" />
             </template>
           </SfProperty>
+          <APromoCode :allow-promo-code-removal="true" />
           <SfButton
             class="sf-button--full-width btn-secondary a-add-to-cart"
             @click.native="goToCheckout"
@@ -127,6 +128,7 @@ import { getThumbnailForProduct } from '@vue-storefront/core/modules/cart/helper
 import { getProductPrice, getProductPriceFromTotals , getProductUrl } from 'theme/helpers';
 import VueOfflineMixin from 'vue-offline/mixin';
 import onEscapePress from '@vue-storefront/core/mixins/onEscapePress'; 
+import APromoCode from 'theme/components/atoms/a-promo-code';
 
 import {
   SfButton,
@@ -148,7 +150,8 @@ export default {
     SfImage,
     SfHeading,
     SfSidebar,
-    SfCircleIcon
+    SfCircleIcon,
+    APromoCode
   },
   mixins: [VueOfflineMixin, onEscapePress],
   data () {
