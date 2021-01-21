@@ -52,11 +52,33 @@ export default {
   },
   methods: {
     async applyCoupon () {
-      await this.$store.dispatch('cart/applyCoupon', this.promoCode);
+      const couponApplied = await this.$store.dispatch('cart/applyCoupon', this.promoCode);
       this.promoCode = ''
+      console.log(couponApplied);
+      if (!couponApplied) {
+        this.$store.dispatch('notification/spawnNotification', {
+          type: 'danger',
+          message: this.$t('You have entered an incorrect coupon code. Please try again.'),
+          action1: { label: this.$t('OK') }
+        });
+      }
+      if (couponApplied) {
+        this.$store.dispatch('notification/spawnNotification', {
+          type: 'success',
+          message: this.$t('Coupon code applied successfully.'),
+          action1: { label: this.$t('OK') }
+        });
+      }
     },
-    removeCoupon () {
-      this.$store.dispatch('cart/removeCoupon');
+   async removeCoupon () {
+      const couponRemoved = this.$store.dispatch('cart/removeCoupon');
+      if (couponRemoved) {
+        this.$store.dispatch('notification/spawnNotification', {
+          type: 'success',
+          message: this.$t('Coupon removed successfully'),
+          action1: { label: this.$t('OK') }
+        });
+      }
     }
   }
 };
