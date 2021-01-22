@@ -5,7 +5,7 @@
       class="alert"
       :message="alert.message"
       :type="alert.type"
-    />
+    /> 
     <SfAddToCart v-model="qty">
       <template #add-to-cart-btn>
         <AAddToCart
@@ -100,7 +100,7 @@ export default {
       return !!this.qtyValidationError || this.stock.isLoading || !this.isAvailable
     },
     isAvailable () {
-      return !this.isOnline || !!this.stock.max || !this.stock.manageQuantity || !this.isSimpleOrConfigurable
+      return !this.isOnline || !!this.stock.max || !this.stock.manageQuantity || !this.isSimpleOrConfigurable || this.product.stock.backorders
     },
     isSimpleOrConfigurable () {
       return ['simple', 'configurable'].includes(
