@@ -86,7 +86,7 @@ header {
                     max-height: auto;
                     li{
                         padding: 7px 0;
-                        border-bottom: 1px solid var(--_c-gray-accent-lighten);
+                        --select-option-background: var(--c-white);
                         &:hover{
                             a{
                                 color: var(--_c-green-primary-lighten);
