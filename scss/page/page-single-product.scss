@@ -230,7 +230,11 @@
                 &__tab{
                     padding: 0px;
                     padding-top: 20px;
+                    @media screen and (max-width: 1024px){
+                        padding: 0 15px;
+                    } 
                     .description{
+                       
                         p{
                             white-space: break-spaces;
                             font-size: 14px;

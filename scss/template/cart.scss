@@ -66,6 +66,14 @@
             }
         }
     }
+    .sf-sidebar__bottom{
+        .a-promo-code{
+            margin-bottom: 15px;
+            button.promo-code__button{
+                width: 100%;
+            }
+        }
+    }
     .sf-price{
         @media screen and (max-width: 1024px){
             height: auto;
