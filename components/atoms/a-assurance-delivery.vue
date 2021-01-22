@@ -1,6 +1,5 @@
 <template>
-    <div class="d-flex align-center">
-         <SfLink link="/pages/delivery">  
+         <SfLink link="/pages/delivery" class="d-flex align-center">  
             <SfImage
             src="/assets/icons/delivery-icon.png"
             class="image_delivery"
@@ -10,7 +9,6 @@
                 <p>on Order Over £50</p>
             </div>
         </SfLink>
-    </div>
 </template>
 
 <script>

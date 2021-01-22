@@ -1,6 +1,5 @@
 <template>
-    <div class="d-flex align-center">
-         <SfLink link="/pages/payment-info">  
+         <SfLink link="/pages/payment-info" class="d-flex align-center">  
             <SfImage
             src="/assets/icons/payment-icon.png"
             class="image_payment"
@@ -9,7 +8,6 @@
                 <h6>100% Secure Payment</h6>
             </div>
         </SfLink>
-    </div>
 </template>
 
 <script>
