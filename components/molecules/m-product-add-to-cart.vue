@@ -100,7 +100,7 @@ export default {
       return !!this.qtyValidationError || this.stock.isLoading || !this.isAvailable
     },
     isAvailable () {
-      return !this.isOnline || !!this.stock.max || !this.stock.manageQuantity || !this.isSimpleOrConfigurable || this.product.stock.backorders
+      return !this.isOnline || !!this.stock.max || !this.stock.manageQuantity || !this.isSimpleOrConfigurable || this.stock.backorder
     },
     isSimpleOrConfigurable () {
       return ['simple', 'configurable'].includes(

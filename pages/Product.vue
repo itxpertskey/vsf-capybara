@@ -80,7 +80,8 @@ export default {
       stock: {
         isLoading: false,
         max: 0,
-        manageQuantity: true
+        manageQuantity: true,
+        backorder: false
       }
     };
   },
@@ -222,9 +223,10 @@ export default {
         const res = await this.$store.dispatch('stock/check', {
           product: this.getCurrentProduct,
           qty: this.getCurrentProduct.qty
-        });
+        }); 
         this.manageQuantity = res.isManageStock;
         this.stock.max = res.isManageStock ? res.qty : null;
+        this.stock.backorder = res.isbackorder ? true : false;
       } finally {
         this.stock.isLoading = false;
       }
