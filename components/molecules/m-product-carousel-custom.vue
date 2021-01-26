@@ -5,6 +5,7 @@
           <SfProductCard
               :key="product.id"  
               :image="product.image" 
+              :link="product.link"
             >
              <template slot="title">
                 <h3 class="sf-product-card__title">
@@ -40,20 +41,14 @@
          <SfIcon
             icon="arrow_left"
             size="xs"
-            class="sf-header__icon icon-size"
-            :class="{
-              'sf-header__icon--is-active': isLoggedIn
-            }"
+            class="sf-header__icon icon-size sf-header__icon--is-active"  
           />
       </button>
       <button @click="showNext">
         <SfIcon
             icon="arrow_right"
             size="xs"
-            class="sf-header__icon icon-size"
-            :class="{
-              'sf-header__icon--is-active': isLoggedIn
-            }"
+            class="sf-header__icon icon-size sf-header__icon--is-active"
           />
       </button>
       </div>
