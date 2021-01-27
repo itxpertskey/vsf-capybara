@@ -307,11 +307,26 @@
 }
 
 .sf-bottom-navigation{
+    padding-left: 40px;
     .sf-bottom-navigation-item{
         &__label{
             color: var(--_c-green-primary-darken);
         }
-        &:nth-child(3){
+        &:first-child{
+            position: absolute;
+            left: 0;
+            top: 0;
+            padding: 0;
+            width: 35px;
+            background-color: var(--_c-green-primary-lighten);
+            height: 100%;
+            display: flex;
+            align-items: center;
+            .sf-icon{
+                fill: var(--_c-red-secondary-lighten);
+            }
+        }
+        &:nth-child(4){
             .sf-bottom-navigation-item__label{
                 display: none;
             }
