@@ -31,6 +31,7 @@ export default {
   data () {
     return {
       navigationItems: [
+        { icon: 'chevron_left', onClick: this.goToHome },
         { icon: 'home', label: this.$t('Home'), onClick: this.goToHome },
         { icon: 'menu', label: this.$t('Menu'), onClick: this.goToMenu },
         { icon: 'search', label: this.$t('Search'), onClick: this.goToSearch },
