@@ -152,7 +152,6 @@ export default {
       heroImages: 'promoted/getHeadImage',
       heroImagesResponsive: 'promoted/getHeadImageResponsive',
       promotedOffers: 'promoted/getPromotedOffers',
-      newCollection: 'homepage/getEverythingNewCollection',
       dummyInstagramImages: 'instagram/getInstagramImages',      
       blockoneproduct: 'homepage/getBlockOneProducts',
     }),
