@@ -50,6 +50,17 @@
       <SfDivider v-show="reviewsCount" />
       <MReviewList v-show="reviewsCount" :reviews="reviews" :visible=10 />
     </SfTab>
+    <SfTab :title="$t('Product Manual')" v-if="isShowProductManualTab"> 
+      <div class="product_manual" >
+        <template>
+           <img :src="'/assets/images/ownermanual.png'"
+                class="image_owner_manual" />
+          <SfLink :link="productManualPath" target="_blank">
+            View the product manual
+          </SfLink>
+        </template>
+      </div>
+    </SfTab>
     <SfTab :title="$t('Video')" ref="videoTab"  v-if="isShowVideoTab">  
       <div class="video-grid">
         <div class="video-item" v-if="product.youtube_video_code_one">
@@ -75,7 +86,7 @@
 <script>
 import { ModalList } from 'theme/store/ui/modals';
 import { mapState, mapActions } from 'vuex';
-import { SfHeading, SfTabs, SfDivider } from '@storefront-ui/vue';
+import { SfHeading, SfTabs, SfDivider, SfLink } from '@storefront-ui/vue';
 import AProductRating from 'theme/components/atoms/a-product-rating';
 import AProductAttribute from 'theme/components/atoms/a-product-attribute';
 import MReviewList from 'theme/components/molecules/m-review-list'; 
@@ -91,6 +102,7 @@ export default {
     SfTabs,
     AProductRating,
     SfDivider, 
+    SfLink,
     AProductAttribute,
     MReviewList,
     CmsBlock,
@@ -102,6 +114,7 @@ export default {
       productVideoIdOne: '',
       productVideoIdTwo: '',
       productVideoIdThree: '', 
+      productManualPath: '',
       playerVars: {
         autoplay: 1
       }
@@ -134,12 +147,16 @@ export default {
     }, 
     isShowVideoTab(){
       return this.product.youtube_video_code_one != null || this.product.youtube_video_code_two != null || this.product.youtube_video_code_three != null  ? true : false ;
+    },
+    isShowProductManualTab(){
+      return this.product.product_manual.length > 0  ? true : false ;
     }
   },
   mounted () {
     this.productVideoIdOne   = this.product.youtube_video_code_one != null ? this.$youtube.getIdFromUrl(this.product.youtube_video_code_one) : '';
     this.productVideoIdTwo   = this.product.youtube_video_code_two != null? this.$youtube.getIdFromUrl(this.product.youtube_video_code_two) : '';
     this.productVideoIdThree = this.product.youtube_video_code_three != null? this.$youtube.getIdFromUrl(this.product.youtube_video_code_three) : '';
+    this.productManualPath   = this.product.product_manual.length > 0 ? this.product.product_manual[0].pdf_path : '';
   },
   watch: {
     isReviewProductTab (value) {

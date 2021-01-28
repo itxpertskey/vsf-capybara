@@ -11,39 +11,45 @@
       :product="product"
     />
     <div class="product__info">
-    <div class="d-flex align-start">
+      <div class="d-flex align-start">
+        <MProductShortInfo
+          :product="product"
+          :custom-options="productCustomOptions"
+          :reviews="reviews"
+        />
+        <div class="quantity-section">
 
-      <MProductShortInfo
-        :product="product"
-        :custom-options="productCustomOptions"
-        :reviews="reviews"
-      />
-
-      <div class="quantity-section">
-      
-        <MProductOptionsConfigurable
-          v-if="product.type_id =='configurable'"
-          :product="product"
-          :configuration="productConfiguration"
-        />
-        <MProductOptionsGroup
-          v-if="product.type_id =='grouped'"
-          :product-options="product.product_links"
-        />
-        <MProductOptionsBundle
-          v-if="product.bundle_options && product.bundle_options.length > 0"
-          :product="product"
-        />
-        <MProductOptionsCustom
-          v-else-if="product.custom_options && product.custom_options.length > 0"
-          :product="product"
-        />
-      
-        <MProductAddToCart
-          class="product__add-to-cart"
-          :product="product"
-          :stock="productStock"
-        />
+          <MProductOptionsConfigurable
+            v-if="product.type_id =='configurable'"
+            :product="product"
+            :configuration="productConfiguration"
+          />
+          <MProductOptionsGroup
+            v-if="product.type_id =='grouped'"
+            :product-options="product.product_links"
+          />
+          <MProductOptionsBundle
+            v-if="product.bundle_options && product.bundle_options.length > 0"
+            :product="product"
+          />
+          <MProductOptionsCustom
+            v-else-if="product.custom_options && product.custom_options.length > 0"
+            :product="product"
+          />
+          <MProductAddToCart
+            class="product__add-to-cart"
+            :product="product"
+            :stock="productStock"
+          />
+        </div>
+        <div class="product_manual" v-if="isShowProductManualTab"> 
+          <template>
+            <img :src="'/assets/images/ownermanual.png'"
+                  class="image_owner_manual" />
+            <SfLink :link="productManualPath" target="_blank">
+              View the product manual
+            </SfLink>
+          </template>
         </div>
       </div>
     </div>
@@ -61,6 +67,7 @@ import MProductOptionsBundle from 'theme/components/molecules/m-product-options-
 import MProductOptionsCustom from 'theme/components/molecules/m-product-options-custom';
 import MProductOptionsGroup from 'theme/components/molecules/m-product-options-group';
 import { ModalList } from 'theme/store/ui/modals';
+import { SfLink } from '@storefront-ui/vue';
 
 export default {
   components: {
@@ -70,7 +77,13 @@ export default {
     MProductOptionsConfigurable,
     MProductOptionsBundle,
     MProductOptionsCustom,
-    MProductOptionsGroup
+    MProductOptionsGroup,
+    SfLink
+  },
+  data() {
+    return { 
+        productManualPath: '', 
+      }
   },
   props: {
     product: {
@@ -140,7 +153,13 @@ export default {
     },
     sizeOption () {
       return get(this.productConfiguration, 'size', false)
+    },
+    isShowProductManualTab(){
+      return this.product.product_manual.length > 0  ? true : false ;
     }
+  },
+  mounted () {
+     this.productManualPath   = this.product.product_manual.length > 0 ? this.product.product_manual[0].pdf_path : '';
   },
   methods: {
     ...mapActions('ui', {
