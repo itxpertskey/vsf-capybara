@@ -129,12 +129,11 @@ p{
     &:before {
         content: '\2022';
         display: inline-block;
+        vertical-align: middle;
         font-size: 24px;
-        margin-right: 4px;
-        position: absolute;
+        margin-right: 4px; 
         line-height: 14px;
-        left: -12px;
-        top: 0;
+        left: -12px; 
     }
     @media screen and (max-width: 600px) {
         line-height: 1;
