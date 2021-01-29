@@ -41,16 +41,17 @@
             :product="product"
             :stock="productStock"
           />
+          <div class="product_manual" v-if="isShowProductManualTab"> 
+            <template>
+              <img :src="'/assets/images/ownermanual.png'"
+                    class="image_owner_manual" />
+              <SfLink :link="productManualPath" target="_blank">
+                View the product manual
+              </SfLink>
+            </template>
+          </div>
         </div>
-        <div class="product_manual" v-if="isShowProductManualTab"> 
-          <template>
-            <img :src="'/assets/images/ownermanual.png'"
-                  class="image_owner_manual" />
-            <SfLink :link="productManualPath" target="_blank">
-              View the product manual
-            </SfLink>
-          </template>
-        </div>
+ 
       </div>
     </div>
   </div>
@@ -202,14 +203,35 @@ export default {
 }
 
 .quantity-section{
-    min-width: 260px;
-    width: 100%;
-    margin: 0 15px;
-    padding: 15px;
-    border: 1px solid var(--_c-green-primary-lighten);
-    border-radius: 3px;
-    @include for-mobile{
-      width: -webkit-fill-available;
+  .product__add-to-cart{
+      min-width: 260px;
+      width: 100%;
+      margin: 0 8px;
+      margin-bottom: 15px;
+      padding: 15px;
+      border: 1px solid var(--_c-green-primary-lighten);
+      border-radius: 3px;
+      @include for-mobile{
+        width: -webkit-fill-available;
+      }
+    }
+    .product_manual{
+      margin: 0 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 15px;
+      border: 1px solid var(--_c-green-primary-lighten);
+      border-radius: 3px;
+      width: 100%;
+      img{
+        width: 30px;
+        margin-right: 10px;
+      }
+      a{
+        text-decoration: none;
+        font-size: 12px;
+      }
     }
   }
 
