@@ -169,3 +169,22 @@ p{
         }
     }
 }
+
+.product_manual{
+    margin: 0 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 15px;
+    border: 1px solid var(--_c-green-primary-lighten);
+    border-radius: 3px;
+    width: 100%;
+    img{
+      width: 30px;
+      margin-right: 10px;
+    }
+    a{
+      text-decoration: none;
+      font-size: 12px;
+    }
+  }
