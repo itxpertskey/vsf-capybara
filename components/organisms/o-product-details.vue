@@ -156,11 +156,11 @@ export default {
       return get(this.productConfiguration, 'size', false)
     },
     isShowProductManualTab(){
-      return this.product.product_manual.length > 0  ? true : false ;
+      return this.product.product_manual && this.product.product_manual.length > 0  ? true : false ;
     }
   },
   mounted () {
-     this.productManualPath   = this.product.product_manual.length > 0 ? this.product.product_manual[0].pdf_path : '';
+     this.productManualPath   = this.product.product_manual && this.product.product_manual.length > 0 ? this.product.product_manual[0].pdf_path : '';
   },
   methods: {
     ...mapActions('ui', {

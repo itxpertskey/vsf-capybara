@@ -149,14 +149,14 @@ export default {
       return this.product.youtube_video_code_one != null || this.product.youtube_video_code_two != null || this.product.youtube_video_code_three != null  ? true : false ;
     },
     isShowProductManualTab(){
-      return this.product.product_manual.length > 0  ? true : false ;
+      return this.product.product_manual && this.product.product_manual.length > 0  ? true : false ;
     }
   },
   mounted () {
     this.productVideoIdOne   = this.product.youtube_video_code_one != null ? this.$youtube.getIdFromUrl(this.product.youtube_video_code_one) : '';
     this.productVideoIdTwo   = this.product.youtube_video_code_two != null? this.$youtube.getIdFromUrl(this.product.youtube_video_code_two) : '';
     this.productVideoIdThree = this.product.youtube_video_code_three != null? this.$youtube.getIdFromUrl(this.product.youtube_video_code_three) : '';
-    this.productManualPath   = this.product.product_manual.length > 0 ? this.product.product_manual[0].pdf_path : '';
+    this.productManualPath   = this.product.product_manual && this.product.product_manual.length > 0 ? this.product.product_manual[0].pdf_path : '';
   },
   watch: {
     isReviewProductTab (value) {
