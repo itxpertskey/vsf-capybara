@@ -26,7 +26,7 @@
       </AProductRating>
     </div>
     <hr>
-    <div class="product__description desktop-only" v-html="product.description" />
+    <div class="product__description desktop-only" v-html="this.productDescription" />
     <a @click="openDescriptionTab" class="read-more">Read more</a>
     <!-- <SfButton
       v-show="sizeOption"
@@ -63,6 +63,16 @@ export default {
     AGarantie,
     SfButton
   },
+    data() {
+      return { 
+          productDescription:'',
+          imagemediapath:'{{media url="wysiwyg',
+          imagepng:'.png"}}',
+          imagejpg:'.jpg"}}',
+          imagejpeg:'.jpeg"}}',
+          imagegif:'.gif"}}', 
+        }
+   },
   props: {
     product: {
       type: Object,
@@ -81,6 +91,13 @@ export default {
     reviewsCount () {
       return this.reviews.length
     }
+  },
+  mounted () {
+    this.productDescription  = this.product.description.replace(this.imagemediapath, (config.externalCheckout.cmsUrl+"/media/wysiwyg"));   
+    this.productDescription  = this.productDescription.replace(this.imagepng, ".png");   
+    this.productDescription  = this.productDescription.replace(this.imagejpg, ".jpg");   
+    this.productDescription  = this.productDescription.replace(this.imagejpeg, ".jpeg");   
+    this.productDescription  = this.productDescription.replace(this.imagegif, ".gif");   
   },
   methods: {
     openReviewsTab () {

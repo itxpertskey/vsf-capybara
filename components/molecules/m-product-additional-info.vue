@@ -7,9 +7,8 @@
   >
     <SfTab :title="$t('Description')" ref="descriptionTab"> 
       <div class="description" >
-        <p itemprop="description" v-html="product.description"> </p>
+        <p itemprop="description" v-html="this.productDescription"></p>
       </div>
-     <!--  <div itemprop="description" v-html="product.description" /> -->
     </SfTab>
     <SfTab :title="$t('Features')" v-if="product.feature_bullets"> 
       <div class="features" >
@@ -91,6 +90,7 @@ import AProductRating from 'theme/components/atoms/a-product-rating';
 import AProductAttribute from 'theme/components/atoms/a-product-attribute';
 import MReviewList from 'theme/components/molecules/m-review-list'; 
 import CmsBlock from 'theme/components/core/blocks/Cms/Block';
+import config from 'config';
 import Vue from 'vue'
 import VueYoutube from 'vue-youtube'
 Vue.use(VueYoutube)
@@ -115,6 +115,12 @@ export default {
       productVideoIdTwo: '',
       productVideoIdThree: '', 
       productManualPath: '',
+      productDescription:'',
+      imagemediapath:'{{media url="wysiwyg',
+      imagepng:'.png"}}',
+      imagejpg:'.jpg"}}',
+      imagejpeg:'.jpeg"}}',
+      imagegif:'.gif"}}',
       playerVars: {
         autoplay: 1
       }
@@ -157,6 +163,11 @@ export default {
     this.productVideoIdTwo   = this.product.youtube_video_code_two != null? this.$youtube.getIdFromUrl(this.product.youtube_video_code_two) : '';
     this.productVideoIdThree = this.product.youtube_video_code_three != null? this.$youtube.getIdFromUrl(this.product.youtube_video_code_three) : '';
     this.productManualPath   = this.product.product_manual && this.product.product_manual.length > 0 ? this.product.product_manual[0].pdf_path : '';
+    this.productDescription  = this.product.description.replace(this.imagemediapath, (config.externalCheckout.cmsUrl+"/media/wysiwyg"));   
+    this.productDescription  = this.productDescription.replace(this.imagepng, ".png");   
+    this.productDescription  = this.productDescription.replace(this.imagejpg, ".jpg");   
+    this.productDescription  = this.productDescription.replace(this.imagejpeg, ".jpeg");   
+    this.productDescription  = this.productDescription.replace(this.imagegif, ".gif");   
   },
   watch: {
     isReviewProductTab (value) {
