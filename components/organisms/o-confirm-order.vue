@@ -159,7 +159,10 @@
         class="table__row"
       >
         <SfTableData class="table__image">
-          <SfImage :src="getThumbnailForProduct(product)" />
+          <div data-v-d1a2776c="" class="sf-image" data-loaded="true">
+            <img :src="getThumbnailForProduct(product)" @error="$event.target.src=placeholder"/> 
+          </div> 
+         <!-- <SfImage :src="getThumbnailForProduct(product)" /> -->
         </SfTableData>
         <SfTableData class="table__description">
           <div class="product-title">
@@ -169,13 +172,13 @@
             {{ product.sku }}
           </div>
         </SfTableData>
-        <SfTableData
+        <!--  <SfTableData
           v-for="property in ['Color', 'Size']"
           :key="property"
           class="table__data"
         >
           {{ getProductProperty(product, property) }}
-        </SfTableData>
+        </SfTableData> -->
         <SfTableData class="table__data">
           {{ product.qty }}
         </SfTableData>
@@ -258,9 +261,9 @@
     </div>
     <div class="actions align-center">
       <SfButton
-        class="sf-button--full-width actions__button btn-primary"
-        :disabled="$v.orderReview.$invalid || !productsInCart.length"
-        @click="placeOrder"
+        class="sf-button--full-width actions__button"
+        :disabled="!orderReview.terms && productsInCart.length > 0 "
+        @click="placeOrder" 
       >
         {{ $t("Place the order") }}
       </SfButton>
@@ -318,8 +321,8 @@ export default {
     return {
       tableHeaders: [
         this.$t('Description'),
-        this.$t('Colour'),
-        this.$t('Size'),
+        //this.$t('Colour'),
+        //this.$t('Size'),
         this.$t('Quantity'),
         this.$t('Price')
       ],
@@ -333,13 +336,9 @@ export default {
           title: this.$t('Easy shipping'),
           description: this.$t('You’ll receive dispatch confirmation and an arrival date'),
           icon: 'shipping'
-        },
-        {
-          title: this.$t('Changed your mind?'),
-          description: this.$t('Rest assured, we offer free returns within 30 days'),
-          icon: 'return'
         }
-      ]
+      ],
+      placeholder: '/assets/placeholder.jpg'
     };
   },
   validations: {

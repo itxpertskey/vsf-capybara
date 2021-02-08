@@ -1,0 +1,34 @@
+.a-product-rating{
+    .product__rating{
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        .sf-rating{
+            margin-right: 10px;
+            margin-bottom: 5px;
+        }
+        .sf-rating{
+            &__icon{
+              --icon-color: var(--_c-orange-primary);
+              &--negative {
+                    --icon-color: var(--c-gray-variant);
+                }
+            }
+          }
+        .product__count{
+            font-size: 12px;
+            line-height: normal;
+            align-items: flex-start;
+            margin: 0;
+        }
+    }
+}
+
+.sf-rating{
+    &__icon{
+      --icon-color: var(--_c-orange-primary);
+      &--negative {
+            --icon-color: var(--c-gray-variant);
+        }
+    }
+  }

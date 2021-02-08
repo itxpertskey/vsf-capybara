@@ -5,7 +5,7 @@
          <b>Secured payment methods</b>
       </p>
       <div class="payment-types d-flex wrap">
-        <a href="">
+        <a>
           <img :src="'/assets/images/visaDark.png'" class="payment_image_size"/>
         </a>
         <a>
@@ -13,13 +13,10 @@
         </a>
         <a>
           <img :src="'/assets/images/masterCardDark.png'" class="payment_image_size"/>
-        </a>
-        <a>
+        </a> 
+         <a>
           <img :src="'/assets/images/maestroDark.png'" class="payment_image_size"/>
-        </a>
-        <a>
-          <img :src="'/assets/images/paypal.png'" class="payment_image_size"/>
-        </a>
+        </a> 
         <a>
           <img :src="'/assets/images/americanExpressDark.png'" class="payment_image_size"/>
         </a>

@@ -10,6 +10,7 @@
       <SfProductCard 
          :link="product.link"
         :wishlist-icon="false"
+        :image="product.image"
         link-tag="router-link"
       >
           <template #title>
@@ -19,36 +20,46 @@
             <p class="reference">
                 Ref : {{ product.sku }}
             </p>
-            <AProductRating />
+            <div class="a-product-rating" @click="$emit('click')">
+              <div class="product__rating">
+                <SfRating :score="getSingleProductRatingCount(product.id)" :max="product.rating.max" />
+                <span class="product__count">({{ getSingleProductReviewCount(product.id) }}) Customer reviews</span>
+              </div>
+            </div>
              <div class="d-flex align-start justify-between">
                 <SfPrice
                   class="sf-product-card__price"
                   :regular="product.price.regular"
                   :special="product.price.special" 
                 />  
-                <p class="stock" v-if="product.is_in_stock">In stock</p>
-                <p class="out-of-stock" v-else>Out of stock</p> 
+                <!-- <p class="stock" v-if="product.is_in_stock">In stock</p>
+                <p class="out-of-stock" v-else>Out of stock</p>  -->
              </div>
           </template> 
           <template #price>
-            <AAddToCart
+             
+                <SfLink class="sf-button a-add-to-cart sf-button--full-width sf-add-to-cart__button" :link="product.link">
+                  More Info
+                </SfLink>
+           
+         <!--    <AAddToCart
               class="sf-add-to-cart__button"
               :qty="qty"
               :product="product.obj_product"
               :disabled="isProductDisabled(product)"
-            />  
+            />  -->
           </template>
-           <template #image>
+          <template #image>
             <div class="sf-image sf-product-card__image sf-image--has-size" data-loaded="true" style="--_image-width:216;--_image-height:326;">
-              <img width="216" height="326" alt="" style="" :src="product.image" @error="$event.target.src=placeholder"/> 
-            </div>
-           </template>
+              <img width="216" height="326" alt="product image" style="" :src="product.image" @error="$event.target.src=placeholder"/> 
+            </div> 
+          </template> 
        </SfProductCard>
     </SfCarouselItem>
   </SfCarousel>
 </template>
 <script>
-import { SfProductCard, SfCarousel ,   SfRating, SfPrice, } from '@storefront-ui/vue';
+import { SfProductCard , SfCarousel , SfRating , SfPrice , SfButton , SfLink } from '@storefront-ui/vue';
 import { htmlDecode } from '@vue-storefront/core/filters';
 import config from 'config';
 import { currentStoreView } from '@vue-storefront/core/lib/multistore';
@@ -57,6 +68,7 @@ import { productThumbnailPath } from '@vue-storefront/core/helpers';
 import { prepareCategoryProduct } from 'theme/helpers';
 import AProductRating from 'theme/components/atoms/a-product-rating';
 import AAddToCart from 'theme/components/atoms/a-add-to-cart';
+import get from 'lodash-es/get'
 
 export default {
   name: 'MProductCarousel',
@@ -65,6 +77,8 @@ export default {
     SfProductCard,
     SfRating,
     SfPrice,
+    SfButton,
+    SfLink,
     AProductRating,
     AAddToCart
   },
@@ -95,6 +109,28 @@ export default {
   methods: {  
     isProductDisabled ( product ) {
       return product.is_in_stock ? false : true ;
+    },
+    getSingleProductReviewCount(product_Id){
+       const reviewCountCollection = get(this.$store.state.review, 'review_count_collection',[])
+       if( reviewCountCollection != null ){
+         for (let iLoop = 0; iLoop < reviewCountCollection.length; iLoop++) {
+           if( reviewCountCollection[iLoop].product_Id == product_Id ){
+                return +reviewCountCollection[iLoop].review_Count;  
+              } 
+            }
+       } 
+       return 0;
+    },
+     getSingleProductRatingCount(product_Id){
+       const reviewCountCollection = get(this.$store.state.review, 'review_count_collection',[])
+       if( reviewCountCollection != null ){
+         for (let iLoop = 0; iLoop < reviewCountCollection.length; iLoop++) {
+           if( reviewCountCollection[iLoop].product_Id == product_Id ){
+                return +reviewCountCollection[iLoop].rating_Count;  
+              } 
+            }
+       } 
+       return 0;
     },
   }
 };

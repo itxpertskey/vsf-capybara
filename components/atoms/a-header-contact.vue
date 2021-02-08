@@ -1,7 +1,7 @@
 <template>
   <div class="rectangle_contact">
     <a href="tel:+08082808029" class="text_upper">
-      0808 280 8029
+      020 3026 8712
     </a>
     <div class="text_lower">
       Call Weekdays Until 5 PM

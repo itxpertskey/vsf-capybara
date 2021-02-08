@@ -93,7 +93,29 @@
         "
         @blur="$v.payment.zipCode.$touch()"
       />
-      <SfSelect
+       <div  v-for="country in countries" :key="country.code">
+        <div v-if="country.code === defaultCountryCode">
+          <SfSelect
+            v-model="payment.country"
+            class="form__element form__element--half form__element--half-even form__select sf-select--underlined"
+            name="countries"
+            :label="$t('Country')"
+            :required="true"
+            :valid="!$v.payment.country.$error"
+            :error-message="$t('Field is required')"
+            @change="changeCountry"
+            style="width: 15rem;"
+          >
+            <SfSelectOption
+              :key="country.code"
+              :value="country.code"
+            >
+              {{ country.name }}
+            </SfSelectOption>
+          </SfSelect>
+        </div>
+      </div>  
+     <!-- <SfSelect
         v-model="payment.country"
         class="form__element form__element--half form__element--half-even form__select sf-select--underlined"
         name="countries"
@@ -110,7 +132,7 @@
         >
           {{ country.name }}
         </SfSelectOption>
-      </SfSelect>
+      </SfSelect> -->
       <SfInput
         v-model.trim="payment.phoneNumber"
         class="form__element"
@@ -154,34 +176,6 @@
       </template>
     </div>
 
-    <template>
-       <div class="row fs16 mb35">
-    <div class="col-xs-12 h4">
-         
-        <div class="col-xs-12">
-            <h4>{{ $t('Payment method') }}</h4>
-        </div>
-         <div class="col-xs-12">
-            <payment-stripe/>
-        </div>
-       <!-- <div class="col-md-6 mb15">
-            <label class="radioStyled"> {{ getPaymentMethod().title }}
-            <input type="radio" value="" checked disabled name="chosen-payment-method">
-            <span class="checkmark" />
-            </label> 
-        </div>  -->
-        </div>
-    </div>
-    
-    <!-- The stripe method integration 
-    <div class="row mb35 stripe-container" v-if="paymentDetails.paymentMethod === 'stripe_payments'">
-        <div class="col-xs-12">
-            <payment-stripe/>
-        </div>
-    </div> -->
-   
-    </template>
-    
     <SfHeading
       :title="$t('Payment method')"
       :level="3"
@@ -189,8 +183,9 @@
     />
     <div class="form">
       <div class="form__radio-group">
-        <SfRadio
+        <SfRadio 
           v-for="method in paymentMethods"
+          v-show="method.code === 'stripe_payments'"
           :key="method.code"
           v-model="payment.paymentMethod"
           :label="method.title ? method.title : method.name"
@@ -199,6 +194,10 @@
           class="form__radio payment-method"
           @input="changePaymentMethod"
         />
+        <div class="col-xs-12" v-if="paymentDetails.paymentMethod === 'stripe_payments'">
+          <payment-stripe/>
+        </div>
+   
       </div>
       <div class="form__action">
         <SfButton
@@ -316,7 +315,12 @@ export default {
   },
   mounted () {
     createSmoothscroll(document.documentElement.scrollTop || document.body.scrollTop, 0);
-  }
+  },
+  data() {
+    return {
+      defaultCountryCode: "GB"
+    };
+  },
 };
 </script>
 <style lang="scss" scoped>

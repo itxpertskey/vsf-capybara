@@ -14,22 +14,22 @@
       :product-custom-options="getCurrentCustomOptions"
       :product-attributes="getCustomAttributes"
       :product-stock="stock"
-    />
+    />  
     <div class="product__bottom">
       <MAssurance />
       <MProductAdditionalInfo
         :product="getCurrentProduct"
         :reviews="reviews"
-        :attributes="productAttributes"
-      />
+        :attributes="getCustomAttributes"
+      /> 
       <lazy-hydrate when-idle>
-        <SfSection :title-heading="$t('We found other products you might like')">
+        <SfSection :title-heading="$t('OUR TOP DEALS')" v-if="upsellProductCount">
           <MRelatedProducts type="upsell" />
         </SfSection>
       </lazy-hydrate>
 
       <lazy-hydrate when-idle>
-        <SfSection :title-heading="$t('Similar Products')">
+        <SfSection :title-heading="$t('RELATED PRODUCTS')" v-if="relatedProductCount">
           <MRelatedProducts type="related" />
         </SfSection>
       </lazy-hydrate>
@@ -80,7 +80,8 @@ export default {
       stock: {
         isLoading: false,
         max: 0,
-        manageQuantity: true
+        manageQuantity: true,
+        backorder: false
       }
     };
   },
@@ -118,7 +119,7 @@ export default {
     },
     getCustomAttributes () {
       return Object.values(this.attributesByCode)
-        .filter(a => {
+        .filter(a => { 
           return (
             a.is_visible &&
             a.is_user_defined &&
@@ -143,7 +144,7 @@ export default {
         author: review.nickname,
         date: review.created_at,
         message: `${review.title}: ${review.detail}`,
-        rating: 1 // TODO: remove hardcode
+        rating: ( review.ratings[0].value+review.ratings[1].value+review.ratings[2].value+review.ratings[3].value+review.ratings[4].value ) / 5 // TODO: remove hardcode
       }))
     },
 
@@ -152,6 +153,18 @@ export default {
     },
     sizeOption () {
       return get(this.productConfiguration, 'size', false)
+    }, 
+    upsellProductCount () {
+      var productArray = this.getCurrentProduct.product_links.filter(function(ele){
+        return (ele.link_type == "upsell")
+      });
+      return productArray.length; 
+    },
+    relatedProductCount () {
+      var productArray = this.getCurrentProduct.product_links.filter(function(ele){
+        return (ele.link_type == "related")
+      });
+      return productArray.length; 
     }
   },
   watch: {
@@ -210,9 +223,10 @@ export default {
         const res = await this.$store.dispatch('stock/check', {
           product: this.getCurrentProduct,
           qty: this.getCurrentProduct.qty
-        });
+        }); 
         this.manageQuantity = res.isManageStock;
         this.stock.max = res.isManageStock ? res.qty : null;
+        this.stock.backorder = res.isbackorder ? true : false;
       } finally {
         this.stock.isLoading = false;
       }

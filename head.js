@@ -1,6 +1,6 @@
 export default {
-  title: 'VSF Capybara',
-  titleTemplate: '%s - Vue Storefront',
+  title: 'Capitools UK',
+  titleTemplate: '%s - Capitools',
   htmlAttrs: {
     lang: 'en'
   },
@@ -10,7 +10,7 @@ export default {
       vmid: 'description',
       name: 'description',
       content:
-        'Vue Storefront is a standalone PWA storefront for your eCommerce, possible to connect with any eCommerce backend (eg. Magento, Prestashop or Shopware) through the API.'
+        'Capitools has made it possible to simplify all your DIY and gardening desires.Professionals, amateurs or just a DIY and DIY fan, we offer a wide choice of tools, machines and accessories.'
     },
     {
       name: 'viewport',
@@ -80,6 +80,10 @@ export default {
       integrity:
         'sha384-I1iiXcTSM6j2xczpDckV+qhhbqiip6FyD6R5CpuqNaWXvyDUvXN5ZhIiyLQ7uuTh',
       crossorigin: 'anonymous'
+    },
+    {
+      src: 'https://widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js',
+      async: true
     }
   ]
 };

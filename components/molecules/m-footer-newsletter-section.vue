@@ -60,7 +60,14 @@ export default {
     subscribeExtend () {
       this.$v.$touch();
       if (this.$v.$invalid) return
-      this.subscribe(this.onSuccesfulSubmission)
+      this.$store.dispatch('newsletter/status',this.email).then((res) => {  
+        if(res){
+            this.OnAlreadySubscribed();
+        }
+        else{
+          this.subscribe(this.onSuccesfulSubmission)
+        } 
+      }) 
     },
     onSuccesfulSubmission (isSubscribed) {
       if (isSubscribed) {
@@ -70,6 +77,13 @@ export default {
           action1: { label: i18n.t('OK') }
         })
       } 
+    },
+    OnAlreadySubscribed () {
+      this.$store.dispatch('notification/spawnNotification', {
+        type: 'danger',
+        message: i18n.t('You are already subscribed'),
+        action1: { label: i18n.t('OK') }
+      });
     }
   }, 
    validations: {

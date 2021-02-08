@@ -1,7 +1,7 @@
-<template>
+<template> 
   <SfProperty
     class="a-product-attribute"
-    :name="label | htmlDecode"
+    :name="getAttributeName()"
     :value="value | htmlDecode"
   />
 </template>
@@ -15,6 +15,16 @@ export default {
   mixins: [ProductAttribute],
   components: {
     SfProperty
+  }, 
+  methods: {
+    getAttributeName(){
+      let attributename = this.label;
+      if(attributename.charAt(0) === '+')
+      {
+        attributename = attributename.substring(1);
+      }
+      return attributename;
+    }
   }
 };
 </script>

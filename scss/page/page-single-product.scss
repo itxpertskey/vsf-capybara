@@ -47,6 +47,10 @@
                         line-height: normal;
                     }
                 }
+                .read-more{
+                    font-size: 14px;
+                    color: var(--_c-green-primary-lighten);
+                }
                 .garantie-product{
                     .sf-image{
                         > img{
@@ -58,7 +62,7 @@
                 }
             }
             .quantity-section{
-                margin: 0 7px;
+               
                 p{
                     font-size: 13px;
                 }
@@ -92,6 +96,36 @@
                         }
                     }
                 }
+                .m-product-add-to-cart{
+                    .sf-add-to-cart{
+                        .md-feature-bullets{
+                            .delivery-bullets{
+                                margin: 0;
+                                padding-left: 20px;
+                                font-size: 12px;
+                            }
+                        }
+                        .sf-price{
+                            margin-bottom: 10px;
+                            font-family: 'Poppins-Bold';
+                            .sf-price__regular,
+                            .sf-price__special{
+                                font-family: 'Poppins-Bold';
+                            }
+                        }
+                        .quantity{
+                            label{
+                                margin-right: 10px;
+                            }
+                            .a-product-quantity{
+                                border: 1px solid var(--_c-gray-accent);
+                            }
+                        }
+                    }
+                    .sf-alert{
+                        margin-bottom: 10px;
+                    }
+                }
                 .a-add-to-cart{
                     max-width: 100%;
                     color: var(--c-white);
@@ -115,18 +149,159 @@
                         margin: 0;
                     }
                 }
+                .m-product-options-custom{
+                    margin-bottom: 15px;
+                    .single-option{
+                        .sf-heading{
+                            .sf-heading__title{
+                                font-size: 14px;
+                                font-family: 'Poppins-Bold';
+                            }
+                        }
+                        .sf-radio{
+                            .sf-radio__container{
+                                padding: 10px;
+                                .sf-radio__label{
+                                    font-size: 13px;
+                                  }
+                                  .sf-radio__checkmark{
+                                    width: 20px;
+                                    height: 20px;
+                                  }
+                            }
+                            &.sf-radio--is-active{
+                                .sf-radio__container{
+                                   padding: 10px;
+                                   .sf-radio__checkmark{
+                                        width: 20px;
+                                        height: 20px;
+                                        border: 6px solid var(--_c-green-primary-lighten);
+                                    }                                  
+                                 }                                 
+                             }
+                        }
+                        .sf-select{
+                            --select-border-width: 0;
+                            .sf-product-option__label{
+                                font-size: 12px;
+                            }
+                        }
+                    }
+                }
             }
-        }   
+        } 
+        &__bottom{
+            .sf-section{
+                margin: 0;
+            }
+            .m-product-carousel{
+                @media screen and (max-width: 767px){ 
+                    .sf-carousel__controls{
+                        display: flex;
+                        z-index: 1;
+                    }
+                }
+                .glide{
+                    .glide__track{
+                        .glide__slides{
+                            .glide__slide {
+                                @media screen and (max-width: 480px){ 
+                                    width: 75vw!important;
+                                    .sf-product-card{ 
+                                        max-width: 100%;
+                                        width: 100%;
+                                    }
+                                    &.glide__slide--active{
+                                        width: 75vw!important;
+                                        
+                                    }  
+                                }    
+                            }
+                        }
+                    }
+                }
+            }
+        }  
     }
     .product__bottom{
+        margin-bottom: 130px;
         .sf-tabs{
             &__content{
                 &__tab{
                     padding: 0px;
+                    padding-top: 20px;
+                    @media screen and (max-width: 1024px){
+                        padding: 0 15px;
+                    } 
                     .description{
+                       
                         p{
                             white-space: break-spaces;
+                            font-size: 14px;
                         }
+                    }
+                    .m-review-list{
+                        .product__review{
+                            .sf-review__author{
+                                margin: 18px 0;
+                                margin-bottom: 0;
+                                font-size: 16px;
+                                font-weight: bold;
+                                color: var(--_c-green-primary);
+                            }
+                            .sf-review__message{
+                                font-size: 14px;
+                            }
+                            .sf-review__rating{
+                                .sf-rating{
+                                    .sf-rating__icon{
+                                        --icon-color: var(--_c-orange-primary);
+                                    }
+                                }
+                            }
+                            .sf-review__read-more{
+                                margin: 0;
+                                margin-bottom: 20px;
+                            }
+                        }
+                    }
+                    .specs{
+                        border: 1px solid  var(--c-light);
+                        .a-product-attribute{
+                            margin: 0;
+                            border-bottom: 1px solid  var(--c-light);
+                            @media screen and (max-width: 600px){
+                                flex-direction: column;
+                            }
+                            .sf-property__name{
+                                width: 380px;
+                                background-color: var(--_c-green-primary);
+                                color: var(--c-white);
+                                margin: 0;
+                                @media screen and (max-width: 600px){
+                                    width: auto;
+                                }
+                            }
+                            span{
+                                display: block;
+                                width: 100%;
+                                padding: 10px;
+                                @media screen and (max-width: 600px){
+                                    width: auto;
+                                }
+                            }
+                            &:nth-child(odd){
+                                .sf-property__value{
+                                    background-color: var(--c-light);
+                                }
+                            }
+                        } 
+                    } 
+                    .product_manual{
+                        padding: 0;
+                        margin: 0;
+                        border: 0;
+                        justify-content: flex-start;
                     }
                 }
             }

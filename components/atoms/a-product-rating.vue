@@ -4,7 +4,7 @@
       <SfRating :score="score" :max="max" />
       <a v-if="!!reviews" href="#" class="product__count">
         ({{ reviews.length }})
-      <span>Customer reviews</span>
+      <span> Customer reviews</span>
       </a>
     </div>
     <SfButton class="sf-button--text">
@@ -51,11 +51,20 @@ export default {
     margin: var(--spacer-xs) 0 0 0;
   }
   &__count {
-    color: var(--c-text);
+    color: var(--_c-green-primary-lighten);
     text-decoration: none;
     margin: 0 10px;
     font-size: 13px;
     padding: 0;
+    &:hover{
+      text-decoration: underline;
+    }
+  }
+}
+
+.sf-rating{
+  &__icon{
+    color: var(--_c-orange-primary);
   }
 }
 </style>

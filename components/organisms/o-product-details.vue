@@ -8,42 +8,50 @@
       :offline-image="offlineImage"
       :gallery="gallery"
       :configuration="productConfiguration"
+      :product="product"
     />
     <div class="product__info">
-    <div class="d-flex align-start">
+      <div class="d-flex align-start">
+        <MProductShortInfo
+          :product="product"
+          :custom-options="productCustomOptions"
+          :reviews="reviews"
+        />
+        <div class="quantity-section">
 
-      <MProductShortInfo
-        :product="product"
-        :custom-options="productCustomOptions"
-        :reviews="reviews"
-      />
-
-      <div class="quantity-section">
-      
-        <MProductOptionsConfigurable
-          v-if="product.type_id =='configurable'"
-          :product="product"
-          :configuration="productConfiguration"
-        />
-        <MProductOptionsGroup
-          v-if="product.type_id =='grouped'"
-          :product-options="product.product_links"
-        />
-        <MProductOptionsBundle
-          v-if="product.bundle_options && product.bundle_options.length > 0"
-          :product="product"
-        />
-        <MProductOptionsCustom
-          v-else-if="product.custom_options && product.custom_options.length > 0"
-          :product="product"
-        />
-      
-        <MProductAddToCart
-          class="product__add-to-cart"
-          :product="product"
-          :stock="productStock"
-        />
+          <MProductOptionsConfigurable
+            v-if="product.type_id =='configurable'"
+            :product="product"
+            :configuration="productConfiguration"
+          />
+          <MProductOptionsGroup
+            v-if="product.type_id =='grouped'"
+            :product-options="product.product_links"
+          />
+          <MProductOptionsBundle
+            v-if="product.bundle_options && product.bundle_options.length > 0"
+            :product="product"
+          />
+          <MProductOptionsCustom
+            v-else-if="product.custom_options && product.custom_options.length > 0"
+            :product="product"
+          />
+          <MProductAddToCart
+            class="product__add-to-cart"
+            :product="product"
+            :stock="productStock"
+          />
+          <div class="product_manual" v-if="isShowProductManualTab"> 
+            <template>
+              <img :src="'/assets/images/ownermanual.png'"
+                    class="image_owner_manual" />
+              <SfLink :link="productManualPath" target="_blank">
+                View the product manual
+              </SfLink>
+            </template>
+          </div>
         </div>
+ 
       </div>
     </div>
   </div>
@@ -60,6 +68,7 @@ import MProductOptionsBundle from 'theme/components/molecules/m-product-options-
 import MProductOptionsCustom from 'theme/components/molecules/m-product-options-custom';
 import MProductOptionsGroup from 'theme/components/molecules/m-product-options-group';
 import { ModalList } from 'theme/store/ui/modals';
+import { SfLink } from '@storefront-ui/vue';
 
 export default {
   components: {
@@ -69,7 +78,13 @@ export default {
     MProductOptionsConfigurable,
     MProductOptionsBundle,
     MProductOptionsCustom,
-    MProductOptionsGroup
+    MProductOptionsGroup,
+    SfLink
+  },
+  data() {
+    return { 
+        productManualPath: '', 
+      }
   },
   props: {
     product: {
@@ -131,7 +146,7 @@ export default {
         author: review.nickname,
         date: review.created_at,
         message: `${review.title}: ${review.detail}`,
-        rating: 1 // TODO: remove hardcode
+        rating: ( review.ratings[0].value+review.ratings[1].value+review.ratings[2].value+review.ratings[3].value+review.ratings[4].value ) / 5 // TODO: remove hardcode
       }))
     },
     availability () {
@@ -139,7 +154,13 @@ export default {
     },
     sizeOption () {
       return get(this.productConfiguration, 'size', false)
+    },
+    isShowProductManualTab(){
+      return this.product.product_manual && this.product.product_manual.length > 0  ? true : false ;
     }
+  },
+  mounted () {
+     this.productManualPath   = this.product.product_manual && this.product.product_manual.length > 0 ? this.product.product_manual[0].pdf_path : '';
   },
   methods: {
     ...mapActions('ui', {
@@ -182,15 +203,19 @@ export default {
 }
 
 .quantity-section{
-    min-width: 260px;
-    width: 100%;
-    margin: 0 15px;
-    padding: 15px;
-    border: 1px solid var(--_c-green-primary-lighten);
-    border-radius: 3px;
-    @include for-mobile{
-      width: -webkit-fill-available;
+  .product__add-to-cart{
+      min-width: 260px;
+      width: 100%;
+      margin: 0 8px;
+      margin-bottom: 15px;
+      padding: 15px;
+      border: 1px solid var(--_c-green-primary-lighten);
+      border-radius: 3px;
+      @include for-mobile{
+        width: -webkit-fill-available;
+      }
     }
+    
   }
 
 .section {

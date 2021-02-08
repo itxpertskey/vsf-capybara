@@ -73,7 +73,7 @@
                   </div>  
                 -->
                 <div class="navbar__sort d-flex"> 
-                  <p><b>Tri:</b></p>
+                  <p><b>Sorting:</b></p>
                   <SfButton class="sf-button--text" @click="OrderProducthHightoLow">High to Low</SfButton>
                   <SfButton class="sf-button--text" @click="OrderProducthLowtoHigh">Low to High</SfButton>
                 </div>
@@ -128,13 +128,17 @@
                 class="products__product-card">
                 <template #title>
                   <h3 class="sf-product-card__title">
-                      {{ product.title }}
+                      {{ product.title }} 
                   </h3>
                   <p class="reference">
                      Ref : {{ product.sku }}
                   </p> 
-                  
-                  <AProductRating />
+                  <div class="a-product-rating" @click="$emit('click')">
+                    <div class="product__rating">
+                      <SfRating :score="getSingleProductRatingCount(product.id)" :max="product.rating.max" />
+                      <span class="product__count">({{ getSingleProductReviewCount(product.id) }}) Customer reviews</span>
+                    </div>
+                  </div>
                   <div class="d-flex align-start justify-between">
                       <SfPrice
                         class="sf-product-card__price"
@@ -152,7 +156,7 @@
                     :product="product.obj_product"
                     :disabled="isProductDisabled(product)"
                   />  
-                  </template>
+                  </template> 
                   <template #image>
                       <div class="sf-image sf-product-card__image sf-image--has-size" data-loaded="true" style="--_image-width:216;--_image-height:326;">
                         <img width="216" height="326" alt="" style="" :src="product.image" @error="$event.target.src=placeholder"/> 
@@ -185,7 +189,7 @@
                   >
                   <template #image>
                       <div class="sf-image sf-product-card__image sf-image--has-size" data-loaded="true" style="--_image-width:216;--_image-height:326;">
-                        <img width="216" height="326" alt="" style="" :src="product.image" @error="$event.target.src=placeholder"/> 
+                        <img width="216" height="326" alt="product image" style="" :src="product.image" @error="$event.target.src=placeholder"/> 
                       </div>
                   </template>
                   <template #title>
@@ -195,10 +199,14 @@
                     <p class="reference">
                       Ref : {{ product.sku }}
                     </p> 
-                    
-                    <AProductRating />
-                     <div class="description" style="white-space: break-spaces">
-                      <p itemprop="description" v-html="product.description"> </p>
+                     <div class="a-product-rating" @click="$emit('click')">
+                      <div class="product__rating">
+                        <SfRating :score="getSingleProductRatingCount(product.id)" :max="product.rating.max" />
+                        <span class="product__count">({{ getSingleProductReviewCount(product.id) }}) Customer reviews</span>
+                      </div>
+                     </div> 
+                     <div class="features" v-if="product.feature_bullets">
+                      <p itemprop="features" v-html="product.feature_bullets"> </p>
                     </div> 
                   </template> 
                  <template #price>
@@ -297,6 +305,9 @@ import {
   productThumbnailPath,
   isServer
 } from '@vue-storefront/core/helpers';
+import { ReviewModule } from '@vue-storefront/core/modules/review';
+import { registerModule } from '@vue-storefront/core/lib/modules';
+import get from 'lodash-es/get'
 import i18n from '@vue-storefront/i18n';
 import onBottomScroll from '@vue-storefront/core/mixins/onBottomScroll';
 import { htmlDecode } from '@vue-storefront/core/filters';
@@ -330,6 +341,7 @@ import {
   SfProductCard,
   SfProductCardHorizontal,
   SfPrice,
+  SfRating
 } from '@storefront-ui/vue';
 
 const THEME_PAGE_SIZE = 12;
@@ -386,6 +398,7 @@ export default {
     SfPrice,
     AAddToCart,
     AProductRating,
+    SfRating
   },
   props: 
   {
@@ -431,29 +444,32 @@ export default {
        getCurrentProduct: 'product/getCurrentProduct',
     }), 
     getParentCategoryName(){ 
-      const categoryUrl = this.getCurrentCategory.url_path;      
-      if( categoryUrl.includes("gardening/")){
-        return "Gardening";
-      } 
+      const categoryUrl = this.getCurrentCategory.url_path;  
+      if(categoryUrl != null){
 
-      if( categoryUrl.includes("gardening-hand-tools")){
-        return "Hand Tools";
-      } 
+        if( categoryUrl.includes("gardening/")){
+          return "Gardening";
+        } 
 
-      if( categoryUrl.includes("power-tools")){
-        return "Power Tools";
-      } 
+        if( categoryUrl.includes("gardening-hand-tools")){
+          return "Hand Tools";
+        } 
 
-      if( categoryUrl.includes("generators")){
-        return "Generators";
-      } 
-      
-      if( categoryUrl.includes("workshop")){
-        return "Workshop";
-      } 
-      
-      if( categoryUrl.includes("brands")){
-        return "Brands";
+        if( categoryUrl.includes("power-tools")){
+          return "Power Tools";
+        } 
+
+        if( categoryUrl.includes("generators")){
+          return "Generators";
+        } 
+        
+        if( categoryUrl.includes("workshop")){
+          return "Workshop";
+        } 
+        
+        if( categoryUrl.includes("brands")){
+          return "Brands";
+        } 
       } 
       return "Gardening";
     },
@@ -611,6 +627,9 @@ export default {
       });
     }
   },
+  beforeCreate () {
+    registerModule(ReviewModule);
+  },
   mounted () {
     this.unsubscribeFromStoreAction = this.$store.subscribeAction(action => {
       if (action.type === 'category-next/loadAvailableFiltersFrom') {
@@ -629,6 +648,28 @@ export default {
   methods: { 
     getBrowserWidth () {
       return (this.browserWidth = window.innerWidth);
+    },
+    getSingleProductReviewCount(product_Id){
+       const reviewCountCollection = get(this.$store.state.review, 'review_count_collection',[])
+       if( reviewCountCollection != null ){
+         for (let iLoop = 0; iLoop < reviewCountCollection.length; iLoop++) {
+           if( reviewCountCollection[iLoop].product_Id == product_Id ){
+                return +reviewCountCollection[iLoop].review_Count;  
+              } 
+            }
+       } 
+       return 0;
+    },
+     getSingleProductRatingCount(product_Id){
+       const reviewCountCollection = get(this.$store.state.review, 'review_count_collection',[])
+       if( reviewCountCollection != null ){
+         for (let iLoop = 0; iLoop < reviewCountCollection.length; iLoop++) {
+           if( reviewCountCollection[iLoop].product_Id == product_Id ){
+                 return +reviewCountCollection[iLoop].rating_Count;  
+              } 
+            }
+       } 
+       return 0;
     },
     isProductDisabled ( product ) {
       return product.is_in_stock ? false : true ;

@@ -26,14 +26,15 @@
       </AProductRating>
     </div>
     <hr>
-    <div class="product__description desktop-only" v-html="product.description" />
-    <SfButton
+    <div class="product__description desktop-only" v-html="this.productDescription" />
+    <a @click="openDescriptionTab" class="read-more">Read more</a>
+    <!-- <SfButton
       v-show="sizeOption"
       @click.native="openSizeGuide"
       class="sf-button--text desktop-only product__guide"
     >
       {{ $t('Size guide') }}
-    </SfButton>
+    </SfButton> -->
     <div v-if="showOrHideBlocksBasedOnBFTG(product)">
       <AMesAdvantage />
     </div>
@@ -59,8 +60,19 @@ export default {
     AProductRating,
     AProductPrice,
     AMesAdvantage,
-    AGarantie
+    AGarantie,
+    SfButton
   },
+    data() {
+      return { 
+          productDescription:'',
+          imagemediapath:'{{media url="wysiwyg',
+          imagepng:'.png"}}',
+          imagejpg:'.jpg"}}',
+          imagejpeg:'.jpeg"}}',
+          imagegif:'.gif"}}', 
+        }
+   },
   props: {
     product: {
       type: Object,
@@ -80,10 +92,30 @@ export default {
       return this.reviews.length
     }
   },
+  mounted () {
+    this.productDescription  = this.product.description.replace(this.imagemediapath, (config.externalCheckout.cmsUrl+"/media/wysiwyg"));   
+    this.productDescription  = this.productDescription.replace(this.imagepng, ".png");   
+    this.productDescription  = this.productDescription.replace(this.imagejpg, ".jpg");   
+    this.productDescription  = this.productDescription.replace(this.imagejpeg, ".jpeg");   
+    this.productDescription  = this.productDescription.replace(this.imagegif, ".gif");   
+  },
   methods: {
     openReviewsTab () {
+      this.$store.commit('ui/setVideoProductTab', false);
+      this.$store.commit('ui/setDescriptionProductTab', false);
       this.$store.commit('ui/setReviewProductTab', true);
+       
+      const reviewsEl = document.querySelector('#m-product-additional-info');
+      if (!reviewsEl) return;
 
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      createSmoothscroll(scrollTop, scrollTop + reviewsEl.getBoundingClientRect().top);
+    },
+    openDescriptionTab() {
+      this.$store.commit('ui/setReviewProductTab', false);
+      this.$store.commit('ui/setVideoProductTab', false);
+      this.$store.commit('ui/setDescriptionProductTab', true);
+      
       const reviewsEl = document.querySelector('#m-product-additional-info');
       if (!reviewsEl) return;
 

@@ -1,17 +1,25 @@
 .header-menu{
     position: relative;
+    z-index: 8;
+    background-color: #fff;
+    display: flex;
+    align-items: stretch;
     .sf-mega-menu{
         box-shadow: 0px 100vh 0 100vh rgba(0, 0, 0, 0.7);
     }
     .sf-header-navigation-item{
-        width: 200px;
+        width: auto;
+        margin: 0 1vw;
         flex: inherit;
+        @media screen and (max-width: 1200px){
+            margin: 0 0.4vw;
+        }
         a{
             border: 0;
             padding: 12px;
-            display: block;
+            display: flex;
             margin: 0 auto;
-            font-family: 'Poppins-Regular';
+            font-family: 'Poppins-Bold';
             text-transform: none;
             font-weight: normal;
             &:hover{
@@ -93,6 +101,11 @@
                     padding: 0;
                     margin: 0;
                 }
+            }
+        }
+        &:not(:first-child){
+            .m-menu{
+                display: none!important;
             }
         }
     }

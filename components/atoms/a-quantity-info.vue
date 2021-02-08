@@ -1,21 +1,28 @@
 <template>
-    <div class="quantity-info">
+   <!-- <div class="quantity-info">
         <div class="d-flex align-center"> 
              <SfImage
                 src="/assets/icons/livraisonGratuite-Icon.png"
-                :alt="$t(defaultTitle)"
+                alt="Livraison Gratuite"
                 class="icon"
                 />
-             <p>Free delivery</p>
+             <p>{{product.type_id}}</p>
         </div>
         <div class="d-flex align-center"> 
              <SfImage
                 src="/assets/icons/calendar-icon.png"
-                :alt="$t(defaultTitle)"
+                alt="Calendar"
                 class="icon"
                 />
              <p>Delivery within 10 days</p>
         </div>
+    </div> -->
+    <div class="md-feature-bullets">
+        <ul class="delivery-bullets">
+            <li v-if="product.bullet_one">{{product.bullet_one}}</li>
+            <li v-if="product.bullet_two">{{product.bullet_two}}</li>
+            <li v-if="product.bullet_three">{{product.bullet_three}}</li>
+        </ul>
     </div>
 </template>
 
@@ -24,6 +31,13 @@
     export default {
         name: 'AQuantityInfo',
         components: { SfImage },
+        props: {
+            product: {
+                type: Object,
+                required: true,
+                default: () => ({})
+            }
+        }
     };
 </script>
 

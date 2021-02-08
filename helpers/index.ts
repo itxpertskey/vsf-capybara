@@ -5,9 +5,11 @@ import { productThumbnailPath, getThumbnailPath, isServer } from '@vue-storefron
 import { htmlDecode } from '@vue-storefront/core/filters'
 import { formatProductLink } from '@vue-storefront/core/modules/url/helpers'
 import { getProductPrice } from './price'
+import store from '@vue-storefront/core/store'
 
 export * from './price'
 
+let categoryCollection: string[] = ['gardening','power-tools','garden-hand-tools','generators','pressure-washers','water-pumps','workshop','parts-and-accessories'];
 export function getPathForStaticPage (path: string) {
   const { storeCode } = currentStoreView()
   const isStoreCodeEquals = storeCode === config.defaultStoreCode
@@ -48,12 +50,13 @@ export function getTopLevelCategories (categoryList) {
     ? config.entities.category.categoriesDynamicPrefetchLevel
     : 2
 
-  return categoryList.filter(
-    category => category.level === categoryLevel && category.is_active && category.children_count > 0
+  return categoryList.filter( 
+    category => category.level === categoryLevel && category.is_active && categoryCollection.includes(category.url_path)
   )
 }
 
 export function prepareCategoryProduct (product) {
+  (store as any).dispatch('review/reviewCount', { productId: product.id });
   return {
     id: product.id, 
     title: htmlDecode(product.name),
@@ -71,7 +74,8 @@ export function prepareCategoryProduct (product) {
     obj_product:product,
     sku:product.sku,
     is_in_stock:product.stock.is_in_stock,
-    description:product.description
+    description:product.description,
+    feature_bullets:product.feature_bullets,
   }
 }
 

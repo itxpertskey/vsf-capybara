@@ -34,16 +34,12 @@ header{
                 } 
                 .o-search-panel{
                     top: 96px;
-                    @media screen and (max-width: 767px){
-                        height: calc(100vh - 97px);
-                        .container{
-                            height: 100%;
-                        }
-                    }
+                    height: calc(100vh - 155px);
                     .no-results{
                         height: auto;
                         line-height: normal;
                         padding: 10px 0;
+                        padding-top: 30px;
                     }
                     .container{
                         padding: 0 20px;
@@ -101,12 +97,18 @@ header{
             }
         }  
         + .o-search-panel{
-            top: 110px;
+            top: 135px;
             z-index: 2;
             box-shadow: 0px 100vh 0 100vh rgba(0, 0, 0, 0.7);
         }
     }
     .o-search-panel{
+        .no-results{
+            //background-image: url('/assets/loading.gif');
+            background-size: 24px;
+            background-repeat: no-repeat;
+            background-position: 50% 7px;
+        }
         .products{
             &__listing{
                 .sf-product-card{

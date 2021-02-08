@@ -1,8 +1,8 @@
 <template>
   <div class="garantie-product d-flex">
             <SfImage
-            src="/assets/images/garantie-icon.png"
-            :alt="garantie-icon"
+            src="/assets/images/big-garantie-2years-icon.png"
+            alt="garantie-icon"
             class="sf-heade"
              />
         <div class="description">
@@ -26,7 +26,7 @@ export default {
   },
   data() {
     return {
-      link: "#",
+      link: "https://www.capitools.com/fr/content/40-ma-garantie-swap",
     };
   },
 };
@@ -39,6 +39,7 @@ export default {
         border: 1px solid var(--_c-gray-accent);
         border-radius: 5px;
         width: fit-content;
+        margin: 15px 0;
         @include for-mobile{
           display: inline-flex;
           width: 43vw;

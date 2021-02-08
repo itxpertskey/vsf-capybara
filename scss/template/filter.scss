@@ -1,4 +1,4 @@
-.navbar__filters-button{
+.sf-button.navbar__filters-button{
     text-decoration: none;
     font-size: 13px!important;
     background-color: var(--_c-green-primary-lighten);
@@ -18,8 +18,12 @@
 }
 
 .navbar__main{
+    justify-content: space-between;
     @media screen and (max-width: 600px){
         flex-direction: column;
+        .navbar__counter{
+            margin: 15px 0;
+        }
     }
     .navbar__sort{
         p{

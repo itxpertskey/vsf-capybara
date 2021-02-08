@@ -4,6 +4,7 @@
         <div class="d-flex footer-overlay justify-between">
           <MFooterNewsletterSection />
           <AFooterPaymentSection />
+          <AFooterSocialMediaSection />
         </div>
         <SfFooter :column="4" :multiple="true">
           <SfFooterColumn
@@ -14,61 +15,46 @@
             <SfList>
                <SfListItem v-for="link in linkGroup.children" :key="link.name">
                 <template v-if="link.name === 'Logout'">
-                  <router-link v-if="link.link" v-on:click.native="changeActivePage" :to="localizedRoute(link.link)" exact>
-                    <SfMenuItem class="sf-footer__menu-item" :label="$t(link.name)" />
-                  </router-link>
-                  <SfMenuItem
+                  <div v-if="isLoggedIn"> 
+                     <router-link v-if="link.link" v-on:click.native="changeActivePage" :to="localizedRoute(link.link)" exact>
+                        <SfMenuItem class="sf-footer__menu-item" :label="$t(link.name)" />
+                     </router-link>
+                    <SfMenuItem
+                        v-else-if="link.clickHandler"
+                        class="sf-footer__menu-item"
+                        :label="$t(link.name)"
+                        @click="link.clickHandler"
+                    />
+                  </div>
+                  <div v-else> 
+                     <router-link v-on:click.native="goToAccount" :to="{ path: $route.currentRoute}" exact>
+                       <SfMenuItem class="sf-footer__menu-item" label="Login" />
+                    </router-link> 
+                  </div>
+                </template>
+                <template v-else>
+                  <div v-if="link.name === 'My orders' || link.name === 'My adresses' || link.name === 'My personal information'">
+                    <router-link v-on:click.native="goToAccount" :to="{ path: $route.currentRoute}" exact>
+                       <SfMenuItem class="sf-footer__menu-item" :label="$t(link.name)" />
+                    </router-link>
+                  </div>
+                  <div v-else>
+                    <router-link v-if="link.link" :to="localizedRoute(link.link)" exact>
+                     <SfMenuItem class="sf-footer__menu-item" :label="$t(link.name)" />
+                    </router-link>
+                    <SfMenuItem
                       v-else-if="link.clickHandler"
                       class="sf-footer__menu-item"
                       :label="$t(link.name)"
                       @click="link.clickHandler"
-                  />
-                </template>
-                <template v-else>
-                  <router-link v-if="link.link" :to="localizedRoute(link.link)" exact>
-                    <SfMenuItem class="sf-footer__menu-item" :label="$t(link.name)" />
-                  </router-link>
-                  <SfMenuItem
-                    v-else-if="link.clickHandler"
-                    class="sf-footer__menu-item"
-                    :label="$t(link.name)"
-                    @click="link.clickHandler"
-                  />
+                    />
+                  </div>
                 </template>
               </SfListItem>
             </SfList>
           </SfFooterColumn>
         </SfFooter>
-        <div class="social-links d-flex align-center">
-          <h4>
-            Lets stay in touch!
-          </h4>
-          <div class="item d-flex">
-           <a href="https://www.facebook.com/CapitoolsUK/" target="_blank">
-              <img :src="'/assets/images/facebook_icon.png'" class="icon_facebook"/>
-            </a>
-            <a href="https://www.youtube.com/channel/UCi6MvXNjvI_Oy02TzXThOMg" target="_blank">
-              <img :src="'/assets/images/youtube_icon.png'" class="icon_youtube"/>
-            </a>
-            <a href="https://www.instagram.com/capitoolsuk/" target="_blank">
-              <img :src="'/assets/images/insta_icon.png'" class="icon_instagram"/>
-            </a>
-          </div>
-        </div>
-
-        <!--  <div class="blog d-flex align-center">
-          <label>New</label>
-          <img :src="'/assets/images/footer_blog.png'" class="image_blog_size">
-          <p class="footer_blog_text">
-            Ut nonumes noluisse nec, in impetus integre sea. Nec no elitr ignota aeterno. Qui etiam assentior complectitur no. in impetus integre sea. Nec no elitr ignota aeterno.
-          </p>
-          <SfButton
-            class="see-more btn-primary"
-            :link="seeMoreLink"
-          >
-            See more
-          </SfButton>
-        </div> -->
+      
     </div>
     <ABackToTop bottom="20px" right="20px" visibleoffset="200" class="desktop-only" />
     <div class="copyrights text-center">
@@ -89,6 +75,8 @@ import config from 'config';
 import { currentStoreView } from '@vue-storefront/core/lib/multistore';
 import get from 'lodash-es/get';
 import AFooterPaymentSection from 'theme/components/atoms/a-footer-payment-section';
+import AFooterSocialMediaSection from 'theme/components/atoms/a-footer-social-media-section';
+import AFooterTrustpilotSection from 'theme/components/atoms/a-footer-trustpilot-section';
 import MFooterNewsletterSection from 'theme/components/molecules/m-footer-newsletter-section';
 
 export default {
@@ -100,6 +88,8 @@ export default {
     SfMenuItem,
     SfButton,
     AFooterPaymentSection,
+    AFooterSocialMediaSection,
+    AFooterTrustpilotSection,
     MFooterNewsletterSection
   },
   data () {
@@ -124,53 +114,49 @@ export default {
     links () {
       return {
         about: {
-          name: 'About us',
+          name: 'About Us',
           children: [
-            { name: 'Who We Are?', link: '/pages/about-us' },
-            { name: 'Our products', link: '/pages/our-products.html' },
-            { name: 'Our expertise', link: '/pages/our-expertise' },
-            { name: 'Our partner brands', link: '/pages/capitools-brands-and-partners' },
-            { name: 'Our guarantee', link: '/pages/our-guarantee' },
-            { name: 'Promotions', link: '/pages/deals-promos' },
-            { name: 'New products', link: '/pages/new-products' },
-            { name: 'Contact us', link: '/pages/contact-capitools' },
-            { name: 'sitemap', link: '/pages/sitemap' },
-            { name: 'We are hiring', link: '/pages/we-are-hiring' }
+            { name: 'Who We Are', link: '/pages/about-us' },
+            { name: 'Our Brands & Partners', link: '/pages/capitools-brands-and-partners' },
+            { name: 'Deals & Promos', link: '/pages/deals-promos' },
+            { name: 'Our Best Sellers', link: '/pages/our-best-sellers' },
+            { name: 'New product', link: '/pages/new-products' },
+            { name: 'Contact Us', link: '/pages/contact-capitools' },
+            { name: 'Our Community', link: '/pages/our-community' }
           ]
-        },
+        }, 
         product: {
           name: 'The Products',
           children: [
-            { name: 'Secure payment', link: '/pages/secure-payment' },
-            { name: 'Terms of Sales', link: '/pages/terms-of-sales' },
-            { name: 'Legal Notice', link: '/pages/legal-information' },
-            { name: 'Payment methods', link: '/pages/payment-info' },
-            { name: 'Satisfied or refunded', link: '/pages/satisfied-or-refunded' },
-            { name: 'Partners', link: '/pages/partners' },
-            { name: 'Cyber ​​Security', link: '/pages/cyber-security' },
-            { name: 'Cookie notice information', link: '/pages/cookie-notice-information' }
+            { name: 'Water Pumps', link: '/water-pumps' },
+            { name: 'Generators', link: '/generators' },
+            { name: 'DIY Tools', link: '/power-tools' },
+            { name: 'Garden Hand Tools', link: '/garden-hand-tools' }, 
+            { name: 'Accessories', link: '/pages/accessories' },
+            { name: 'Spare Parts', link: '/pages/spare-parts' },
+            { name: 'Protective Equipment', link: '/pages/protective-equipment' }
           ]
-        },
-        help: {
+        }, 
+        help: { 
           name: 'Help & Services',
           children: [
-            { name: 'My orders', link: '/pages/my-capitools-order' },
-            { name: 'My assets', link: '/pages/my-assets' },
-            { name: 'My adresses', link: '/pages/my-address' },
-            { name: 'My personal information', link: '/pages/my-personal-details' },
-            { name: 'My coupons', link: '/pages/my-coupons' },
-            { name: 'Logout', link: '/' }
+            { name: 'FAQ (Frequently Asked Questions)', link: '/pages/f-a-q-frequently-asked-questions' },
+            { name: 'Service & Customer Care', link: '/pages/capitools-service-and-customer-care' },
+            { name: 'Mantenance & Troubleshooting', link: '/pages/maintenance-and-troubleshooting' },
+            { name: 'Payment', link: '/pages/payment-info' },
+            { name: 'Delivery', link: '/pages/delivery' },
+            { name: 'Return & Refund Policy', link: '/pages/returns-and-refunds-policy' },
+            { name: 'Swap Europe Network Warranty', link: '/pages/swap-europe-network-warranty' }
           ]
-        },
+        }, 
         legal: {
           name: 'Legal Information',
           children: [
-            { name: 'FAQ', link: '/pages/f-a-q-frequently-asked-questions' },
-            { name: 'After-sales service & customer relations', link: '/pages/after-sales-service-and-customer-relations' },
-            { name: 'Payment in 3 installments', link: '/pages/payment-in-three-installments' },
-            { name: 'Product delivery', link: '/pages/delivery' },
-            { name: 'Return Policy', link: '/pages/return-policy' },
-            { name: 'The SWAP Europe Guarantee network', link: '/pages/swap-europe-network-warranty' }
+            { name: 'Terms & Conditions', link: '/pages/capitools-uk-terms-conditions' },
+            { name: 'Cookie notice information', link: '/pages/privacy' },
+            { name: 'Data Protection', link: '/pages/data-protection' },
+            { name: 'Cyber Security', link: '/pages/cyber-security' },
+            { name: 'Legal Information', link: '/pages/legal-information' }
           ]
         }
       };
@@ -180,6 +166,13 @@ export default {
     changeActivePage () {
         this.logout();
         return;
+    },
+    goToAccount () {
+      if (this.isLoggedIn) {
+        this.$router.push(this.localizedRoute('/my-account'))
+      } else {
+        this.openModal({ name: ModalList.Auth, payload: 'login' })
+      }
     },
     async logout () {
       await this.$store.dispatch('user/logout', {});

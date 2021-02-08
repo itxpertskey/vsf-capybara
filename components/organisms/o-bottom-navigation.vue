@@ -2,6 +2,12 @@
   <div class="o-bottom-navigation">
     <SfBottomNavigation>
       <SfBottomNavigationItem
+      icon="chevron_left" 
+      iconActive="chevron_left"
+      v-if="!isHomePage()"
+      @click="gotoBack()"
+    />
+      <SfBottomNavigationItem
         v-for="item in navigationItems"
         :key="item.icon"
         :icon="item.icon"
@@ -16,11 +22,7 @@
 
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex';
-import { ModalList } from 'theme/store/ui/modals'
-import AHomeIcon from 'theme/components/atoms/a-home-icon';
-import ASearchIcon from 'theme/components/atoms/a-search-icon';
-import AAccountIcon from 'theme/components/atoms/a-account-icon';
-import AMicrocartIcon from 'theme/components/atoms/a-microcart-icon';
+import { ModalList } from 'theme/store/ui/modals' 
 import { SfBottomNavigation } from '@storefront-ui/vue';
 
 export default {
@@ -29,8 +31,8 @@ export default {
     SfBottomNavigation
   },
   data () {
-    return {
-      navigationItems: [
+    return { 
+      navigationItems: [ 
         { icon: 'home', label: this.$t('Home'), onClick: this.goToHome },
         { icon: 'menu', label: this.$t('Menu'), onClick: this.goToMenu },
         { icon: 'search', label: this.$t('Search'), onClick: this.goToSearch },
@@ -65,7 +67,7 @@ export default {
         }
       }
     }
-  },
+  }, 
   methods: {
     ...mapActions({
       openModal: 'ui/openModal',
@@ -98,6 +100,16 @@ export default {
     },
     goToCart () {
       this.openMicrocart();
+    },
+    isHomePage(){
+       if(this.$route.path == "/" || this.$route.path == "/home" ) {
+          return true
+        } else {
+          return false
+        }
+    },
+    gotoBack(){
+      return this.$router.back();
     }
   }
 }
@@ -107,7 +119,7 @@ export default {
 
 .o-bottom-navigation {
   position: relative;
-  z-index: 1;
+  z-index: 9;
   @include for-desktop() {
     display: none;
   }

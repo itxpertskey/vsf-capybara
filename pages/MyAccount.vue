@@ -13,22 +13,26 @@
       class="my-account"
       @click:change="changeActivePage"
     >
-      <SfContentCategory :title="$t('Personal Details')">
         <SfContentPage :title="$t('My profile')">
-          <OMyAccountProfile />
+            <OMyAccountProfile />
         </SfContentPage>
-       <SfContentPage :title="$t('Shipping details')">
+        <SfContentPage :title="$t('Shipping details')">
           <OMyAccountShippingDetails />
         </SfContentPage>
-        <SfContentPage :title="$t('Log out')" />
-       <!--  <SfContentPage :title="$t('Loyalty Card')">
+        <SfContentPage :title="$t('My Orders')">
+          <OMyAccountOrdersHistory />
+        </SfContentPage>
+      </SfContentPages>
+     <!-- <SfContentPage :title="$t('Log out')" />
+       <SfContentCategory :title="$t('Personal Details')">
+        <SfContentPage :title="$t('Loyalty Card')">
           <OMyAccountPlaceholder :title="$t('Loyalty Card')" />
         </SfContentPage>
         <SfContentPage :title="$t('My newsletter')">
           <OMyAccountPlaceholder :title="$t('My newsletter')" />
-        </SfContentPage> -->
+        </SfContentPage>  
       </SfContentCategory>
-      <!-- <SfContentCategory :title="$t('Order details')">
+       <SfContentCategory :title="$t('Order details')">
         <SfContentPage :title="$t('Order history')">
           <OMyAccountOrdersHistory />
         </SfContentPage>
@@ -36,7 +40,6 @@
           <OMyAccountPlaceholder :title="$t('My reviews')" />
         </SfContentPage>
       </SfContentCategory> -->
-    </SfContentPages>
   </div>
 </template>
 

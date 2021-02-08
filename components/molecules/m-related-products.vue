@@ -1,12 +1,17 @@
 <template>
-  <m-product-carousel
-    v-if="getCurrentRelatedProducts.length"
-    :products="getCurrentRelatedProducts"
-  />
+   <div class="product-slider">
+     <div class="slider-content"> 
+        <m-product-carousel-custom
+          v-if="getCurrentRelatedProducts.length"
+          :products="getCurrentRelatedProducts"
+        />
+      </div>
+    </div>
 </template>
 
 <script>
 import MProductCarousel from 'theme/components/molecules/m-product-carousel';
+import MProductCarouselCustom from 'theme/components/molecules/m-product-carousel-custom';
 import { mapGetters } from 'vuex';
 import { prepareRelatedQuery } from '@vue-storefront/core/modules/catalog/queries/related';
 import config from 'config';
@@ -14,7 +19,8 @@ import config from 'config';
 export default {
   name: 'MRelatedProducts',
   components: {
-    MProductCarousel
+    MProductCarousel,
+    MProductCarouselCustom
   },
   props: {
     type: {

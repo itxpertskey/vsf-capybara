@@ -10,7 +10,19 @@ export const homepageStore = {
     block_three_products: []
   },
   actions: {
-    async fetchNewCollection({ commit, dispatch }) {
+    async blockOneProducts({ commit, dispatch }) {
+      const response = await dispatch('product/findProducts', {
+         query: prepareQuery({ filters: { 
+           key: "category_ids",
+            value: { 'in': [4374, 4395, 4396, 4397, 4412, 4401, 4402, 4404, 4405, 4406, 4407, 4411, 4408, 4409, 4410, 4413, 4414, 4415, 4416, 4417, 4418, 4419, 4420, 4421, 4436, 4651, 4665, 4666, 4660, 4661]
+            } } }),
+        size: 8,
+        sort: 'created_at:desc'
+      }, { root: true })
+
+      commit('SET_BLOCKONEPRODUCTS', response.items)
+    }
+   /* async fetchNewCollection({ commit, dispatch }) {
       const newProductsQuery = prepareQuery({ queryConfig: 'newProducts' })
 
       const newProductsResult = await dispatch('product/list', {
@@ -34,18 +46,6 @@ export const homepageStore = {
 
       commit('SET_BESTSELLERS', response.items)
     },
-    async blockOneProducts({ commit, dispatch }) {
-      const response = await dispatch('product/findProducts', {
-        // query: prepareQuery({ filters: { 
-        //   key: "category_ids",
-        //    value: { 'in': [4374, 4395, 4396, 4397, 4412, 4401, 4402, 4404, 4405, 4406, 4407, 4411, 4408, 4409, 4410, 4413, 4414, 4415, 4416, 4417, 4418, 4419, 4420, 4421, 4436, 4651, 4665, 4666, 4660, 4661]
-        //    } } }),
-        size: 8,
-        sort: 'created_at:desc'
-      }, { root: true })
-
-      commit('SET_BLOCKONEPRODUCTS', response.items)
-    },
     async blockTwoProducts({ commit, dispatch }) {
       const response = await dispatch('product/findProducts', {
         query: prepareQuery({ filters: { key: "manufacturer", value: { 'eq': "63" } } }),
@@ -63,40 +63,40 @@ export const homepageStore = {
       }, { root: true })
 
       commit('SET_BLOCKTHREEPRODUCTS', response.items)
-    }
+    }*/
   },
   mutations: {
-    SET_NEW_COLLECTION(state, products) {
+    SET_BLOCKONEPRODUCTS(state, products) {
+      state.block_one_products = products
+    }
+   /* SET_NEW_COLLECTION(state, products) {
       state.new_collection = products || []
     },
     SET_BESTSELLERS(state, bestsellers) {
       state.bestsellers = bestsellers
-    },
-    SET_BLOCKONEPRODUCTS(state, products) {
-      state.block_one_products = products
-    },
+    }, 
     SET_BLOCKTWOPRODUCTS(state, products) {
       state.block_two_products = products
     },
     SET_BLOCKTHREEPRODUCTS(state, products) {
       state.block_three_products = products
-    }
+    }*/
   },
   getters: {
-    getEverythingNewCollection(state) {
+    getBlockOneProducts(state) {
+      return state.block_one_products
+    }
+   /* getEverythingNewCollection(state) {
       return state.new_collection
     },
     getBestsellers(state) {
       return state.bestsellers
-    },
-    getBlockOneProducts(state) {
-      return state.block_one_products
     },
     getBlockTwoProducts(state) {
       return state.block_two_products
     },
     getBlockThreeProducts(state) {
       return state.block_three_products
-    }
+    }*/
   }
 }
