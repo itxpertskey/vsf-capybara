@@ -1,5 +1,5 @@
 export default {
-  title: 'VSF Capybara',
+  title: 'Capitools UK',
   titleTemplate: '%s - Capitools',
   htmlAttrs: {
     lang: 'en'
