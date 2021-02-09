@@ -16,7 +16,7 @@
       :product-stock="stock"
     />  
     <div class="product__bottom">
-      <MAssurance />
+      <MAssurance /> 
       <MProductAdditionalInfo
         :product="getCurrentProduct"
         :reviews="reviews"
@@ -144,10 +144,9 @@ export default {
         author: review.nickname,
         date: review.created_at,
         message: `${review.title}: ${review.detail}`,
-        rating: ( review.ratings[0].value+review.ratings[1].value+review.ratings[2].value+review.ratings[3].value+review.ratings[4].value ) / 5 // TODO: remove hardcode
+        rating: ( review.ratings[0].value+review.ratings[1].value+review.ratings[2].value+review.ratings[3].value ) / 4 // TODO: remove hardcode
       }))
     },
-
     availability () {
       return this.product.stock && this.product.stock.is_in_stock ? 'InStock' : 'OutOfStock'
     },
@@ -155,15 +154,21 @@ export default {
       return get(this.productConfiguration, 'size', false)
     }, 
     upsellProductCount () {
-      var productArray = this.getCurrentProduct.product_links.filter(function(ele){
-        return (ele.link_type == "upsell")
-      });
+      if(!this.product.product_links){
+        return 0;
+      }
+      var productArray = this.product.product_links.filter(function(ele){
+            return (ele.link_type == "upsell")
+          });
       return productArray.length; 
     },
     relatedProductCount () {
-      var productArray = this.getCurrentProduct.product_links.filter(function(ele){
-        return (ele.link_type == "related")
-      });
+      if(!this.product.product_links){
+        return 0;
+      }
+      var productArray = this.product.product_links.filter(function(ele){
+          return (ele.link_type == "related")
+        });
       return productArray.length; 
     }
   },
@@ -200,7 +205,7 @@ export default {
       this.$store.dispatch('review/list', { productId: this.getOriginalProduct.id }),
       this.$store.dispatch('instagram/updateInstagramImages')
     ])
-  },
+  }, 
   beforeRouteEnter (to, from, next) {
     if (isServer) {
       next();
