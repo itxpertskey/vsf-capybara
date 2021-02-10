@@ -6,31 +6,39 @@
       rewindDuration: 3000
     }"
   >
-    <SfCarouselItem v-for="(product, i) in carouselProducts" :key="i">
+    <SfCarouselItem v-for="(product, i) in carouselProducts" :key="i" itemscope itemtype="https://schema.org/Product">
       <SfProductCard 
          :link="product.link"
         :wishlist-icon="false"
         :image="product.image"
-        link-tag="router-link"
+        link-tag="router-link" itemprop="image" 
       >
+
           <template #title>
-            <h3 class="sf-product-card__title">
+            <meta itemprop="image" :content="product.image">
+            <meta itemprop="name" :content="product.title">
+            <meta itemprop="priceCurrency" :content="$store.state.storeView.i18n.currencyCode">
+            <meta itemprop="price" :content="product.price.regular">
+            <meta itemprop="availability" :content="availability(product)">
+            <meta itemprop="url" :content="product.link">
+            <meta itemprop="ratingValue" :content="getSingleProductRatingCount(product.id)">
+            <h3 itemprop="name" class="sf-product-card__title">
                 {{ product.title }}
             </h3>
-            <p class="reference">
+            <p itemprop="sku" class="reference">
                 Ref : {{ product.sku }}
             </p>
-            <div class="a-product-rating" @click="$emit('click')">
+            <div class="a-product-rating" @click="$emit('click')" itemprop="reviewRating" itemscope itemtype="https://schema.org/Rating">
               <div class="product__rating">
                 <SfRating :score="getSingleProductRatingCount(product.id)" :max="product.rating.max" />
-                <span class="product__count">({{ getSingleProductReviewCount(product.id) }}) Customer reviews</span>
+                <span class="product__count" itemprop="ratingValue">({{ getSingleProductReviewCount(product.id) }}) Customer reviews</span>
               </div>
             </div>
-             <div class="d-flex align-start justify-between">
-                <SfPrice
+             <div class="d-flex align-start justify-between" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+                <SfPrice itemprop="price"
                   class="sf-product-card__price"
                   :regular="product.price.regular"
-                  :special="product.price.special" 
+                  :special="product.price.special"  
                 />  
                 <!-- <p class="stock" v-if="product.is_in_stock">In stock</p>
                 <p class="out-of-stock" v-else>Out of stock</p>  -->
@@ -109,6 +117,9 @@ export default {
   methods: {  
     isProductDisabled ( product ) {
       return product.is_in_stock ? false : true ;
+    },
+        availability (product) {
+      return product.is_in_stock ? 'InStock' : 'OutOfStock'
     },
     getSingleProductReviewCount(product_Id){
        const reviewCountCollection = get(this.$store.state.review, 'review_count_collection',[])
