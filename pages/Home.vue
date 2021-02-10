@@ -7,6 +7,12 @@
         rewindDuration: 2000
       }"
     >
+     <router-link to="gardening/chainsaws/new-premium-range-from-feider-machines-home-pro-petrol-chainsaws">
+        <SfHeroItem
+            class="sf-hero-item--position-bg-top-left sf-hero-item--align-right"
+            image="/assets/banner/png/banner-03.png"
+         />
+      </router-link>
       <SfHeroItem
         v-for="(hero, i) in heroes"
         :key="i"
@@ -21,6 +27,12 @@
         rewindDuration: 2000
       }"
     >
+     <router-link to="gardening/chainsaws/new-premium-range-from-feider-machines-home-pro-petrol-chainsaws">
+        <SfHeroItem
+            class="sf-hero-item--position-bg-top-left sf-hero-item--align-right"
+            image="/assets/banner/png/banner-03-responsive.png"
+         />
+      </router-link>
       <SfHeroItem
         v-for="(hero, i) in heroesResponsive"
         :key="i"
