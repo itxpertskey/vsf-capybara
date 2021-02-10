@@ -23,7 +23,7 @@
             <meta itemprop="url" :content="product.link">
             <meta itemprop="ratingValue" :content="getSingleProductRatingCount(product.id)">
             <h3 itemprop="name" class="sf-product-card__title">
-                {{ product.title }}
+                 {{ product.title }}
             </h3>
             <p itemprop="sku" class="reference">
                 Ref : {{ product.sku }}
@@ -59,7 +59,7 @@
           </template>
           <template #image>
             <div class="sf-image sf-product-card__image sf-image--has-size" data-loaded="true" style="--_image-width:216;--_image-height:326;">
-              <img width="216" height="326" alt="product image" style="" :src="product.image" @error="$event.target.src=placeholder"/> 
+              <img width="216" height="326" alt="product image" style="" :src="getImagePath(product)" @error="$event.target.src=placeholder"/> 
             </div> 
           </template> 
        </SfProductCard>
@@ -143,6 +143,19 @@ export default {
        } 
        return 0;
     },
+    getImagePath(product){
+     const resizeIndex = product.image.indexOf('resize');
+      if(resizeIndex > 0 ){
+        const imagepath = product.image;
+        if(imagepath.charAt(product.image.indexOf('resize') + 6) == "/"){
+          return product.image;
+        }
+        else{
+          return [imagepath.slice(0, resizeIndex+6), "/", imagepath.slice(resizeIndex+6)].join('');
+        }
+      }
+      return product.image;
+    }
   }
 };
 </script>
