@@ -125,8 +125,15 @@
                 @click:is-added-to-cart="alert('@click:is-added-to-cart')"
                 @click:wishlist="alert('@click:wishlist')"
                 @click:reviews="alert('@click:reviews')"
-                class="products__product-card">
+                class="products__product-card" itemscope itemtype="https://schema.org/Product">
                 <template #title>
+                    <meta itemprop="image" :content="product.image">
+                    <meta itemprop="name" :content="product.title">
+                    <meta itemprop="priceCurrency" :content="$store.state.storeView.i18n.currencyCode">
+                    <meta itemprop="price" :content="product.price.regular">
+                    <meta itemprop="availability" :content="availability(product)">
+                    <meta itemprop="url" :content="product.link">
+                    <meta itemprop="ratingValue" :content="getSingleProductRatingCount(product.id)">
                   <h3 class="sf-product-card__title">
                       {{ product.title }} 
                   </h3>
@@ -172,7 +179,7 @@
               name="products__slide"
               tag="div"
               class="products-list"
-              v-if="isShowList"
+              v-if="isShowList" itemscope itemtype="https://schema.org/Product"
             >
                 <SfProductCardHorizontal
                      v-for="product in products"
@@ -187,6 +194,13 @@
                     :max-rating="maxRating"
                     :reviews-count="reviewsCount" 
                   >
+                   <meta itemprop="image" :content="product.image">
+                    <meta itemprop="name" :content="product.title">
+                    <meta itemprop="priceCurrency" :content="$store.state.storeView.i18n.currencyCode">
+                    <meta itemprop="price" :content="product.price.regular">
+                    <meta itemprop="availability" :content="availability(product)">
+                    <meta itemprop="url" :content="product.link">
+                    <meta itemprop="ratingValue" :content="getSingleProductRatingCount(product.id)">
                   <template #image>
                       <div class="sf-image sf-product-card__image sf-image--has-size" data-loaded="true" style="--_image-width:216;--_image-height:326;">
                         <img width="216" height="326" alt="product image" style="" :src="product.image" @error="$event.target.src=placeholder"/> 
@@ -648,6 +662,9 @@ export default {
   methods: { 
     getBrowserWidth () {
       return (this.browserWidth = window.innerWidth);
+    },
+       availability (product) {
+      return product.is_in_stock ? 'InStock' : 'OutOfStock'
     },
     getSingleProductReviewCount(product_Id){
        const reviewCountCollection = get(this.$store.state.review, 'review_count_collection',[])
