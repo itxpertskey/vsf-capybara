@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="cms-content">
     <section id="mkpSection">
       <div class="mkpHeader">
         <img src="https://services.swap-europe.com/images/marketplaces_head.png" alt="SWAP Services"/>
