@@ -45,9 +45,7 @@
     <div class="product-slider">
       <div class="container">    
         <div class="slider-content">  
-          <lazy-hydrate :trigger-hydration="!loading">
-            <m-product-carousel :products="blockoneproduct" />
-          </lazy-hydrate>
+          <m-product-carousel :products="blockoneproduct" />
         </div> 
       </div>
     </div> 
@@ -57,8 +55,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex';
-import LazyHydrate from 'vue-lazy-hydration';
+import { mapState, mapGetters } from 'vuex'; 
 import { Logger } from '@vue-storefront/core/lib/logger';
 import { isServer, onlineHelper } from '@vue-storefront/core/helpers'; 
 import { checkWebpSupport } from 'theme/helpers'
@@ -73,8 +70,7 @@ import AAboutUs from 'theme/components/atoms/a-about-us';
 
 export default {
   name: 'Home',
-  components: {
-    LazyHydrate,
+  components: { 
     SfHero, 
     MProductCarousel,
     AAboutUs,
