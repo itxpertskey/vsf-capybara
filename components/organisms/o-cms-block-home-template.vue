@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="cms-content">
     <section id="homeGrid">
       <div>
         <a href="/generators">
