@@ -40,75 +40,23 @@
         :class="hero.className"
       />
     </SfHero>
-    <MAssurance />
-   <!-- <MNosSpecialities /> -->
-    <cms-block :identifier="'home-template'" />
-  <!--  <MPromoProductBlock />-->
-    
+    <MAssurance /> 
+    <OCmsBlockHomeTemplate /> 
     <div class="product-slider">
       <div class="container">    
         <div class="slider-content">  
           <lazy-hydrate :trigger-hydration="!loading">
             <m-product-carousel :products="blockoneproduct" />
           </lazy-hydrate>
-       </div> 
+        </div> 
       </div>
-    </div>
-
-   <!-- <div class="product-slider">
-      <div class="container">
-        <div class="d-flex slider-content">
-          <SfImage
-            src="assets/images/jardin.jpg"
-            class="slider-banner"
-          />
-          <lazy-hydrate :trigger-hydration="!loading">
-            <m-product-carousel :products="blockoneproduct" />
-          </lazy-hydrate>
-        </div>
-      </div>
-    </div>
-
-    <MCodePromotionBlock /> 
-
-    <div class="product-slider">
-      <div class="container">
-        <div class="d-flex slider-content">
-          <SfImage
-            src="assets/images/hyundai-groupe-electrogene-inverter.jpg"
-            class="slider-banner"
-          />
-          <lazy-hydrate :trigger-hydration="!loading">
-            <m-product-carousel :products="blockoneproduct" />
-          </lazy-hydrate>
-        </div>
-      </div>
-    </div>
-
-    <MSupportBlock />
-    <div class="product-slider">
-      <div class="container">
-        <div class="d-flex slider-content">
-          <SfImage
-            src="assets/images/outillage.jpg"
-            class="slider-banner"
-          />
-          <lazy-hydrate :trigger-hydration="!loading">
-            <m-product-carousel :products="blockoneproduct" />
-          </lazy-hydrate>
-        </div>
-      </div>
-    </div>
-
-    <MAssurance /> 
-    <MWarrantyNetwork/>-->
-    <cms-block :identifier="'swap-text'" />   
+    </div> 
+    <OCmsBlockSwapText /> 
     <AAboutUs />
   </section>
 </template>
 
 <script>
-
 import { mapState, mapGetters } from 'vuex';
 import LazyHydrate from 'vue-lazy-hydration';
 import { Logger } from '@vue-storefront/core/lib/logger';
@@ -120,17 +68,13 @@ import MWarrantyNetwork from 'theme/components/molecules/m-warranty-network';
 import MPromoProductBlock from 'theme/components/molecules/m-promo-product-block';
 import MCodePromotionBlock from 'theme/components/molecules/m-code-promotion-block';
 import MSupportBlock from 'theme/components/molecules/m-support-block';
+import OCmsBlockHomeTemplate from 'theme/components/organisms/o-cms-block-home-template';
+import OCmsBlockSwapText from 'theme/components/organisms/o-cms-block-swap-text';
 import { checkWebpSupport } from 'theme/helpers'
-import AAboutUs from 'theme/components/atoms/a-about-us';
-import CmsBlock from 'theme/components/core/blocks/Cms/Block'
+import AAboutUs from 'theme/components/atoms/a-about-us'; 
 import { ReviewModule } from '@vue-storefront/core/modules/review';
 import { registerModule } from '@vue-storefront/core/lib/modules';
-import get from 'lodash-es/get'
-
-import {
-  SfHero,
-  SfImage
-} from '@storefront-ui/vue';
+import { SfHero, SfImage} from '@storefront-ui/vue';
 
 export default {
   name: 'Home',
@@ -144,11 +88,11 @@ export default {
     MAssurance,
     MSupportBlock,
     MPromoProductBlock,
-    MCodePromotionBlock,
-    CmsBlock,
-    MWarrantyNetwork
-  },
-   mixins: [CmsBlock],
+    MCodePromotionBlock, 
+    MWarrantyNetwork,
+    OCmsBlockHomeTemplate,
+    OCmsBlockSwapText
+  }, 
   data () {
     return {
       loading: true,
@@ -195,10 +139,7 @@ export default {
     if (context) context.output.cacheTags.add(`home`)
 
     await Promise.all([
-       store.dispatch('homepage/blockOneProducts'),
-        // store.dispatch('homepage/blockTwoProducts'),
-        // store.dispatch('homepage/blockThreeProducts'),
-        //store.dispatch('homepage/fetchNewCollection'),
+      store.dispatch('homepage/blockOneProducts'), 
       store.dispatch('promoted/updateHeadImage'),
       store.dispatch('promoted/updateHeadImageResponsive'),
       store.dispatch('instagram/updateInstagramImages')
