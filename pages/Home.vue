@@ -60,36 +60,25 @@
 import { mapState, mapGetters } from 'vuex';
 import LazyHydrate from 'vue-lazy-hydration';
 import { Logger } from '@vue-storefront/core/lib/logger';
-import { isServer, onlineHelper } from '@vue-storefront/core/helpers';
-import MNosSpecialities from 'theme/components/molecules/m-nos-specialities';
-import MProductCarousel from 'theme/components/molecules/m-product-carousel';
-import MAssurance from 'theme/components/molecules/m-assurance';
-import MWarrantyNetwork from 'theme/components/molecules/m-warranty-network';
-import MPromoProductBlock from 'theme/components/molecules/m-promo-product-block';
-import MCodePromotionBlock from 'theme/components/molecules/m-code-promotion-block';
-import MSupportBlock from 'theme/components/molecules/m-support-block';
-import OCmsBlockHomeTemplate from 'theme/components/organisms/o-cms-block-home-template';
-import OCmsBlockSwapText from 'theme/components/organisms/o-cms-block-swap-text';
+import { isServer, onlineHelper } from '@vue-storefront/core/helpers'; 
 import { checkWebpSupport } from 'theme/helpers'
-import AAboutUs from 'theme/components/atoms/a-about-us'; 
 import { ReviewModule } from '@vue-storefront/core/modules/review';
 import { registerModule } from '@vue-storefront/core/lib/modules';
-import { SfHero, SfImage} from '@storefront-ui/vue';
+import { SfHero } from '@storefront-ui/vue';
+import MProductCarousel from 'theme/components/molecules/m-product-carousel';
+import MAssurance from 'theme/components/molecules/m-assurance';  
+import OCmsBlockHomeTemplate from 'theme/components/organisms/o-cms-block-home-template';
+import OCmsBlockSwapText from 'theme/components/organisms/o-cms-block-swap-text';
+import AAboutUs from 'theme/components/atoms/a-about-us'; 
 
 export default {
   name: 'Home',
   components: {
     LazyHydrate,
-    SfHero,
-    SfImage,
-    MNosSpecialities,
+    SfHero, 
     MProductCarousel,
     AAboutUs,
-    MAssurance,
-    MSupportBlock,
-    MPromoProductBlock,
-    MCodePromotionBlock, 
-    MWarrantyNetwork,
+    MAssurance,    
     OCmsBlockHomeTemplate,
     OCmsBlockSwapText
   }, 
@@ -106,25 +95,17 @@ export default {
     ...mapGetters({
       isLoggedIn: 'user/isLoggedIn',
       heroImages: 'promoted/getHeadImage',
-      heroImagesResponsive: 'promoted/getHeadImageResponsive',
-      promotedOffers: 'promoted/getPromotedOffers',
-      dummyInstagramImages: 'instagram/getInstagramImages',      
+      heroImagesResponsive: 'promoted/getHeadImageResponsive',   
       blockoneproduct: 'homepage/getBlockOneProducts',
     }),
     isOnline () {
       return onlineHelper.isOnline;
-    },
-    banners () {
-      return checkWebpSupport(this.promotedOffers.mainBanners, this.isWebpSupported)
-    },
+    }, 
     heroes () {
       return checkWebpSupport(this.heroImages, this.isWebpSupported)
     },
     heroesResponsive () {
       return checkWebpSupport(this.heroImagesResponsive, this.isWebpSupported)
-    },
-    instagramImages () {
-      return checkWebpSupport(this.dummyInstagramImages, this.isWebpSupported)
     }
   },
   watch: {
@@ -141,8 +122,7 @@ export default {
     await Promise.all([
       store.dispatch('homepage/blockOneProducts'), 
       store.dispatch('promoted/updateHeadImage'),
-      store.dispatch('promoted/updateHeadImageResponsive'),
-      store.dispatch('instagram/updateInstagramImages')
+      store.dispatch('promoted/updateHeadImageResponsive')
     ]);
   },
    beforeCreate () {
