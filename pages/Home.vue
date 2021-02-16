@@ -40,7 +40,8 @@
         :class="hero.className"
       />
     </SfHero>
-    <MAssurance /> 
+     <MAssurance /> 
+     {{ showFirstTimePopup }}
     <OCmsBlockHomeTemplate /> 
     <div class="product-slider">
       <div class="container">    
@@ -55,7 +56,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'; 
+import { mapState, mapGetters, mapActions } from 'vuex'; 
 import { Logger } from '@vue-storefront/core/lib/logger';
 import { isServer, onlineHelper } from '@vue-storefront/core/helpers'; 
 import { checkWebpSupport } from 'theme/helpers'
@@ -67,6 +68,7 @@ import MAssurance from 'theme/components/molecules/m-assurance';
 import OCmsBlockHomeTemplate from 'theme/components/organisms/o-cms-block-home-template';
 import OCmsBlockSwapText from 'theme/components/organisms/o-cms-block-swap-text';
 import AAboutUs from 'theme/components/atoms/a-about-us'; 
+import { ModalList } from 'theme/store/ui/modals'
 
 export default {
   name: 'Home',
@@ -86,7 +88,8 @@ export default {
   },
   computed: {
     ...mapState({
-      isWebpSupported: state => state.ui.isWebpSupported
+      isWebpSupported: state => state.ui.isWebpSupported,
+      isFirstTimePopup: state => state.ui.isFirstTimePopup,
     }),
     ...mapGetters({
       isLoggedIn: 'user/isLoggedIn',
@@ -102,7 +105,18 @@ export default {
     },
     heroesResponsive () {
       return checkWebpSupport(this.heroImagesResponsive, this.isWebpSupported)
+    },
+     showFirstTimePopup(){
+      if(this.isFirstTimePopup){
+        this.$store.commit('ui/setFirstTimePopup', false);
+          this.openModal({ name: ModalList.Subscribe });
+      }
     }
+  },
+  methods: {
+    ...mapActions('ui', {
+      openModal: 'openModal'
+    }),
   },
   watch: {
     isLoggedIn () {

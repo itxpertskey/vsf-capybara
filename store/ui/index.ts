@@ -22,7 +22,8 @@ export const uiStore = {
     isReviewProductTab: false,
     isVideoProductTab: false,
     isDescriptionProductTab: false,
-    isMobileMenu: false
+    isMobileMenu: false,
+    isFirstTimePopup:true
   },
   mutations: {
     setCheckoutMode (state, action) {
@@ -67,6 +68,9 @@ export const uiStore = {
     },
     setDescriptionProductTab (state, action) {
       state.isDescriptionProductTab = action
+    },
+    setFirstTimePopup (state, action) {
+      state.isFirstTimePopup = action
     },
     openMenu (state) {
       state.isMobileMenu = true
