@@ -67,14 +67,88 @@
             max-width: 767px;
             width: 100%;
             height: 75vh;
-            .sf-modal__content{
+            .sf-modal__content {
                 height: 100%;
                 padding: 0;
-                iframe{
+                iframe {
                     width: 99%;
                     height: 98%;
                 }
             }
+        }
+    }
+}
+
+.m-modal-subscribe {
+    .sf-overlay {
+        opacity: 0.8;
+    }
+    .sf-modal {
+        .sf-modal__close {
+            z-index: 2;
+            .sf-icon{
+                --icon-color: var(--_c-green-primary-lighten);
+            }
+        }
+        .sf-modal__content {
+            padding: 0;
+            .capitools-offer-banner {
+                width: 100%;
+                img {
+                    width: 100%;
+                }
+            }
+            .padding {
+                padding: 20px;
+                padding-top: 0;
+                p {
+                    font-size: 14px;
+                    line-height: normal;
+                }
+                form {
+                    .sf-input {
+                        &__wrapper{
+                            margin: 0;
+                        }
+                        input {
+                            border: 1px solid var(--_c-gray-accent);
+                            border-radius: 5px;
+                            background-color: var(--_c-gray-accent);
+                            padding: 0;
+                            height: 50px;
+                            font-size: 14px;
+                            text-align: left;
+                            text-indent: 12px;
+                        }
+                    }
+                    .sf-button{
+                        width: 100%;
+                        height: 48px;
+                        text-transform: none;
+                    }
+                }
+                .text-primary{
+                    color: var(--_c-green-primary-lighten);
+                }
+                .coupon-code{
+                    border: 1px solid var(--_c-gray-accent);
+                    border-radius: 5px;
+                    padding: 5px;
+                    h1{
+                        background-color: var(--_c-green-primary-lighten);
+                        color: var(--c-white);
+                        text-transform: uppercase;
+                        margin: 0;
+                        padding: 10px 20px;
+                        border-radius: 5px;
+                    }
+                    span{
+                        margin: 0 auto;
+                        font-size: 14px;
+                    }
+                }
+            }
+
         }
     }
 }
