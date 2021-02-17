@@ -65,7 +65,6 @@ export default {
     subscribeExtend () {
       this.$v.$touch();
       if (this.$v.$invalid) {
-        this.showThankYouModal();
         this.$store.dispatch('notification/spawnNotification', {
           type: 'danger',
           message: this.$t('Please fix the validation errors'),
@@ -84,6 +83,7 @@ export default {
     },
     onSuccesfulSubmission (isSubscribed) {
       if (isSubscribed) {
+        this.showThankYouModal();
         this.$store.dispatch('notification/spawnNotification', {
           type: 'success',
           message: i18n.t('You have been successfully subscribed to our newsletter!'),
