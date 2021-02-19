@@ -28,14 +28,7 @@
             v-if="product.type_id =='grouped'"
             :product-options="product.product_links"
           />
-          <MProductOptionsBundle
-            v-if="product.bundle_options && product.bundle_options.length > 0"
-            :product="product"
-          />
-          <MProductOptionsCustom
-            v-else-if="product.custom_options && product.custom_options.length > 0"
-            :product="product"
-          />
+         
           <MProductAddToCart
             class="product__add-to-cart"
             :product="product"

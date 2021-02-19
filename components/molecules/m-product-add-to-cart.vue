@@ -1,5 +1,13 @@
 <template>
   <div class="m-product-add-to-cart">
+    <MProductOptionsBundle
+      v-if="product.bundle_options && product.bundle_options.length > 0"
+      :product="product"
+    />
+    <MProductOptionsCustom
+      v-else-if="product.custom_options && product.custom_options.length > 0"
+      :product="product"
+    />
     <SfAlert
       v-if="alert"
       class="alert"
@@ -56,8 +64,10 @@ import AProductQuantity from 'theme/components/atoms/a-product-quantity';
 import AQuantityInfo from 'theme/components/atoms/a-quantity-info';
 import AAddToCart from 'theme/components/atoms/a-add-to-cart';
 import AProductPrice from 'theme/components/atoms/a-product-price';
+import MProductOptionsCustom from 'theme/components/molecules/m-product-options-custom';
+import MProductOptionsBundle from 'theme/components/molecules/m-product-options-bundle';
 
- 
+
 export default {
   name: 'MProductAddToCart',
   components: {
@@ -68,7 +78,9 @@ export default {
     AAddToCart,
     SfPrice,
     SfImage,
-    AProductPrice
+    AProductPrice,
+    MProductOptionsCustom,
+    MProductOptionsBundle
   },
   data () {
     return {
