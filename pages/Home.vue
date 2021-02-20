@@ -40,8 +40,7 @@
         :class="hero.className"
       />
     </SfHero>
-     <MAssurance /> 
-     {{ showFirstTimePopup }}
+     <MAssurance />   
     <OCmsBlockHomeTemplate /> 
     <div class="product-slider">
       <div class="container">    
@@ -105,18 +104,20 @@ export default {
     },
     heroesResponsive () {
       return checkWebpSupport(this.heroImagesResponsive, this.isWebpSupported)
-    },
-     showFirstTimePopup(){
-      if(this.isFirstTimePopup){
-        this.$store.commit('ui/setFirstTimePopup', false);
-          this.openModal({ name: ModalList.Subscribe });
-      }
     }
-  },
+  }, 
   methods: {
     ...mapActions('ui', {
       openModal: 'openModal'
     }),
+    handleScroll (event) {
+      if(window.scrollY > 600){
+        if(!localStorage.getItem('show_first_time_popup')){ 
+          localStorage.setItem('show_first_time_popup',true);
+          this.openModal({ name: ModalList.Subscribe });
+        }
+      }
+    } 
   },
   watch: {
     isLoggedIn () {
@@ -140,6 +141,10 @@ export default {
   },
   mounted () {
     if (!this.isLoggedIn && localStorage.getItem('redirect')) { this.$bus.$emit('modal-show', 'modal-signup'); }
+    window.addEventListener('scroll', this.handleScroll);
+  },
+  beforeDestroy () {
+     window.removeEventListener('scroll', this.handleScroll);
   },
   beforeRouteEnter (to, from, next) {
     if (!isServer && !from.name) {
