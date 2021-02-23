@@ -45,7 +45,7 @@
     <div class="product-slider">
       <div class="container">    
         <div class="slider-content">  
-          <m-product-carousel :products="blockoneproduct" />
+          <m-product-carousel :products="ourBestDealsProducts" />
         </div> 
       </div>
     </div> 
@@ -94,7 +94,7 @@ export default {
       isLoggedIn: 'user/isLoggedIn',
       heroImages: 'promoted/getHeadImage',
       heroImagesResponsive: 'promoted/getHeadImageResponsive',   
-      blockoneproduct: 'homepage/getBlockOneProducts',
+      ourBestDealsProducts: 'homepage/getOurBestDealsProducts',
     }),
     isOnline () {
       return onlineHelper.isOnline;
@@ -131,7 +131,7 @@ export default {
     if (context) context.output.cacheTags.add(`home`)
 
     await Promise.all([
-      store.dispatch('homepage/blockOneProducts'), 
+      store.dispatch('homepage/ourBestDealsProducts'), 
       store.dispatch('promoted/updateHeadImage'),
       store.dispatch('promoted/updateHeadImageResponsive')
     ]);
@@ -149,7 +149,7 @@ export default {
   beforeRouteEnter (to, from, next) {
     if (!isServer && !from.name) {
       next(vm => {
-        vm.$store.dispatch('homepage/blockOneProducts').then(() => {
+        vm.$store.dispatch('homepage/ourBestDealsProducts').then(() => {
            vm.loading = false;
        });
       });
