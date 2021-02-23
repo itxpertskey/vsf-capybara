@@ -197,8 +197,7 @@ export default {
 
 .quantity-section{
   .product__add-to-cart{
-      min-width: 260px;
-      width: 100%;
+     
       margin: 0 8px;
       margin-bottom: 15px;
       padding: 15px;
@@ -206,6 +205,8 @@ export default {
       border-radius: 3px;
       @include for-mobile{
         width: -webkit-fill-available;
+        min-width: 260px;
+        width: 100%;
       }
     }
     

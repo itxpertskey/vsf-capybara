@@ -1,6 +1,15 @@
 #product{
     .product{
         &__info{
+            @media screen and (max-width: 1200px){
+                .d-flex.align-start{
+                    flex-direction: column;
+                    .quantity-section,
+                    .m-product-short-info{
+                        width: auto;
+                    }
+                }
+            }
             > .d-flex.align-start{
                 @include for-tablet{
                     flex-direction: column;
@@ -12,6 +21,9 @@
             }
             .m-product-short-info{
                 margin: 0 7px;
+                @media screen and (min-width: 1024px){
+                    width: 55%;;
+                }
                 @include for-mobile{
                     padding: 0;
                     margin: 0;
@@ -62,7 +74,9 @@
                 }
             }
             .quantity-section{
-               
+                @media screen and (min-width: 1024px){
+                    width: 45%;
+                }
                 p{
                     font-size: 13px;
                 }

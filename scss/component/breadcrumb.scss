@@ -1,5 +1,6 @@
 .sf-breadcrumbs {
     &__list{
+        flex-wrap: wrap;
         &-item{
             &:first-child{
                 &:before{
@@ -22,6 +23,7 @@
             a{
                 font-family: 'Poppins-Regular';
                 font-size: 14px;
+                white-space: nowrap;
             }
             &:before{
                 content: ''!important;
