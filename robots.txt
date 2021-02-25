@@ -36,4 +36,4 @@ Disallow: /tracker.php
 Disallow: /js/phoenix/seo/
 Disallow: /pinquiry/
 Disallow: /media/catalog/downloads/
-Sitemap: https://www.lights.ie/sitemap.xml
+Sitemap: https://www.capitools.co.uk/sitemap.xml
