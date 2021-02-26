@@ -6,7 +6,7 @@
           <h1 class="text-center">First time ordering with Capitools ?</h1>
           <SfImage src="/assets/images/capitools-off-image.png" class="capitools-offer" />
           <p>By continuing you have read and understand the Privacy Policy and the Cookies Policy so you agree to receive 
-            personalized commercial communication from Capitools by email. *Offer applicable only for order abouve £500</p>
+            personalised marketing communication from Capitools by email. *Offer applicable for orders below £500.</p>
           <form @submit.prevent="subscribeExtend" class="form">
             <div class="align-start">
               <template>
