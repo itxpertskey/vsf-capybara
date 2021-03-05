@@ -35,16 +35,31 @@
             :key="product.id"
             :title="product.title"
             :image="product.image"
-            :regular-price="product.price.regular"
-            :special-price="product.price.special"
-            :max-rating="product.rating.max"
-            :score-rating="product.rating.score"
             :link="product.link"
             link-tag="router-link"
             :wishlist-icon="false"
             class="products__product-card"
             @click.native="$store.commit('ui/setSearchpanel', false)"
-          />
+          >
+            <template slot="title">
+              <h3 class="sf-product-card__title">
+                {{ product.title }}
+              </h3>
+              <p class="reference">
+                  Ref : {{ product.sku }}
+              </p>
+              <div class="d-flex align-start justify-between">
+                  <SfPrice
+                    class="sf-product-card__price"
+                    :regular="product.price.regular"
+                    :special="product.price.special" 
+                  />    
+              </div>
+               <SfLink class="sf-button a-add-to-cart sf-button--full-width sf-add-to-cart__button" :link="product.link">
+                 More Info
+              </SfLink> 
+            </template> 
+          </SfProductCard>
         </div>
         <SfButton
           v-if="OnlineOnly && readMore && visibleProducts.length >= pageSize"
@@ -60,14 +75,9 @@
 </template>
 
 <script>
-import config from 'config';
-import { currentStoreView } from '@vue-storefront/core/lib/multistore';
-import { productThumbnailPath } from '@vue-storefront/core/helpers';
-import { htmlDecode } from '@vue-storefront/core/filters';
-import { formatProductLink } from '@vue-storefront/core/modules/url/helpers';
-import { prepareCategoryProduct } from 'theme/helpers';
+import { prepareCategoryProductSearch  } from 'theme/helpers';
 import VueOfflineMixin from 'vue-offline/mixin';
-import { SfButton, SfList, SfMenuItem, SfProductCard } from '@storefront-ui/vue';
+import { SfButton, SfList, SfMenuItem, SfProductCard, SfPrice, SfLink } from '@storefront-ui/vue';
 import { disableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
 
 export default {
@@ -76,7 +86,9 @@ export default {
     SfButton,
     SfList,
     SfMenuItem,
-    SfProductCard
+    SfProductCard,
+    SfPrice,
+    SfLink
   },
   mixins: [VueOfflineMixin],
   data () {
@@ -112,7 +124,7 @@ export default {
         ? this.products.filter(product => product.category_ids.some(categoryId => this.selectedCategoryIds.includes(categoryId)))
         : this.products;
 
-      return productList.map(product => prepareCategoryProduct(product));
+      return productList.map(product => prepareCategoryProductSearch(product));
     },
     categories () {
       const distinctCategories = this.products
