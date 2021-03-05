@@ -8,8 +8,11 @@
       v-else-if="product.custom_options && product.custom_options.length > 0"
       :product="product"
     />
+    <div v-show="this.stock.isLoading">
+      <div class="show-loader-stock-api"></div>
+    </div>
     <SfAlert
-      v-if="alert"
+      v-show="!this.stock.isLoading"
       class="alert"
       :message="alert.message"
       :type="alert.type"
