@@ -53,25 +53,6 @@
                     {{ $t('Clear all') }}
                   </button>
                 </template>
-                <!--
-                  <div class="navbar__sort">
-                    <span class="navbar__label">{{ $t("Sort By") }}:</span>
-                    <SfSelect
-                      class="navbar__select sort-by"
-                      :selected="sortOrder"
-                      @change="changeSortOder"
-                    >
-                      <SfSelectOption
-                        v-for="option in sortOptions"
-                        :key="option.id"
-                        :value="option.id"
-                        class="sort-by__option"
-                      >
-                        {{ option.label }}
-                      </SfSelectOption>
-                    </SfSelect>
-                  </div>  
-                -->
                 <div class="navbar__sort d-flex"> 
                   <p><b>Sorting:</b></p>
                   <SfButton class="sf-button--text" @click="OrderProducthHightoLow">High to Low</SfButton>
@@ -114,6 +95,8 @@
                 v-for="product in products"
                 :key="product.id"  
                 :image="product.image"  
+                :imageWidth="200"
+                :imageHeight="200"
                 :link="product.link"
                 link-tag="router-link"
                 :wishlist-icon="wishlistIcon"
@@ -163,12 +146,7 @@
                     :product="product.obj_product"
                     :disabled="isProductDisabled(product)"
                   />  
-                  </template> 
-                  <template #image>
-                      <div class="sf-image sf-product-card__image sf-image--has-size" data-loaded="true" style="--_image-width:216;--_image-height:326;">
-                        <img width="216" height="326" alt="" style="" :src="product.image" @error="$event.target.src=placeholder"/> 
-                      </div>
-                  </template>
+                  </template>  
               </SfProductCard>
             </transition-group>
           </lazy-hydrate>
@@ -185,6 +163,8 @@
                      v-for="product in products"
                     :key="product.id"  
                     :image="product.image"  
+                    :imageWidth="200"
+                    :imageHeight="200"
                     :title="product.title"
                     :link="product.link"
                     :link-tag="router-link"
@@ -201,11 +181,7 @@
                     <meta itemprop="availability" :content="availability(product)">
                     <meta itemprop="url" :content="product.link">
                     <meta itemprop="ratingValue" :content="getSingleProductRatingCount(product.id)">
-                  <template #image>
-                      <div class="sf-image sf-product-card__image sf-image--has-size" data-loaded="true" style="--_image-width:216;--_image-height:326;">
-                        <img width="216" height="326" alt="product image" style="" :src="product.image" @error="$event.target.src=placeholder"/> 
-                      </div>
-                  </template>
+ 
                   <template #title>
                     <h3 class="sf-product-card__title">
                         {{ product.title }}

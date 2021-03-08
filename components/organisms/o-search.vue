@@ -41,7 +41,7 @@ export default {
   },
   data () {
     return {
-      size: 8,
+      size: 6,
       searchPanelAsyncComponent: () => ({
         component: SearchPanel(),
         loading: ALoadingSpinner,

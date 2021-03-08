@@ -35,6 +35,8 @@
             :key="product.id"
             :title="product.title"
             :image="product.image"
+            :imageWidth="150"
+            :imageHeight="150"
             :link="product.link"
             link-tag="router-link"
             :wishlist-icon="false"
@@ -246,7 +248,6 @@ export default {
       margin: -1rem -1rem 0;
     }
     &__product-card {
-      --product-card-max-width: 200px;
       flex: 0 1 25%;
       min-width: calc(var(--product-card-max-width) * 0.8);
     }
