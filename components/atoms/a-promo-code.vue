@@ -1,5 +1,6 @@
 <template>
   <div class="a-promo-code promo-code">
+     <div v-show="isShowLoader" class="show-loader-voucher-code-api"></div>
     <template v-if="!isCouponCode">
       <SfInput
         v-model="promoCode"
@@ -42,7 +43,8 @@ export default {
   },
   data () {
     return {
-      promoCode: ''
+      promoCode: '',
+      isShowLoader: false
     };
   },
   computed: {
@@ -52,9 +54,9 @@ export default {
   },
   methods: {
     async applyCoupon () {
+      this.isShowLoader = true;
       const couponApplied = await this.$store.dispatch('cart/applyCoupon', this.promoCode);
       this.promoCode = ''
-      console.log(couponApplied);
       if (!couponApplied) {
         this.$store.dispatch('notification/spawnNotification', {
           type: 'danger',
@@ -62,23 +64,26 @@ export default {
           action1: { label: this.$t('OK') }
         });
       }
-      if (couponApplied) {
+      if (couponApplied == true) {
         this.$store.dispatch('notification/spawnNotification', {
           type: 'success',
           message: this.$t('Coupon code applied successfully.'),
           action1: { label: this.$t('OK') }
         });
       }
+      this.isShowLoader = false;
     },
    async removeCoupon () {
-      const couponRemoved = this.$store.dispatch('cart/removeCoupon');
-      if (couponRemoved) {
+     this.isShowLoader = true;  
+      const couponRemoved = await this.$store.dispatch('cart/removeCoupon');
+      if (couponRemoved == true) {
         this.$store.dispatch('notification/spawnNotification', {
           type: 'success',
           message: this.$t('Coupon removed successfully'),
           action1: { label: this.$t('OK') }
         });
-      }
+      } 
+      this.isShowLoader = false;
     }
   }
 };
