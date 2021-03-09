@@ -72,6 +72,7 @@ export default {
       });
     },
      async makeSearch () { 
+      this.$store.commit('ui/setCustomLoader', true);
       if (this.search !== '' && this.search !== undefined) {
          let startValue = 0;
         this.start = startValue
@@ -99,8 +100,10 @@ export default {
         this.products = []
         this.emptyResults = 0
       }
+      this.$store.commit('ui/setCustomLoader', false);
     },
     async seeMore () {
+      this.$store.commit('ui/setCustomLoader', true);
       if (this.search !== '' && this.search !== undefined) {
         let startValue = this.start;
         try {
@@ -131,6 +134,7 @@ export default {
         this.products = []
         this.emptyResults = 0
       }
+      this.$store.commit('ui/setCustomLoader', false);
     }
   }
 };

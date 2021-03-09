@@ -1,6 +1,6 @@
 <template>
   <div class="o-search-panel">
-    <div
+    <div v-show="isShowLoader" class="search-result-loader"></div><div
       v-if="noResultsMessage"
       class="no-results"
     >
@@ -63,6 +63,7 @@
             </template> 
           </SfProductCard>
         </div>
+        <div v-show="isShowLoader" class="load-more-loader"></div>
         <SfButton
           v-if="OnlineOnly && readMore && visibleProducts.length >= pageSize"
           class="sf-button--full-width load-more"
@@ -81,6 +82,7 @@ import { prepareCategoryProductSearch  } from 'theme/helpers';
 import VueOfflineMixin from 'vue-offline/mixin';
 import { SfButton, SfList, SfMenuItem, SfProductCard, SfPrice, SfLink } from '@storefront-ui/vue';
 import { disableBodyScroll, clearAllBodyScrollLocks } from 'body-scroll-lock';
+import { mapState } from 'vuex';
 
 export default {
   name: 'OSearchPanel',
@@ -121,6 +123,9 @@ export default {
     }
   },
   computed: {
+     ...mapState({
+      isShowLoader: state => state.ui.customLoader
+    }),
     visibleProducts () {
       const productList = this.selectedCategoryIds.length
         ? this.products.filter(product => product.category_ids.some(categoryId => this.selectedCategoryIds.includes(categoryId)))

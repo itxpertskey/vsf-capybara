@@ -12,6 +12,7 @@ export const uiStore = {
     searchpanel: false,
     overlay: false,
     loader: false,
+    customLoader: false,
     checkoutMode: false,
     openMyAccount: false,
     submenu: {
@@ -57,6 +58,9 @@ export const uiStore = {
     setLoader (state, action) {
       state.loader = action === true;
     },
+    setCustomLoader (state, action) {
+      state.customLoader = action === true;
+    }, 
     setWebpSupport (state, action) {
       state.isWebpSupported = action
     },
