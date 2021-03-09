@@ -109,6 +109,34 @@ header{
             background-repeat: no-repeat;
             background-position: 50% 7px;
         }
+        .search-result-loader{
+            background-image: url(/assets/loading.gif);
+            background-size: 40px !important;
+            background-repeat: no-repeat;
+            background-position: center;
+            width: 100%;
+            height: 100%; 
+            margin: 0 auto;  
+            z-index: 1;
+            background-size: contain;
+            background-color: rgba(255, 255, 255, 0.7);
+            position: absolute;
+        }
+        .container{
+            .load-more-loader{
+                background-image: url(/assets/loading.gif);
+                background-size: 24px;
+                background-repeat: no-repeat;
+                background-position: center;
+                width: 40px;
+                height: 40px;
+                display: block;
+                margin: 0 auto;  
+                z-index: 1;
+                background-size: contain;
+                background-color: rgba(255, 255, 255, 0.7)
+            }
+        }
         .products{
             &__listing{
                 .sf-product-card{
