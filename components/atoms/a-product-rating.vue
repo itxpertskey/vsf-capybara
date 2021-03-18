@@ -33,8 +33,24 @@ export default {
   },
   computed: {
     score () {
-      const allScore = this.reviews.reduce((sum, rev) => (sum + (rev.rating || 0)), 0)
-      return allScore ? allScore / this.count : allScore
+      var ratingStarCount = 0;
+      if(this.count > 0){
+         var tempRatingStarCount =  0;
+         var tempTotalRatingCount = 0;
+        for (let iLoop = 0; iLoop < this.count; iLoop++) {
+          tempTotalRatingCount = tempTotalRatingCount + this.reviews[iLoop].rating.length;
+          for (let jLoop = 0; jLoop < this.reviews[iLoop].rating.length; jLoop++) {
+            tempRatingStarCount = tempRatingStarCount + this.reviews[iLoop].rating[jLoop].value;
+           }   
+        }
+        if( tempRatingStarCount > 0 && tempTotalRatingCount > 0){
+          ratingStarCount = tempRatingStarCount/tempTotalRatingCount;
+        }
+      }
+      console.info(ratingStarCount);
+      return ratingStarCount;
+      //const allScore = this.reviews.reduce((sum, rev) => (sum + (rev.rating || 0)), 0)
+      // return allScore ? allScore / this.count : allScore
     },
     count () {
       return this.reviews.length

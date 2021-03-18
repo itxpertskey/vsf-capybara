@@ -7,7 +7,7 @@
       :author="review.author"
       :date="review.date"
       :message="review.message"
-      :rating="review.rating"
+      :rating="getReviewSum(review.rating)"
       :max-rating="5"
       :read-more-text="$t('Read more')"
       :hide-full-text="$t('Read less')"
@@ -59,6 +59,14 @@ export default {
   methods: {
     setCurrentPage (newPage) {
       this.currentPage = newPage
+    },
+    getReviewSum(rating){
+      var tempRatingStarCount =  0;
+     for (let iLoop = 0; iLoop < rating.length; iLoop++) {
+        tempRatingStarCount = tempRatingStarCount + rating[iLoop].value;
+      }
+      tempRatingStarCount = tempRatingStarCount > 0 ? tempRatingStarCount / rating.length : 4; // harcoded the value 4 , if no start is displayed
+      return tempRatingStarCount;
     }
   },
   watch: {

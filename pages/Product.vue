@@ -144,7 +144,7 @@ export default {
         author: review.nickname,
         date: review.created_at,
         message: `${review.title}: ${review.detail}`,
-        rating: ( review.ratings[0].value+review.ratings[1].value+review.ratings[2].value+review.ratings[3].value ) / 4 // TODO: remove hardcode
+        rating: review.ratings
       }))
     },
     availability () {
