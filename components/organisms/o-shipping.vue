@@ -109,24 +109,6 @@
           </SfSelect>
         </div>
       </div>  
-     <!-- <SfSelect
-        v-model="shipping.country"
-        class="form__element form__element--half form__element--half-even form__select sf-select--underlined"
-        name="countries"
-        :label="$t('Country')"
-        :required="true"
-        :valid="!$v.shipping.country.$error"
-        :error-message="$t('Field is required')"
-        @change="changeCountry"
-      >
-        <SfSelectOption
-          v-for="country in countries"
-          :key="country.code"
-          :value="country.code"
-        >
-          {{ country.name }}
-        </SfSelectOption>
-      </SfSelect> -->
       <SfInput
         v-model.trim="shipping.phoneNumber"
         class="form__element"

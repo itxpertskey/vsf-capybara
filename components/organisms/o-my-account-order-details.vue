@@ -46,7 +46,6 @@
             <div data-v-e966eaee="" class="sf-image" data-loaded="true">
               <img :alt="product.name | htmlDecode" :src="getThumbnailForProduct(product)" @error="$event.target.src=placeholder"/> 
             </div>
-           <!-- <SfImage :src="getThumbnailForProduct(product)" :alt="product.name | htmlDecode" /> -->
           </SfTableData>
           <SfTableData class="table__header">
             {{ product.name | htmlDecode }}

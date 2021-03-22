@@ -23,10 +23,6 @@
                 {{ $t(tableHeader) }}
               </SfTableHeader>
                <SfTableHeader class="orders__element--right">
-               <!-- <span class="mobile-only">{{ $t('Download') }}</span>
-                <SfButton @click.native="downloadAll" class="desktop-only sf-button--text orders__download-all">
-                  {{ $t('Download all') }}
-                </SfButton>-->
               </SfTableHeader> 
             </SfTableHeading>
             <SfTableRow v-for="order in orders" :key="order.order_id">
@@ -56,13 +52,6 @@
           <OMyAccountOrderDetails :order="activeOrder" @close="setActiveOrder(null)" />
         </template>
       </SfTab>
-      <!-- <SfTab :title="$t('Returns')">
-        <p class="message">
-          {{ $t('This feature is not implemented yet! Please take a look at') }}
-          <a href="https://github.com/DivanteLtd/vue-storefront"> https://github.com/DivanteLtd/vue-storefront </a>
-          {{ $t('for our Roadmap!') }}
-        </p>
-      </SfTab> -->
     </SfTabs>
   </div>
 </template>
@@ -114,7 +103,6 @@ export default {
       this.$store.dispatch('ui/openModal', { name: ModalList.FeatureNotImplemented })
     },
     setActiveOrder (order) {
-      //this.activeOrder = order ? this.ordersHistory.find(item => { return order.order_id.endsWith(item.increment_id) }) : null
       this.activeOrder = order ? this.ordersHistory.find(item => { return order.order_id === item.increment_id }) : null
     }
   }

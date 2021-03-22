@@ -1,17 +1,5 @@
 <template>
   <div id="o-order-confirmation">
-    <!-- <div class="banner">
-      <div class="banner__info">
-        <SfHeading
-          :title="OnlineOnly ? $t('It\'s ordered!') : $t('You are offline')"
-          :level="3"
-          class="sf-heading--no-underline"
-        />
-        <p v-if="OnlineOnly && lastOrderConfirmation.orderNumber" class="banner__order-number">
-          {{ $t('Order No.') }} <strong>{{ lastOrderConfirmation.orderNumber }}</strong>
-        </p>
-      </div>
-    </div> -->
     <div class="wrapper">
       <template v-if="OnlineOnly">
         <div class="text-center">
@@ -80,28 +68,6 @@
           {{ $t('Back to shop') }}
         </SfButton>
       </div>
-      <!-- <SfHeading
-        :title="$t('What we can improve?')"
-        :level="3"
-        class="sf-heading--left"
-      />
-      <p class="paragraph">
-        {{ $t('Your feedback is important for us. Let us know what we could improve.') }}
-      </p>
-      <textarea
-        class="feedback"
-        v-model="feedback"
-        :placeholder="$t('Type your opinion')"
-      />
-      <div class="wrapper__buttons">
-        <SfButton
-          class="color-secondary sf-button--full-width btn-primary"
-          @click="sendFeedback"
-        >
-          {{ $t('Send my feedback') }}
-        </SfButton>
-       
-      </div> -->
     </div>
   </div>
 </template>

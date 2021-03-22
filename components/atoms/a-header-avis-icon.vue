@@ -8,17 +8,6 @@
         <a href="https://uk.trustpilot.com/review/capitools.co.uk"
            target="_blank" rel="noopener">Trustpilot</a>
     </div>
-  <!-- <div class="group-3">
-    <div class="rectangle_text">
-      <div class="rectangle_text_number">
-        8.1 / 10
-      </div>
-    </div>
-    <SfImage
-      src="/assets/images/avis.png"
-      class="image_avis"
-    />
-  </div> -->
 </template>
 
 <script>

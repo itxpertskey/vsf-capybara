@@ -33,7 +33,7 @@
 <style lang="scss" scoped>
 @import "~@storefront-ui/shared/styles/helpers/breakpoints";
 .promo-product-block{
-  marging: 30px 0;
+  margin: 30px 0;
   .static-block-type{
     justify-content: space-between;
     @media screen and (max-width: 600px){

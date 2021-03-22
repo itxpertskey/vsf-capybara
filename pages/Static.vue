@@ -1,15 +1,5 @@
 <template>
   <div id="static">
-   <!-- <SfBreadcrumbs
-      class="breadcrumbs desktop-only"
-      :breadcrumbs="breadcrumbs"
-    >
-      <template #link="{breadcrumb}">
-        <router-link :to="localizedRoute(breadcrumb.route.link)" class="sf-breadcrumbs__breadcrumb">
-          {{ breadcrumb.text }}
-        </router-link>
-      </template>
-    </SfBreadcrumbs> -->
     <SfContentPages
       :active="currentRoute.title"
       :title="currentRoute.title"
