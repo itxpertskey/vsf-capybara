@@ -61,11 +61,6 @@
 </template>
 <script>
 import { SfProductCard , SfCarousel , SfRating , SfPrice , SfButton , SfLink, SfIcon } from '@storefront-ui/vue';
-import { htmlDecode } from '@vue-storefront/core/filters';
-import config from 'config';
-import { currentStoreView } from '@vue-storefront/core/lib/multistore';
-import { formatProductLink } from '@vue-storefront/core/modules/url/helpers';
-import { productThumbnailPath } from '@vue-storefront/core/helpers';
 import { prepareCategoryProduct } from 'theme/helpers';
 import AProductRating from 'theme/components/atoms/a-product-rating';
 import AAddToCart from 'theme/components/atoms/a-add-to-cart';

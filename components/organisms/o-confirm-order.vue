@@ -162,7 +162,6 @@
           <div data-v-d1a2776c="" class="sf-image" data-loaded="true">
             <img :src="getThumbnailForProduct(product)" @error="$event.target.src=placeholder"/> 
           </div> 
-         <!-- <SfImage :src="getThumbnailForProduct(product)" /> -->
         </SfTableData>
         <SfTableData class="table__description">
           <div class="product-title">
@@ -172,13 +171,6 @@
             {{ product.sku }}
           </div>
         </SfTableData>
-        <!--  <SfTableData
-          v-for="property in ['Color', 'Size']"
-          :key="property"
-          class="table__data"
-        >
-          {{ getProductProperty(product, property) }}
-        </SfTableData> -->
         <SfTableData class="table__data">
           {{ product.qty }}
         </SfTableData>

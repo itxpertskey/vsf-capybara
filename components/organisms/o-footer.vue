@@ -70,7 +70,6 @@ import { mapActions, mapGetters } from 'vuex';
 import ABackToTop from 'theme/components/atoms/a-back-to-top';
 import { SfFooter, SfList, SfMenuItem , SfButton } from '@storefront-ui/vue';
 import { ModalList } from 'theme/store/ui/modals'
-import { getPathForStaticPage } from 'theme/helpers';
 import config from 'config';
 import { currentStoreView } from '@vue-storefront/core/lib/multistore';
 import get from 'lodash-es/get';

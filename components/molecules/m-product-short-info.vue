@@ -22,19 +22,11 @@
         :reviews="reviews"
         class="d-flex"
       >
-        <!-- {{ $t("Read all {count} review", { count: reviewsCount }) }} -->
       </AProductRating>
     </div>
     <hr>
     <div class="product__description desktop-only" v-html="this.productDescription" />
     <a @click="openDescriptionTab" class="read-more">Read more</a>
-    <!-- <SfButton
-      v-show="sizeOption"
-      @click.native="openSizeGuide"
-      class="sf-button--text desktop-only product__guide"
-    >
-      {{ $t('Size guide') }}
-    </SfButton> -->
     <div v-if="showOrHideBlocksBasedOnBFTG(product)">
       <AMesAdvantage />
     </div>

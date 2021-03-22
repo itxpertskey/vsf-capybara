@@ -4,17 +4,12 @@
     <p class="text_upper">
      Specialized in DIY and gardening tools
     </p>
-   <!-- <AHeaderAvisIcon /> -->
   </div>
 </template>
 <script>
 
-import AHeaderAvisIcon from 'theme/components/atoms/a-header-avis-icon';
-
+ 
 export default {
-  components: {
-    AHeaderAvisIcon
-  },
   data () {
     return {
       title: '',
