@@ -1,17 +1,5 @@
 <template>
   <div id="o-order-confirmation">
-    <!-- <div class="banner">
-      <div class="banner__info">
-        <SfHeading
-          :title="OnlineOnly ? $t('It\'s ordered!') : $t('You are offline')"
-          :level="3"
-          class="sf-heading--no-underline"
-        />
-        <p v-if="OnlineOnly && lastOrderConfirmation.orderNumber" class="banner__order-number">
-          {{ $t('Order No.') }} <strong>{{ lastOrderConfirmation.orderNumber }}</strong>
-        </p>
-      </div>
-    </div> -->
     <div class="wrapper">
       <template v-if="OnlineOnly">
         <div class="text-center">
@@ -79,30 +67,12 @@
         >
           {{ $t('Back to shop') }}
         </SfButton>
-      </div>
-      <!-- <SfHeading
-        :title="$t('What we can improve?')"
-        :level="3"
-        class="sf-heading--left"
-      />
-      <p class="paragraph">
-        {{ $t('Your feedback is important for us. Let us know what we could improve.') }}
-      </p>
-      <textarea
-        class="feedback"
-        v-model="feedback"
-        :placeholder="$t('Type your opinion')"
-      />
-      <div class="wrapper__buttons">
-        <SfButton
-          class="color-secondary sf-button--full-width btn-primary"
-          @click="sendFeedback"
-        >
-          {{ $t('Send my feedback') }}
-        </SfButton>
-       
-      </div> -->
-    </div>
+      </div> 
+    </div> 
+     <no-ssr>
+       <script language=JavaScript :src="portgkUrl"></script>
+       <noscript><img :src="portgkUrl" width="10" height="10" border="0"></noscript>
+    </no-ssr>
   </div>
 </template>
 
@@ -117,16 +87,20 @@ import { registerModule } from '@vue-storefront/core/lib/modules';
 import { MailerModule } from '@vue-storefront/core/modules/mailer';
 import { SfHeading, SfButton } from '@storefront-ui/vue';
 import UserOrder from '@vue-storefront/core/modules/order/components/UserOrdersHistory';
+import NoSSR from 'vue-no-ssr';
 
 export default {
   name: 'OOrderConfirmation',
-  components: { SfHeading, SfButton },
+  components: { 'no-ssr': NoSSR, SfHeading, SfButton },
   mixins: [VueOfflineMixin, EmailForm, UserOrder],
   data () {
     return {
       feedback: '',
-      notificationPermission: ''
-    };
+      notificationPermission: '', 
+      affiliateDataDecode: '',
+      affiliateData: '', 
+      portgkUrl: '',
+      };
   },
   computed: {
     ...mapState({
@@ -156,6 +130,13 @@ export default {
            
       return orders;
      } 
+  },
+  mounted () {
+    if(this.$route.query.success){
+      this.affiliateDataDecode = atob(this.$route.query.success);
+      this.affiliateData       = JSON.parse(this.affiliateDataDecode); 
+      this.portgkUrl           = "https://portgk.com/create-sale?client=java&MerchantID="+this.affiliateData[0].merchantid+"&SaleID="+this.affiliateData[0].incrementId+"&Purchases="+this.affiliateData[0].purchases+"&VoucherCode="+this.affiliateData[0].couponcode+"&OrderDiscount="+this.affiliateData[0].discountAmount+"&ExcludeVAT="+this.affiliateData[0].excludevat;
+    }
   },
   beforeCreate () {
     registerModule(MailerModule);
