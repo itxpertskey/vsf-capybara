@@ -1,15 +1,9 @@
 <template>
-  <div v-if="isContentAvailable" class="a-static">
-    <SfTabs v-if="showTabs">
-      <SfTab v-for="c in content" :key="c.title" :title="c.title">
-        <div v-html="c.message" />
-      </SfTab>
-    </SfTabs>
-    <div v-else class="content">
-      <SfHeading :level="1" :title="content.title" />
-      <div v-html="content.message" />
-    </div>
-  </div>
+<div>
+  <SfHeading :level="1" :title="content.title" />
+  <div v-html="content.message" />
+</div>
+
 </template>
 
 <script>

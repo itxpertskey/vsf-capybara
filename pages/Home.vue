@@ -1,5 +1,6 @@
 <template>
   <section id="home">
+     <h1>Capitools DIY and gardening tools</h1>
     <SfHero
       class="hero desktop-only"
       :slider-options="{

@@ -1,5 +1,6 @@
 <template>
   <div id="category">
+    <h1>{{ this.getCategoryName() }}</h1>
     <SfBreadcrumbs class="breadcrumbs desktop-only" :breadcrumbs="breadcrumbs">
       <template #link="{breadcrumb}">
         <router-link :to="breadcrumb.route.link" class="sf-breadcrumbs__breadcrumb">
@@ -632,6 +633,9 @@ export default {
     window.removeEventListener('resize', this.getBrowserWidth);
   },
   methods: { 
+    getCategoryName(){
+      return this.getCurrentCategory.name;
+    },
     getBrowserWidth () {
       return (this.browserWidth = window.innerWidth);
     },
