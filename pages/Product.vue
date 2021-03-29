@@ -1,6 +1,6 @@
 <template>
   <div id="product" itemscope itemtype="http://schema.org/Product">
-  <h1>{{ this.getProductName() }}</h1>
+  <h1 hidden>{{ this.getProductName() }}</h1>
     <SfBreadcrumbs class="breadcrumbs desktop-only" :breadcrumbs="breadcrumbs">
       <template #link="{breadcrumb}">
         <router-link :to="breadcrumb.route.link" class="sf-breadcrumbs__breadcrumb">
