@@ -26,6 +26,19 @@
                 }
             }
         }
+        .sf-hero__controls{
+            position: unset;
+            top: 0;
+            .sf-arrow{
+                position: absolute;
+                bottom: 10vw;
+                left: 0;
+                &.sf-arrow--right{
+                    left: auto;
+                    right: 0;
+                }
+            }
+        }
     }
     .about-us{
         .sf-call-to-action{
