@@ -1,6 +1,16 @@
 <template>
   <div class="default-layout">
-    <MLoader />
+    <MLoader /> 
+    <no-ssr>
+     <script type='text/javascript'>
+        window.__lo_site_id = 292300;
+        (function() {
+        var wa = document.createElement('script'); wa.type = 'text/javascript'; wa.async = true;
+        wa.src = 'https://d10lpsik1i8c69.cloudfront.net/w.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(wa, s);
+        })();
+      </script> 
+    </no-ssr>
     <div id="viewport">
       <OHeaderMinimal />
       <OMicrocart />
@@ -32,6 +42,7 @@ import { isServer } from '@vue-storefront/core/helpers';
 import Head from 'theme/head';
 import config from 'config';
 import { ModalList } from 'theme/store/ui/modals'
+import NoSSR from 'vue-no-ssr';
 
 export default {
   components: {
@@ -44,7 +55,8 @@ export default {
     MCookieNotification,
     MOfflineBadge,
     OBottomNavigation,
-    OModal
+    OModal,
+    'no-ssr': NoSSR
   },
   data () {
     return {

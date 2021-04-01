@@ -48,6 +48,10 @@ export default {
   methods: {
     async addToCart () {
       try {
+         this.$bus.$emit(
+        'notification-progress-start',
+        this.$t('Adding product to cart ...')
+      );
         const diffLog = await this.$store.dispatch('cart/addItem', {
           productToAdd: Object.assign({}, this.product, { qty: this.qty })
         });
@@ -64,6 +68,9 @@ export default {
           notifications.createNotification({ type: 'danger', message }),
           { root: true }
         );
+      }
+      finally{
+        this.$bus.$emit('notification-progress-stop', {});
       }
     }
   }
