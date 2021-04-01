@@ -14,12 +14,18 @@
             image="/assets/banner/png/banner-03.png"
          />
       </router-link>
-      <SfHeroItem
-        v-for="(hero, i) in heroes"
-        :key="i"
-        :image="hero.image"
-        :class="hero.className"
-      />
+      <router-link to="/generators">
+        <SfHeroItem
+            class="sf-hero-item--position-bg-top-left sf-hero-item--align-right"
+            image="/assets/banner/png/banner-01.png"
+         />
+      </router-link>
+      <router-link to="/deals">
+        <SfHeroItem
+            class="sf-hero-item--position-bg-top-left sf-hero-item--align-right"
+            image="/assets/banner/png/banner-02.png"
+         />
+      </router-link>
     </SfHero>
     <SfHero
       class="hero-tablet"
@@ -34,12 +40,18 @@
             image="/assets/banner/png/banner-03-responsive.png"
          />
       </router-link>
-      <SfHeroItem
-        v-for="(hero, i) in heroesResponsive"
-        :key="i"
-        :image="hero.image"
-        :class="hero.className"
-      />
+      <router-link to="/generators">
+        <SfHeroItem
+            class="sf-hero-item--position-bg-top-left sf-hero-item--align-right"
+            image="/assets/banner/png/banner-01-responsive.png"
+         />
+      </router-link>
+      <router-link to="/deals">
+        <SfHeroItem
+            class="sf-hero-item--position-bg-top-left sf-hero-item--align-right"
+            image="/assets/banner/png/banner-02-responsive.png"
+         />
+      </router-link> 
     </SfHero>
      <MAssurance />   
     <OCmsBlockHomeTemplate /> 
@@ -92,19 +104,11 @@ export default {
       isFirstTimePopup: state => state.ui.isFirstTimePopup,
     }),
     ...mapGetters({
-      isLoggedIn: 'user/isLoggedIn',
-      heroImages: 'promoted/getHeadImage',
-      heroImagesResponsive: 'promoted/getHeadImageResponsive',   
+      isLoggedIn: 'user/isLoggedIn',   
       ourBestDealsProducts: 'homepage/getOurBestDealsProducts',
     }),
     isOnline () {
       return onlineHelper.isOnline;
-    }, 
-    heroes () {
-      return checkWebpSupport(this.heroImages, this.isWebpSupported)
-    },
-    heroesResponsive () {
-      return checkWebpSupport(this.heroImagesResponsive, this.isWebpSupported)
     }
   }, 
   methods: {
@@ -132,9 +136,7 @@ export default {
     if (context) context.output.cacheTags.add(`home`)
 
     await Promise.all([
-      store.dispatch('homepage/ourBestDealsProducts'), 
-      store.dispatch('promoted/updateHeadImage'),
-      store.dispatch('promoted/updateHeadImageResponsive')
+      store.dispatch('homepage/ourBestDealsProducts')
     ]);
   },
    beforeCreate () {
