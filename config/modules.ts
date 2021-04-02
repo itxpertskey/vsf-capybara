@@ -16,6 +16,7 @@ import { GoogleTagManagerModule } from 'src/modules/google-tag-manager';
 import { registerModule } from '@vue-storefront/core/lib/modules'
 //import { PaymentStripeModule } from 'src/modules/payment-stripe'
 import { ExternalCheckout } from 'src/modules/vsf-external-checkout'
+import { GoogleAnalyticsModule } from 'src/modules/google-analytics';
 
 // TODO:distributed across proper pages BEFORE 1.11
 export function registerClientModules () {
@@ -34,6 +35,7 @@ export function registerClientModules () {
   registerModule(NewsletterModule)
   //registerModule(PaymentStripeModule)
   registerModule(ExternalCheckout)
+  registerModule(GoogleAnalyticsModule)
 }
 
 // Deprecated API, will be removed in 2.0
