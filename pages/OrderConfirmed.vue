@@ -88,6 +88,7 @@ import { MailerModule } from '@vue-storefront/core/modules/mailer';
 import { SfHeading, SfButton } from '@storefront-ui/vue';
 import UserOrder from '@vue-storefront/core/modules/order/components/UserOrdersHistory';
 import NoSSR from 'vue-no-ssr';
+import rootStore from '@vue-storefront/core/store'
 
 export default {
   name: 'OOrderConfirmation',
@@ -194,7 +195,7 @@ export default {
     },
     clearCart () { 
       if (this.getNumberOfItemsInCart() > 0) {
-         this.$store.dispatch('cart/clear', { sync: false }, { root: true })
+        rootStore.dispatch('cart/clear', {}, { root: true })
       }
     },
     getNumberOfItemsInCart () {
