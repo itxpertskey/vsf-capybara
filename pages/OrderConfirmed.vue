@@ -132,13 +132,20 @@ export default {
       return orders;
      } 
   },
+  beforeMount () {
+    this.$bus.$on('application-after-loaded', (payload) => {
+      this.clearTheCart()
+    })
+    this.$bus.$on('cart-after-itemchanged', (payload) => {
+      this.clearTheCart()
+    })
+  },
   mounted () {
     if(this.$route.query.success){
       this.affiliateDataDecode = atob(this.$route.query.success);
       this.affiliateData       = JSON.parse(this.affiliateDataDecode); 
       this.portgkUrl           = "https://portgk.com/create-sale?client=java&MerchantID="+this.affiliateData[0].merchantid+"&SaleID="+this.affiliateData[0].incrementId+"&Purchases="+this.affiliateData[0].purchases+"&VoucherCode="+this.affiliateData[0].couponcode+"&OrderDiscount="+this.affiliateData[0].discountAmount+"&ExcludeVAT="+this.affiliateData[0].excludevat;
     }
-    this.clearCart();
   },
   beforeCreate () {
     registerModule(MailerModule);
@@ -193,9 +200,9 @@ export default {
         action1: { label: this.$t('OK') }
       });
     },
-    clearCart () { 
+    clearTheCart () { 
       if (this.getNumberOfItemsInCart() > 0) {
-        rootStore.dispatch('cart/clear', { sync: false }, { root: true })
+         rootStore.dispatch('cart/clear', {}, { root: true })
       }
     },
     getNumberOfItemsInCart () {
