@@ -195,7 +195,7 @@ export default {
     },
     clearCart () { 
       if (this.getNumberOfItemsInCart() > 0) {
-        rootStore.dispatch('cart/clear', {}, { root: true })
+        rootStore.dispatch('cart/clear', { sync: false }, { root: true })
       }
     },
     getNumberOfItemsInCart () {
