@@ -103,10 +103,10 @@
                 }
             }
         }
-        &:not(:first-child){
+        &:not(:nth-child(-n+5)){
             .m-menu{
                 display: none!important;
-            }
+            } 
         }
     }
 }
